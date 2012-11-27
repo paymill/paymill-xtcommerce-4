@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xtcommerceplugin>
+    <title>Paymill.de</title>
+    <version>2.0.0</version>
+    <code>xt_paymill</code>
+    <url>http://www.paymill.de</url>
+    <description>Paymill Zahlungsmodul Kreditkarte</description>
+    <icon>icon_paymill.png</icon>
+    <type>payment</type>
+    <payment>
+        <payment_code>xt_paymill</payment_code>
+        <payment_dir>xt_paymill</payment_dir>
+        <payment_icon></payment_icon>
+        <payment_tpl>paymill.html</payment_tpl>
+        <de>
+            <title>Kreditkartenzahlung</title>
+            <description></description>
+        </de>
+        <en>
+            <title>Credit card</title>
+            <description></description>
+        </en>
+        <es>
+            <title>Credit card</title>
+            <description></description>
+        </es>
+    </payment>
+    <db_install><![CDATA[
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 24, '', 0, 10000.00, 0, 1);");
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 25, '', 0, 10000.00, 0, 1);");
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 26, '', 0, 10000.00, 0, 1);");
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 27, '', 0, 10000.00, 0, 1);");
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 28, '', 0, 10000.00, 0, 1);");
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 29, '', 0, 10000.00, 0, 1);");
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 30, '', 0, 10000.00, 0, 1);");
+$db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 31, '', 0, 10000.00, 0, 1);");
+]]></db_install>
+    <plugin_code>
+        <code>
+            <hook>module_checkout.php:checkout_process_data</hook>
+            <phpcode><![CDATA[require_once(_SRV_WEBROOT . '/plugins/xt_paymill/classes/hook.php');]]></phpcode>
+            <order>1</order>
+            <active>1</active>
+        </code>
+        <code>
+            <hook>module_checkout.php:checkout_pre_data</hook>
+            <phpcode><![CDATA[$const = 'TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']);
+define($const, '');]]></phpcode>
+            <order>2</order>
+            <active>1</active>
+        </code>
+    </plugin_code>
+    <configuration_payment>
+        <config>
+            <key>PUBLIC_API_KEY</key>
+            <type>textfield</type>
+            <de>
+                <title>Öffentlicher API Key</title>
+            </de>
+            <en>
+                <title>Public API Key</title>
+            </en>
+        </config>
+        <config>
+            <key>PRIVATE_API_KEY</key>
+            <type>textfield</type>
+            <de>
+                <title>Geheimer API Key</title>
+            </de>
+            <en>
+                <title>Private API Key</title>
+            </en>
+        </config>
+        <config>
+            <key>BRIDGE_URL</key>
+            <type>textfield</type>
+            <value>https://bridge.paymill.de</value>
+            <de>
+                <title>Bridge URL</title>
+            </de>
+            <en>
+                <title>Bridge URL</title>
+            </en>
+        </config>
+        <config>
+            <key>API_URL</key>
+            <type>textfield</type>
+            <value>https://api.paymill.de/v2/</value>
+            <de>
+                <title>API URL</title>
+            </de>
+            <en>
+                <title>API URL</title>
+            </en>
+        </config>
+    </configuration_payment>
+    <language_content>
+        <phrase>
+            <key>TEXT_PAYMILL_CCNR</key>
+            <class>store</class>
+            <de>
+                <value>Kreditkartennummer</value>
+            </de>
+            <en>
+                <value>Credit Card Number</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CVC</key>
+            <class>store</class>
+            <de>
+                <value>Kreditkartenprüfnummer</value>
+            </de>
+            <en>
+                <value>Credit Card Verification Number</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_DATE</key>
+            <class>store</class>
+            <de>
+                <value>Gültigkeitsdatum (MM/JJJJ)</value>
+            </de>
+            <en>
+                <value>Expiry date (MM/YYYY)</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ERR_NR_EMPTY</key>
+            <class>store</class>
+            <de>
+                <value>Bitte geben Sie Ihre Kreditkartennummer ein.</value>
+            </de>
+            <en>
+                <value>Please insert your credit card number.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ERR_NR</key>
+            <class>store</class>
+            <de>
+                <value>Ihre Kreditkartennummer ist ungültig.</value>
+            </de>
+            <en>
+                <value>Your credit card number is invalid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ERR_DATE</key>
+            <class>store</class>
+            <de>
+                <value>Das Gültigkeitsdatum ist ungültig.</value>
+            </de>
+            <en>
+                <value>The expiry date is invalid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ERR_CVC_EMPTY</key>
+            <class>store</class>
+            <de>
+                <value>Bitte geben Sie die Kartenprüfnummer ein.</value>
+            </de>
+            <en>
+                <value>Please insert cour credit cards verification code.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ERR_CVC</key>
+            <class>store</class>
+            <de>
+                <value>Die Kartenprüfnummer ist ungültig.</value>
+            </de>
+            <en>
+                <value>Your credit card verification code is invalid.</value>
+            </en>
+        </phrase>
+    </language_content>
+</xtcommerceplugin> 
