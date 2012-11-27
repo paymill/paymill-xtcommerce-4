@@ -13,7 +13,7 @@ Important: Use the following command to clone the complete repository including 
 
 Afterwards perform the following steps in your store backend:
 
-* Install the plugin in
+* Install the plugin
 * Activate the plugin
 * Configure the Paymill payment method by inserting your public and private test or live keys
 * Activate the Paymill payment method
