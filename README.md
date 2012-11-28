@@ -15,7 +15,7 @@ Afterwards perform the following steps in your store backend:
 
 * Install the plugin
 * Activate the plugin
-* Configure the Paymill payment method by inserting your public and private test or live keys
+* Configure the Paymill payment method by inserting your public and private test or live keys and set the API-URL to https://api.paymill.de/v2/.
 * Activate the Paymill payment method
 
 
