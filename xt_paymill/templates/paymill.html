@@ -55,6 +55,7 @@
       var use_paymill = $('#paymill_selector').attr('checked');
 
       if (!use_paymill) {
+        paymill_debug("Do not use Paymill");
         return true;
       } else {
         if (paymill_validate()) {
@@ -64,7 +65,7 @@
             exp_month: $('.card-expiry-month').val(), 
             exp_year: $('.card-expiry-year').val(), 
             cvc: $('.card-cvc').val(),
-            amount: {/literal}{php}print floatval($_SESSION['cart']->content_total['plain']);{/php}{literal},
+            amount_int: '{/literal}{php}print round($_SESSION['cart']->content_total['plain'] * 100);{/php}{literal}',
             currency: '{/literal}{php}
 $currency = new currency();
 print strtoupper($currency->code);
