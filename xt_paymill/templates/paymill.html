@@ -1,6 +1,5 @@
 <table class="paymentblock" width="100%" border="0" cellspacing="0" cellpadding="6">
   <tr>
-  	<td class="header" width="10px"></td>
   	<td class="header">{form type=radio id=paymill_selector name=selected_payment value=$payment_code} <strong>{$payment_name}</strong></td>
     <td class="header" align="right">{$payment_price.formated}</td>
   </tr>
@@ -65,7 +64,7 @@
             exp_month: $('.card-expiry-month').val(), 
             exp_year: $('.card-expiry-year').val(), 
             cvc: $('.card-cvc').val(),
-            amount_int: '{/literal}{php}print round($_SESSION['cart']->content_total['plain'] * 100);{/php}{literal}',
+            amount_int: '{/literal}{php}print round($_SESSION['cart']->total_physical['plain'] * 100);{/php}{literal}',
             currency: '{/literal}{php}
 $currency = new currency();
 print strtoupper($currency->code);

@@ -1,5 +1,8 @@
 <?php
-if ($_SESSION['selected_payment'] == "xt_paymill") {
+print "<pre>";
+print_r($payment_code);
+die();
+if ($payment_code == "xt_paymill") {
 
     /**
      * Processes the payment against the paymill API
@@ -123,7 +126,7 @@ if ($_SESSION['selected_payment'] == "xt_paymill") {
     $result = processPayment(array(
         'libVersion' => 'v2',
         'token' => $subpayment_code,
-        'amount' => ((int)($_SESSION['cart']->total['plain'] * 100)),
+        'amount' => round($_SESSION['cart']->total_physical['plain'] * 100),
         'currency' => 'EUR',
         'name' => $name,
         'email' => $_SESSION['customer']->customer_info['customers_email_address'],
