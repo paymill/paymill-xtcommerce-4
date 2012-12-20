@@ -38,14 +38,21 @@ $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zon
     <plugin_code>
         <code>
             <hook>module_checkout.php:checkout_process_data</hook>
-            <phpcode><![CDATA[require_once(_SRV_WEBROOT . '/plugins/xt_paymill/classes/hook.php');]]></phpcode>
+            <phpcode><![CDATA[
+if ($payment_code == "xt_paymill") {
+    require_once(_SRV_WEBROOT . '/plugins/xt_paymill/classes/hook.php');
+}
+            ]]></phpcode>
             <order>1</order>
             <active>1</active>
         </code>
         <code>
             <hook>module_checkout.php:checkout_pre_data</hook>
-            <phpcode><![CDATA[$const = 'TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']);
-define($const, '');]]></phpcode>
+            <phpcode><![CDATA[
+if ($payment_code == "xt_paymill") {
+    $const = 'TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']);
+    define($const, '');
+}           ]]></phpcode>
             <order>2</order>
             <active>1</active>
         </code>
