@@ -49,10 +49,9 @@ if ($payment_code == "xt_paymill") {
         <code>
             <hook>module_checkout.php:checkout_pre_data</hook>
             <phpcode><![CDATA[
-if ($payment_code == "xt_paymill") {
     $const = 'TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']);
     define($const, '');
-}           ]]></phpcode>
+           ]]></phpcode>
             <order>2</order>
             <active>1</active>
         </code>
