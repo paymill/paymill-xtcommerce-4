@@ -1,14 +1,16 @@
 <?php
+
 /**
  * Processes the payment against the paymill API
  * @param $params array The settings array
  * @return boolean
  */
-function processPayment($params) {  
-    
+function processPayment($params)
+{
+
     // setup the logger
     $logger = $params['loggerCallback'];
-    
+
     // setup client params
     $clientParams = array(
         'email' => $params['email'],
@@ -26,21 +28,21 @@ function processPayment($params) {
         'currency' => $params['currency'],
         'description' => $params['description']
     );
-            
+
     require_once $params['libBase'] . 'Services/Paymill/Transactions.php';
     require_once $params['libBase'] . 'Services/Paymill/Clients.php';
     require_once $params['libBase'] . 'Services/Paymill/Payments.php';
 
     $clientsObject = new Services_Paymill_Clients(
-        $params['privateKey'], $params['apiUrl']
+                    $params['privateKey'], $params['apiUrl']
     );
     $transactionsObject = new Services_Paymill_Transactions(
-        $params['privateKey'], $params['apiUrl']
+                    $params['privateKey'], $params['apiUrl']
     );
     $creditcardsObject = new Services_Paymill_Payments(
-        $params['privateKey'], $params['apiUrl']
+                    $params['privateKey'], $params['apiUrl']
     );
-    
+
     // perform conection to the Paymill API and trigger the payment
     try {
 
@@ -67,6 +69,10 @@ function processPayment($params) {
         $transactionParams['client'] = $client['id'];
         $transactionParams['payment'] = $creditcard['id'];
         $transaction = $transactionsObject->create($transactionParams);
+        if (isset($transaction['data']['response_code'])) {
+            call_user_func_array($logger, array("An Error occured: " . var_export($transaction, true)));
+            return false;
+        }
         if (!isset($transaction['id'])) {
             call_user_func_array($logger, array("No transaction created" . var_export($transaction, true)));
             return false;
@@ -93,30 +99,30 @@ function processPayment($params) {
             call_user_func_array($logger, array("Transaction could not be issued."));
             return false;
         }
-
     } catch (Services_Paymill_Exception $ex) {
         // paymill wrapper threw an exception
         call_user_func_array($logger, array("Exception thrown from paymill wrapper: " . $ex->getMessage()));
         return false;
-    }        
-    
+    }
+
     return true;
 }
 
 // logger
-function logAction($message) {
+function logAction($message)
+{
     $logfile = SRV_WEBROOT . '/plugins/xt_paymill/classes/paymill/log.txt';
-    if (file_exists($logfile ) && is_writable($logfile)) {
+    if (file_exists($logfile) && is_writable($logfile)) {
         $handle = fopen($logfile, 'a');
         fwrite($handle, "[" . date(DATE_RFC822) . "] " . $message . "\n");
         fclose($handle);
     }
 }
 
-// name 
-$name = $_SESSION['customer']->customer_payment_address['customers_lastname'] 
-    . ', ' 
-    . $_SESSION['customer']->customer_payment_address['customers_firstname'];
+// name
+$name = $_SESSION['customer']->customer_payment_address['customers_lastname']
+        . ', '
+        . $_SESSION['customer']->customer_payment_address['customers_firstname'];
 
 $result = processPayment(array(
     'libVersion' => 'v2',
@@ -130,12 +136,11 @@ $result = processPayment(array(
     'privateKey' => XT_PAYMILL_PRIVATE_API_KEY,
     'apiUrl' => XT_PAYMILL_API_URL,
     'loggerCallback' => 'logAction'
-));
+        ));
 
 if ($result !== true) {
     $info->_addInfoSession("Payment could not be processed.");
-    $tmp_link  = $xtLink->_link(array('page'=>'checkout', 'paction'=>'confirmation', 'conn'=>'SSL'));
+    $tmp_link = $xtLink->_link(array('page' => 'checkout', 'paction' => 'confirmation', 'conn' => 'SSL'));
     $xtLink->_redirect($tmp_link);
 }
-
 ?>
