@@ -65,10 +65,7 @@
             exp_year: $('.card-expiry-year').val(), 
             cvc: $('.card-cvc').val(),
             amount_int: '{/literal}{php}print round($_SESSION['cart']->total_physical['plain'] * 100);{/php}{literal}',
-            currency: '{/literal}{php}
-$currency = new currency();
-print strtoupper($currency->code);
-{/php}{literal}'
+            currency: '{/literal}{php}$currency = new currency();print strtoupper($currency->code);{/php}{literal}'
           }, paymill_response_handler);
         }
         return false;
