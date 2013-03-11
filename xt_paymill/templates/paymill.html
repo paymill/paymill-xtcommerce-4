@@ -3,7 +3,7 @@
   	<td class="header">{form type=radio id=paymill_selector name=selected_payment value=$payment_code} <strong>{$payment_name}</strong></td>
     <td class="header" align="right">{$payment_price.formated}</td>
   </tr>
-  
+
   <tr>
     <td colspan="3">
 
@@ -13,7 +13,7 @@
             <td>
               <label>{txt key=TEXT_PAYMILL_CCNR}:</label>
               <input class="card-number" type="text" size="24" />
-              <ul id="cardErrors" class="info_error" style="display: none"></ul>                  
+              <ul id="cardErrors" class="info_error" style="display: none"></ul>
             </td>
           </tr>
 
@@ -48,9 +48,11 @@
 </script>
 <script type="text/javascript" src="{/literal}{$smarty.const.XT_PAYMILL_BRIDGE_URL}{literal}"></script>
 <script type="text/javascript">
-
+{/literal}
+{php}$_SESSION['pigmbhPaymill']['3dSecureAmount'] = round($_SESSION['cart']->total_physical['plain'] * 100);{/php}
+{literal}
   $(document).ready(function() {
-    $('form[name^="payment"]').submit(function(event) { 
+    $('form[name^="payment"]').submit(function(event) {
       var use_paymill = $('#paymill_selector').attr('checked');
 
       if (!use_paymill) {
@@ -60,16 +62,16 @@
         if (paymill_validate()) {
           paymill_debug("Validation passed");
           paymill.createToken({
-            number: $('.card-number').val(), 
-            exp_month: $('.card-expiry-month').val(), 
-            exp_year: $('.card-expiry-year').val(), 
+            number: $('.card-number').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val(),
             cvc: $('.card-cvc').val(),
             amount_int: '{/literal}{php}print round($_SESSION['cart']->total_physical['plain'] * 100);{/php}{literal}',
             currency: '{/literal}{php}$currency = new currency();print strtoupper($currency->code);{/php}{literal}'
           }, paymill_response_handler);
         }
         return false;
-      }    
+      }
     });
   });
 
@@ -88,7 +90,7 @@
     var exp_year = $('.card-expiry-year').val();
     var cvc = $('.card-cvc').val();
 
-   
+
     if (!number) {
       $('#cardErrors').show();
       $('#cardErrors').append('<li class="infoError">{/literal}{txt key=TEXT_PAYMILL_ERR_NR_EMPTY}{literal}</li>');

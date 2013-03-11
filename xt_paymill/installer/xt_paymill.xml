@@ -80,7 +80,7 @@ if ($payment_code == "xt_paymill") {
         <config>
             <key>BRIDGE_URL</key>
             <type>textfield</type>
-            <value>https://bridge.paymill.de</value>
+            <value>https://bridge.paymill.com</value>
             <de>
                 <title>Bridge URL</title>
             </de>
@@ -91,7 +91,7 @@ if ($payment_code == "xt_paymill") {
         <config>
             <key>API_URL</key>
             <type>textfield</type>
-            <value>https://api.paymill.de/v2/</value>
+            <value>https://api.paymill.com/v2/</value>
             <de>
                 <title>API URL</title>
             </de>
@@ -182,4 +182,4 @@ if ($payment_code == "xt_paymill") {
             </en>
         </phrase>
     </language_content>
-</xtcommerceplugin> 
+</xtcommerceplugin>

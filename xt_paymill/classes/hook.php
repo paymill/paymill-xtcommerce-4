@@ -7,7 +7,27 @@
  */
 function processPayment($params)
 {
+    $refund = false;
+    $doubleTransaction = false;
+    if ($params['authorizedAmount'] !== $params['amount']) {
+        if ($params['authorizedAmount'] > $params['amount']) {
+            // basketamount is lower than the authorized amount
+            $refund = true;
+            $refundParams = array(
+                'amount' => $params['authorizedAmount'] - $params['amount']
+            );
 
+            //refund
+        } else {
+            // basketamount is higher than the authorized amount (paymentfee etc.)
+            $doubleTransaction = true;
+            $secoundTransactionParams = array(
+                'amount' => $params['amount'] - $params['authorizedAmount'],
+                'currency' => $params['currency'],
+                'description' => $params['description']
+            );
+        }
+    }
     // setup the logger
     $logger = $params['loggerCallback'];
 
@@ -68,43 +88,71 @@ function processPayment($params)
         // create transaction
         $transactionParams['client'] = $client['id'];
         $transactionParams['payment'] = $creditcard['id'];
-        $transaction = $transactionsObject->create($transactionParams);
-        if (isset($transaction['data']['response_code'])) {
-            call_user_func_array($logger, array("An Error occured: " . var_export($transaction, true)));
-            return false;
-        }
-        if (!isset($transaction['id'])) {
-            call_user_func_array($logger, array("No transaction created" . var_export($transaction, true)));
-            return false;
-        } else {
-            call_user_func_array($logger, array("Transaction created: " . $transaction['id']));
+        $transactionArray[] = $transactionsObject->create($transactionParams);
+
+        // proceed sec transaction
+        if ($doubleTransaction) {
+            $secoundTransactionParams['client'] = $client['id'];
+            $secoundTransactionParams['payment'] = $creditcard['id'];
+            $transactionArray[] = $transactionsObject->create($secoundTransactionParams);
         }
 
-        // check result
-        if (is_array($transaction) && array_key_exists('status', $transaction)) {
-            if ($transaction['status'] == "closed") {
-                // transaction was successfully issued
-                return true;
-            } elseif ($transaction['status'] == "open") {
-                // transaction was issued but status is open for any reason
-                call_user_func_array($logger, array("Status is open."));
-                return false;
-            } else {
-                // another error occured
-                call_user_func_array($logger, array("Unknown error." . var_export($transaction, true)));
+        foreach ($transactionArray as $transaction) {
+            if (isset($transaction['data']['response_code'])) {
+                call_user_func_array($logger, array("An Error occured: " . var_export($transaction, true)));
                 return false;
             }
-        } else {
-            // another error occured
-            call_user_func_array($logger, array("Transaction could not be issued."));
-            return false;
+            if (!isset($transaction['id'])) {
+                call_user_func_array($logger, array("No transaction created" . var_export($transaction, true)));
+                return false;
+            } else {
+                call_user_func_array($logger, array("Transaction created: " . $transaction['id']));
+            }
+
+            // check result
+            if (is_array($transaction) && array_key_exists('status', $transaction)) {
+                if ($transaction['status'] == "open") {
+                    // transaction was issued but status is open for any reason
+                    call_user_func_array($logger, array("Status is open."));
+                    return false;
+                } else {
+                    // another error occured
+                    call_user_func_array($logger, array("Unknown error." . var_export($transaction, true)));
+                    return false;
+                }
+            } else {
+                // another error occured
+                call_user_func_array($logger, array("Transaction could not be issued."));
+                return false;
+            }
         }
+        if ($refund) {
+            require_once $params['libBase'] . 'Services/Paymill/Refunds.php';
+            $refundObject = new Services_Paymill_Payments(
+                            $params['privateKey'], $params['apiUrl']
+            );
+            $refundTransaction = $refundObject->create(array(
+                'transactionId' => $transactionArray[0]['id'],
+                'params' => $refundParams
+                    )
+            );
+            if (isset($refundTransaction['data']['response_code'])) {
+                call_user_func_array($logger, array("An Error occured: " . var_export($refundTransaction, true)));
+                return false;
+            }
+            if (!isset($refundTransaction['id'])) {
+                call_user_func_array($logger, array("No Refund created" . var_export($refundTransaction, true)));
+                return false;
+            } else {
+                call_user_func_array($logger, array("Refund created: " . $refundTransaction['id']));
+            }
+        }
+        return true;
     } catch (Services_Paymill_Exception $ex) {
         // paymill wrapper threw an exception
         call_user_func_array($logger, array("Exception thrown from paymill wrapper: " . $ex->getMessage()));
         return false;
     }
-
     return true;
 }
 
@@ -128,6 +176,7 @@ $result = processPayment(array(
     'libVersion' => 'v2',
     'token' => $subpayment_code,
     'amount' => round($_SESSION['cart']->total_physical['plain'] * 100),
+    'authorizedAmount' => $_SESSION['pigmbhPaymill']['3dSecureAmount'],
     'currency' => 'EUR',
     'name' => $name,
     'email' => $_SESSION['customer']->customer_info['customers_email_address'],
