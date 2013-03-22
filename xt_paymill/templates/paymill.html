@@ -49,7 +49,7 @@
 <script type="text/javascript" src="{/literal}{$smarty.const.XT_PAYMILL_BRIDGE_URL}{literal}"></script>
 <script type="text/javascript">
 {/literal}
-{php}$_SESSION['pigmbhPaymill']['3dSecureAmount'] = round($_SESSION['cart']->total_physical['plain'] * 100);{/php}
+{php}$_SESSION['pigmbhPaymill']['authorizedAmount'] = round($_SESSION['cart']->total_physical['plain'] * 100);{/php}
 {literal}
   $(document).ready(function() {
     $('form[name^="payment"]').submit(function(event) {
@@ -66,7 +66,7 @@
             exp_month: $('.card-expiry-month').val(),
             exp_year: $('.card-expiry-year').val(),
             cvc: $('.card-cvc').val(),
-            amount_int: '{/literal}{php}print round($_SESSION['cart']->total_physical['plain'] * 100);{/php}{literal}',
+            amount_int: '{/literal}{php}print $_SESSION['pigmbhPaymill']['authorizedAmount'];{/php}{literal}',
             currency: '{/literal}{php}$currency = new currency();print strtoupper($currency->code);{/php}{literal}'
           }, paymill_response_handler);
         }
