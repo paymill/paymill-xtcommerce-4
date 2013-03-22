@@ -5,9 +5,7 @@ xtCommerce (Version 4 / Veyton) Plugin for Paymill credit card payments
 
 # Installation
 
-Important: Use the following command to clone the complete repository including the submodules:
-    
-    git clone --recursive https://github.com/Paymill/Paymill-xtCommerce-4.git
+    Download the Zip here: https://github.com/Paymill/Paymill-xtCommerce-4/archive/master.zip
 
 # Configuration
 
@@ -15,7 +13,7 @@ Afterwards perform the following steps in your store backend:
 
 * Install the plugin
 * Activate the plugin
-* Configure the Paymill payment method by inserting your public and private test or live keys and set the API-URL to https://api.paymill.de/v2/.
+* Configure the Paymill payment method by inserting your public and private test or live keys and set the API-URL to https://api.paymill.com/v2/.
 * Activate the Paymill payment method
 
 
