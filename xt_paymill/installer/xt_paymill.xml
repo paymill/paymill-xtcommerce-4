@@ -64,16 +64,6 @@
     </plugin_code>
     <configuration_payment>
         <config>
-            <key>PUBLIC_API_KEY</key>
-            <type>textfield</type>
-            <de>
-                <title>Öffentlicher API Key</title>
-            </de>
-            <en>
-                <title>Public API Key</title>
-            </en>
-        </config>
-        <config>
             <key>PRIVATE_API_KEY</key>
             <type>textfield</type>
             <de>
@@ -84,25 +74,13 @@
             </en>
         </config>
         <config>
-            <key>BRIDGE_URL</key>
+            <key>PUBLIC_API_KEY</key>
             <type>textfield</type>
-            <value>https://bridge.paymill.com</value>
             <de>
-                <title>Bridge URL</title>
+                <title>Öffentlicher API Key</title>
             </de>
             <en>
-                <title>Bridge URL</title>
-            </en>
-        </config>
-        <config>
-            <key>API_URL</key>
-            <type>textfield</type>
-            <value>https://api.paymill.com/v2/</value>
-            <de>
-                <title>API URL</title>
-            </de>
-            <en>
-                <title>API URL</title>
+                <title>Public API Key</title>
             </en>
         </config>
     </configuration_payment>

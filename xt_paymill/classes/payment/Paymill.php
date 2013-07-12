@@ -17,6 +17,7 @@ class Paymill implements Services_Paymill_LoggingInterface
     public function __construct()
     {
         $this->_paymentProcessor = new Services_Paymill_PaymentProcessor();
+        $this->_paymentProcessor->setApiUrl($this->_apiUrl);
     }
     
     public function log($message, $debugInfo)
