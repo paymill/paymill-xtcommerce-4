@@ -1,26 +1,37 @@
-{foreach key=id item=payment from=$omba}
+<link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css" />
+<div>
+    {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLCC eq 'true'}
     <div>
-        {if $payment.error}
-        <table>
-            <tr>
-                <td><strong>{$payment.logo}</strong></td>
-                <td>{$payment.error}</td>
-            </tr>
-        </table>
-        {else}
-        <label>
-            <table>
-                <tr>
-                    {if $ombaSelectedPayment == $payment.name}
-                    <td width="10px">{form type=radio name=selected_payment value=$payment.name checked=true}</td>
-                    <td>{$payment.logo}</td>
-                    {else}
-                    <td width="10px">{form type=radio name=selected_payment value=$payment.name}</td>
-                    <td>{$payment.logo}</td>
-                    {/if}
-                </tr>
-            </table>
-        </label>
-        {/if}
+        <span>{form type=radio name=selected_payment value=$payment_code:cc}</span>
+        <span>{$smarty.const.TEXT_PAYMILL_CC_NAME}</span>
+        <div>
+            <img src="plugins/xt_paymill/images/icon_mastercard.png" alt="Mastercard"/>
+            <img src="plugins/xt_paymill/images/icon_visa.png" alt="Visa"/>
+        </div>
+        <div>
+            <div class="paymill-input-label">
+                <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
+            </div>
+            <input id="paymill-card-number" class="paymill-input" type="text" size="20" value=""/>
+            <div class="paymill-input-label">
+                <label>{$smarty.const.TEXT_PAYMILL_CC_CVC}</label>
+            </div>
+            <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value=""/>
+            <div class="paymill-input-label">
+                <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER}</label>
+            </div>
+            <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value=""/>
+            <div class="paymill-input-label">
+                <label>{$smarty.const.TEXT_PAYMILL_CC_DATE}</label>
+            </div>
+            {html_select_date display_days=false start_year='-100' field_separator=' / ' prefix='Paymill_'}
+        </div>
     </div>
-{/foreach}
+    {/if}
+    {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLELV eq 'true'}
+    <div class="paymill-elv">
+        <span>{form type=radio name=selected_payment value=$payment_code:elv}</span>
+        <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
+    </div>
+    {/if}
+</div>

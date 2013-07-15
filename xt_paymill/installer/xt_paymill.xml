@@ -20,10 +20,6 @@
             <title>PAYMILL</title>
             <description></description>
         </en>
-        <es>
-            <title>PAYMILL</title>
-            <description></description>
-        </es>
     </payment>
     <db_install>
         <![CDATA[
@@ -42,8 +38,8 @@
             <hook>module_checkout.php:checkout_process_data</hook>
             <phpcode>
                 <![CDATA[
-                    if ($payment_code == "xt_paymill") {
-                        require_once(_SRV_WEBROOT . '/plugins/xt_paymill/classes/hook.php');
+                    if ($payment_code === "xt_paymill") {
+                        $payment_module_data->checkoutProcessData();
                     }
                 ]]>
             </phpcode>
@@ -54,8 +50,12 @@
             <hook>module_checkout.php:checkout_pre_data</hook>
             <phpcode>
                 <![CDATA[
-                    $const = 'TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']);
-                    define($const, '');
+                    $payment_code = $_SESSION['selected_payment'];
+                    if ($payment_code === "xt_paymill") {
+                        require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . $payment_code . '/classes/payment/' . 'class.' . $payment_code . '.php');
+                        $payment_module_data = new $payment_code();
+                        $payment_module_data->checkoutPreData();
+                    }
                 ]]>
             </phpcode>
             <order>2</order>
@@ -112,7 +112,27 @@
     </configuration_payment>
     <language_content>
         <phrase>
-            <key>TEXT_PAYMILL_CCNR</key>
+            <key>TEXT_PAYMILL_CC_NAME</key>
+            <class>store</class>
+            <de>
+                <value>Kreditkarte</value>
+            </de>
+            <en>
+                <value>Creditcard</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ELV_NAME</key>
+            <class>store</class>
+            <de>
+                <value>Lastschrift</value>
+            </de>
+            <en>
+                <value>Direct Debit</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_CCNR</key>
             <class>store</class>
             <de>
                 <value>Kreditkartennummer</value>
@@ -122,7 +142,7 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_PAYMILL_CVC</key>
+            <key>TEXT_PAYMILL_CC_CVC</key>
             <class>store</class>
             <de>
                 <value>Kreditkartenprüfnummer</value>
@@ -132,7 +152,17 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_PAYMILL_DATE</key>
+            <key>TEXT_PAYMILL_CC_HOLDER</key>
+            <class>store</class>
+            <de>
+                <value>Kreditkartenprüfnummer</value>
+            </de>
+            <en>
+                <value>Credit Card Verification Number</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_DATE</key>
             <class>store</class>
             <de>
                 <value>Gültigkeitsdatum (MM/JJJJ)</value>
@@ -142,7 +172,7 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_PAYMILL_ERR_NR_EMPTY</key>
+            <key>TEXT_PAYMILL_CC_ERR_NR_EMPTY</key>
             <class>store</class>
             <de>
                 <value>Bitte geben Sie Ihre Kreditkartennummer ein.</value>
@@ -152,7 +182,7 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_PAYMILL_ERR_NR</key>
+            <key>TEXT_PAYMILL_CC_ERR_NR</key>
             <class>store</class>
             <de>
                 <value>Ihre Kreditkartennummer ist ungültig.</value>
@@ -162,7 +192,7 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_PAYMILL_ERR_DATE</key>
+            <key>TEXT_PAYMILL_CC_ERR_DATE</key>
             <class>store</class>
             <de>
                 <value>Das Gültigkeitsdatum ist ungültig.</value>
@@ -172,7 +202,7 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_PAYMILL_ERR_CVC_EMPTY</key>
+            <key>TEXT_PAYMILL_CC_ERR_CVC_EMPTY</key>
             <class>store</class>
             <de>
                 <value>Bitte geben Sie die Kartenprüfnummer ein.</value>
@@ -182,7 +212,7 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_PAYMILL_ERR_CVC</key>
+            <key>TEXT_PAYMILL_CC_ERR_CVC</key>
             <class>store</class>
             <de>
                 <value>Die Kartenprüfnummer ist ungültig.</value>
