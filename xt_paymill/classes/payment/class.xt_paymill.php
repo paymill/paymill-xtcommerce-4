@@ -14,6 +14,10 @@ class Paymill implements Services_Paymill_LoggingInterface
     
     private $_apiUrl    = 'https://api.paymill.com/v2/';
     
+    public $version = '2.1.0';
+    
+    public $subpayments = true;
+    
     public function __construct()
     {
         $this->_paymentProcessor = new Services_Paymill_PaymentProcessor();

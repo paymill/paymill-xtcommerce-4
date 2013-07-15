@@ -1,0 +1,26 @@
+{foreach key=id item=payment from=$omba}
+    <div>
+        {if $payment.error}
+        <table>
+            <tr>
+                <td><strong>{$payment.logo}</strong></td>
+                <td>{$payment.error}</td>
+            </tr>
+        </table>
+        {else}
+        <label>
+            <table>
+                <tr>
+                    {if $ombaSelectedPayment == $payment.name}
+                    <td width="10px">{form type=radio name=selected_payment value=$payment.name checked=true}</td>
+                    <td>{$payment.logo}</td>
+                    {else}
+                    <td width="10px">{form type=radio name=selected_payment value=$payment.name}</td>
+                    <td>{$payment.logo}</td>
+                    {/if}
+                </tr>
+            </table>
+        </label>
+        {/if}
+    </div>
+{/foreach}

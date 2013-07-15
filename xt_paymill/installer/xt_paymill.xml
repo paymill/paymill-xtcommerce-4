@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xtcommerceplugin>
-    <title>Paymill.de</title>
-    <version>2.0.2</version>
+    <title>PAYMILL</title>
+    <version>2.1.0</version>
     <code>xt_paymill</code>
     <url>http://www.paymill.de</url>
-    <description>Paymill Zahlungsmodul Kreditkarte</description>
+    <description>Paymill Payment Plugin</description>
     <icon>icon_paymill.png</icon>
     <type>payment</type>
     <payment>
         <payment_code>xt_paymill</payment_code>
         <payment_dir>xt_paymill</payment_dir>
         <payment_icon></payment_icon>
-        <payment_tpl>paymill.html</payment_tpl>
+        <payment_tpl>xt_paymill.html</payment_tpl>
         <de>
-            <title>Kreditkartenzahlung</title>
+            <title>PAYMILL</title>
             <description></description>
         </de>
         <en>
-            <title>Credit card</title>
+            <title>PAYMILL</title>
             <description></description>
         </en>
         <es>
-            <title>Credit card</title>
+            <title>PAYMILL</title>
             <description></description>
         </es>
     </payment>
@@ -63,6 +63,32 @@
         </code>
     </plugin_code>
     <configuration_payment>
+        <config>
+            <key>ACTIVATE_PAYMILLCC</key>
+            <type>dropdown</type>
+            <value>true</value>
+            <url>conf_truefalse</url>
+            <sort_order>5</sort_order>
+            <de>
+                <title>PAYMILL Kreditkarte aktivieren</title>
+            </de>
+            <en>
+                <title>Activate PAYMILL Creditcard</title>
+            </en>
+        </config>
+        <config>
+            <key>ACTIVATE_PAYMILLELV</key>
+            <type>dropdown</type>
+            <value>true</value>
+            <url>conf_truefalse</url>
+            <sort_order>5</sort_order>
+            <de>
+                <title>PAYMILL Lastschrift aktivieren</title>
+            </de>
+            <en>
+                <title>Activate PAYMILL Direct Debit</title>
+            </en>
+        </config>
         <config>
             <key>PRIVATE_API_KEY</key>
             <type>textfield</type>
