@@ -1,4 +1,7 @@
 <link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://bridge.paymill.com/"></script>
+<script type="text/javascript" src="plugins/xt_paymill/js/payment.js"></script>
 <div>
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLCC eq 'true'}
     <div>
@@ -26,12 +29,45 @@
             </div>
             {html_select_date display_days=false start_year='-100' field_separator=' / ' prefix='Paymill_'}
         </div>
+        <div class="form-row">
+            <div class="paymill_powered">
+                <div class="paymill_credits">
+                    Paymill_Label_Credit_Card 
+                    <a href="http://www.paymill.de" target="_blank">PAYMILL</a>
+                </div>
+            </div>
+        </div>
     </div>
     {/if}
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLELV eq 'true'}
     <div class="paymill-elv">
         <span>{form type=radio name=selected_payment value=$payment_code:elv}</span>
         <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
+        <div>
+            <img src="plugins/xt_paymill/images/icon_elv.png" alt="ELV"/>
+        </div>
+        <div>
+            <div class="paymill-input-label">
+                <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER}</label>
+            </div>
+            <input id="paymill-account-number" class="paymill-input" type="text" size="20" value=""/>
+            <div class="paymill-input-label">
+                <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE}</label>
+            </div>
+            <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value=""/>
+            <div class="paymill-input-label">
+                <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER}</label>
+            </div>
+            <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value=""/>
+        </div>
+        <div class="form-row">
+            <div class="paymill_powered">
+                <div class="paymill_credits">
+                    Paymill_Label_Direct_Debit
+                    <a href="http://www.paymill.de" target="_blank">PAYMILL</a>
+                </div>
+            </div>
+        </div>
     </div>
     {/if}
 </div>

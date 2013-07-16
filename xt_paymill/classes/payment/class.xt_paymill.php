@@ -16,18 +16,14 @@ class xt_paymill implements Services_Paymill_LoggingInterface
      */
     private $_paymentProcessor;
     
-    private $_bridgeUrl = 'https://bridge.paymill.com/';
-    
     private $_apiUrl    = 'https://api.paymill.com/v2/';
     
-    public $data = array();
-
     public function __construct()
     {
         $this->_paymentProcessor = new Services_Paymill_PaymentProcessor();
         $this->_paymentProcessor->setApiUrl($this->_apiUrl);
         $this->_paymentProcessor->setLogger($this);
-        $this->_paymentProcessor->setPrivateKey($this->_getPaymentConfig('PRIVATE_API_KEY'));
+        $this->_paymentProcessor->setPrivateKey(trim($this->_getPaymentConfig('PRIVATE_API_KEY')));
         $this->_paymentProcessor->setSource($this->version . '_xt:Commerce_' . _SYSTEM_VERSION);
         $this->allowed_subpayments = array('cc', 'elv');
     }
@@ -47,13 +43,14 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $this->_paymentProcessor->setToken($_SESSION['paymill_token']);
             $this->_paymentProcessor->setEmail($_SESSION['customer']->customer_info['customers_email_address']);
             $this->_paymentProcessor->setName($name);
-            $this->_paymentProcessor->setDescription();
+            $this->_paymentProcessor->setDescription('test'); //@todo set desc
             
             if ($_SESSION['selected_payment_sub'] === 'cc') {
                 $this->_paymentProcessor->setAuthorizedAmount();
             }
             
             if (!$this->_paymentProcessor->processPayment()) {
+                //@todo set error message
                 $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
             }
         }
@@ -63,6 +60,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     {
         global $xtLink;
         if (!$this->_isTokenAvailable($_POST)) {
+            //@todo set error message
             $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
         } else {
             $_SESSION['paymill_token'] = $_POST['paymill_token'];
