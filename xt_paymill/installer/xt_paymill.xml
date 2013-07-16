@@ -109,6 +109,16 @@
                 <title>Public API Key</title>
             </en>
         </config>
+        <config>
+            <key>DEBUG_MODE</key>
+            <type>textfield</type>
+            <de>
+                <title>Debug Modus</title>
+            </de>
+            <en>
+                <title>Debug Mode</title>
+            </en>
+        </config>
     </configuration_payment>
     <language_content>
         <phrase>
