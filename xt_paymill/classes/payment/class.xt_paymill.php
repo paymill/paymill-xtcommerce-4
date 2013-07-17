@@ -39,12 +39,12 @@ class xt_paymill implements Services_Paymill_LoggingInterface
                   . ' ' 
                   . $_SESSION['customer']->customer_payment_address['customers_lastname'];
             
-            $this->_paymentProcessor->setAmount((int) (round($_SESSION['cart']->total_physical['plain']) * 100));
+            $this->_paymentProcessor->setAmount((int) round($_SESSION['cart']->total_physical['plain'] * 100));
             $this->_paymentProcessor->setToken($subpayment_code);
             $this->_paymentProcessor->setEmail($_SESSION['customer']->customer_info['customers_email_address']);
             $this->_paymentProcessor->setName($name);
             $this->_paymentProcessor->setCurrency($currency->code);
-            $this->_paymentProcessor->setDescription('test'); //@todo set desc
+            $this->_paymentProcessor->setDescription(_STORE_NAME . ' Order ID: ' . $this->_getNextOrderId());
             
             if ($payment_code === 'xt_paymill_cc') {
                 $this->_paymentProcessor->setPreAuthAmount($_SESSION['paymillAuthorizedAmount']); //@todo set PreAuthAmount
@@ -57,6 +57,12 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         }
     }
     
+    private function _getNextOrderId()
+    {
+        return $_SESSION['last_order_id'] + 1;
+    }
+
+
     public function log($message, $debugInfo)
     {
         if ($this->_getPaymentConfig('DEBUG_MODE')) {

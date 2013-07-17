@@ -1,4 +1,4 @@
-{php}$_SESSION['paymillAuthorizedAmount'] = (int) (round($_SESSION['cart']->total_physical['plain']) * 100);{/php}
+{php}$_SESSION['paymillAuthorizedAmount'] = (int) round(($_SESSION['cart']->total_physical['plain'] + XT_PAYMILL_DIFFERENT_AMOUNT) * 100);{/php}
 <script type="text/javascript">
     var flag = true;
     var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY}';

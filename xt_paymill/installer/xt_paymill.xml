@@ -114,6 +114,17 @@
             </en>
         </config>
         <config>
+            <key>DIFFERENT_AMOUNT</key>
+            <type>textfield</type>
+            <value>10</value>
+            <de>
+                <title>Abweichender Betrag</title>
+            </de>
+            <en>
+                <title>Different amount</title>
+            </en>
+        </config>
+        <config>
             <key>DEBUG_MODE</key>
             <type>dropdown</type>
             <value>false</value>
