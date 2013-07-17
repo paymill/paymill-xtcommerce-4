@@ -1,11 +1,30 @@
-<link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css" />
+{php}$_SESSION['paymillAuthorizedAmount'] = (int) (round($_SESSION['cart']->total_physical['plain']) * 100);{/php}
+<script type="text/javascript">
+    var flag = true;
+    var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY}';
+    var debug = '{$smarty.const.XT_PAYMILL_DEBUG_MODE}';
+    var paymentCode = '{$payment_code}';
+    var amount = "{php}echo $_SESSION['paymillAuthorizedAmount'];{/php}";
+    var lang = new Array();
+    // Paymill cc js lang
+    lang['card_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_NUMBER}';
+    lang['verfication_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_CVC}';
+    lang['expiration_date_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_DATE}';
+    lang['card_holder_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_HOLDER}';
+    // Paymill elv js lang
+    lang['account_owner_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_HOLDER}';
+    lang['sort_code_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_BANK_CODE}';
+    lang['account_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_ACCOUNT_NUMBER}';
+</script>
+<link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://bridge.paymill.com/"></script>
 <script type="text/javascript" src="plugins/xt_paymill/js/payment.js"></script>
 <div>
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLCC eq 'true'}
     <div>
-        <span>{form type=radio name=selected_payment value=$payment_code:cc}</span>
+        <div id="payment-errors-cc" class="payment-error"></div>
+        <span>{form type=radio name=selected_payment id=paymill_selector_cc value=$payment_code:cc}</span>
         <span>{$smarty.const.TEXT_PAYMILL_CC_NAME}</span>
         <div>
             <img src="plugins/xt_paymill/images/icon_mastercard.png" alt="Mastercard"/>
@@ -16,32 +35,39 @@
                 <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
             </div>
             <input id="paymill-card-number" class="paymill-input" type="text" size="20" value=""/>
+            <div id="payment-error-cc-1" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_CVC}</label>
             </div>
             <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value=""/>
+            <div id="payment-error-cc-2" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER}</label>
             </div>
             <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value=""/>
+            <div id="payment-error-cc-3" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_DATE}</label>
             </div>
-            {html_select_date display_days=false start_year='-100' field_separator=' / ' prefix='Paymill_'}
+            {html_select_date display_days=false end_year='+15' field_separator=' / ' prefix='Paymill_'}
+            <div id="payment-error-cc-4" class="payment-error"></div>
         </div>
+        {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
         <div class="form-row">
             <div class="paymill_powered">
                 <div class="paymill_credits">
-                    Paymill_Label_Credit_Card 
+                    {$smarty.const.TEXT_PAYMILL_LABEL_CC}
                     <a href="http://www.paymill.de" target="_blank">PAYMILL</a>
                 </div>
             </div>
         </div>
+        {/if}
     </div>
     {/if}
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLELV eq 'true'}
     <div class="paymill-elv">
-        <span>{form type=radio name=selected_payment value=$payment_code:elv}</span>
+        <div id="payment-errors-elv" class="payment-error"></div>
+        <span>{form type=radio name=selected_payment id=paymill_selector_elv value=$payment_code:elv}</span>
         <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
         <div>
             <img src="plugins/xt_paymill/images/icon_elv.png" alt="ELV"/>
@@ -51,23 +77,28 @@
                 <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER}</label>
             </div>
             <input id="paymill-account-number" class="paymill-input" type="text" size="20" value=""/>
+            <div id="payment-error-elv-1" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE}</label>
             </div>
             <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value=""/>
+            <div id="payment-error-elv-2" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER}</label>
             </div>
             <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value=""/>
+            <div id="payment-error-elv-3" class="payment-error"></div>
         </div>
+        {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
         <div class="form-row">
             <div class="paymill_powered">
                 <div class="paymill_credits">
-                    Paymill_Label_Direct_Debit
+                    {$smarty.const.TEXT_PAYMILL_LABEL_ELV}
                     <a href="http://www.paymill.de" target="_blank">PAYMILL</a>
                 </div>
             </div>
         </div>
+        {/if}
     </div>
     {/if}
 </div>

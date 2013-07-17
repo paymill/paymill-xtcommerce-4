@@ -28,10 +28,10 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $this->allowed_subpayments = array('cc', 'elv');
     }
     
-    public function checkoutProcessData()
+    public function checkoutProcessData($subpayment_code, $payment_code)
     {
-        global $xtLink;
-        if (!$this->_isTokenAvailable($_SESSION)) {
+        global $xtLink, $currency;
+        if (!$this->_isTokenAvailable($subpayment_code)) {
             $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
         } else {
             
@@ -39,31 +39,21 @@ class xt_paymill implements Services_Paymill_LoggingInterface
                   . ' ' 
                   . $_SESSION['customer']->customer_payment_address['customers_lastname'];
             
-            $this->_paymentProcessor->setAmount($_SESSION['cart']->total_physical['plain']);
-            $this->_paymentProcessor->setToken($_SESSION['paymill_token']);
+            $this->_paymentProcessor->setAmount((int) (round($_SESSION['cart']->total_physical['plain']) * 100));
+            $this->_paymentProcessor->setToken($subpayment_code);
             $this->_paymentProcessor->setEmail($_SESSION['customer']->customer_info['customers_email_address']);
             $this->_paymentProcessor->setName($name);
+            $this->_paymentProcessor->setCurrency($currency->code);
             $this->_paymentProcessor->setDescription('test'); //@todo set desc
             
-            if ($_SESSION['selected_payment_sub'] === 'cc') {
-                $this->_paymentProcessor->setAuthorizedAmount();
+            if ($payment_code === 'xt_paymill_cc') {
+                $this->_paymentProcessor->setPreAuthAmount($_SESSION['paymillAuthorizedAmount']); //@todo set PreAuthAmount
             }
-            
+
             if (!$this->_paymentProcessor->processPayment()) {
                 //@todo set error message
                 $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
             }
-        }
-    }
-    
-    public function checkoutPreData()
-    {
-        global $xtLink;
-        if (!$this->_isTokenAvailable($_POST)) {
-            //@todo set error message
-            $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
-        } else {
-            $_SESSION['paymill_token'] = $_POST['paymill_token'];
         }
     }
     
@@ -82,7 +72,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     
     private function _isTokenAvailable($data)
     {
-        return array_key_exists('paymill_token', $data) && !empty($data['paymill_token']);
+        return !empty($data);
     }
     
     private function _getPaymentConfig($key)

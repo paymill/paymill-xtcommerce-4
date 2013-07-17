@@ -1,7 +1,6 @@
 
 $(document).ready(function () 
 {
-    
     function paymillElvResponseHandler(error, result) 
     {
         if (flag) {
@@ -11,14 +10,13 @@ $(document).ready(function ()
                 $("#payment-errors-elv").text(error.apierror);
                 $("#payment-errors-elv").css('display', 'block');
             } else {
+                flag = false;
+                paymillDebug('Received a token: ' + result.token);
                 $("#payment-errors-elv").text("");
                 $("#payment-errors-elv").css('display', 'none');
-                var form = $("#zahlung");
-                var token = result.token;
-                paymillDebug('Received a token: ' + token);
-                form.append("<input type='hidden' name='paymillToken' value='" + token + "'/>");
-                flag = false;
-                form.get(0).submit();
+                $('#paymill_selector_elv').val('xt_paymill_elv:' + result.token);
+                $('form[name^="payment"]').append("<input type='hidden' name='paymill_token' value='" + result.token + "'/>");
+                $('form[name^="payment"]').get(1).submit();
             }
         }
     }
@@ -32,14 +30,13 @@ $(document).ready(function ()
                 $("#payment-errors-cc").text(error.apierror);
                 $("#payment-errors-cc").css('display', 'block');
             } else {
+                flag = false;
+                paymillDebug('Received a token: ' + result.token);
                 $("#payment-errors-cc").text("");
                 $("#payment-errors-cc").css('display', 'none');
-                var form = $("#zahlung");
-                var token = result.token;
-                paymillDebug('Received a token: ' + token);
-                form.append("<input type='hidden' name='paymillToken' value='" + token + "'/>");
-                flag = false;
-                form.get(0).submit();
+                $('#paymill_selector_cc').val('xt_paymill_cc:' + result.token);
+                $('form[name^="payment"]').append("<input type='hidden' id='paymill_token' name='paymill_token' value='" + result.token + "'/>");
+                $('form[name^="payment"]').get(1).submit();
             }
         }
     }
@@ -64,8 +61,9 @@ $(document).ready(function ()
             $("#payment-error-cc-1").css('display', 'block');
             ccErrorFlag = false;
         }
+        
 
-        if (false === paymill.validateExpiry($('input[name=Paymill_Month]').val(), $('input[name=Paymill_Year]').val())) {
+        if (false === paymill.validateExpiry($('select[name="Paymill_Month"]').val(), $('select[name="Paymill_Year"]').val())) {
             $("#payment-error-cc-4").text(lang['expiration_date_invalid']);
             $("#payment-error-cc-4").css('display', 'block');
             ccErrorFlag = false;
@@ -87,10 +85,12 @@ $(document).ready(function ()
             return ccErrorFlag;
         }
         
+        
+        
         paymill.createToken({
             number : $('#paymill-card-number').val(),
-            exp_month : $('input[name=Paymill_Month]').val(),
-            exp_year : $('input[name=Paymill_Year]').val(),
+            exp_month : $('select[name="Paymill_Month"]').val(),
+            exp_year : $('select[name="Paymill_Year"]').val(),
             cvc : $('#paymill-card-cvc').val(),
             cardholdername : $('#paymill-card-holdername').val(),
             amount_int : $('#paymill_amount').val(),
@@ -153,7 +153,7 @@ $(document).ready(function ()
     
     function paymillDebug(message)
     {
-        if (debug) {
+        if (debug === 'true') {
             console.log(message);
         }
     }
