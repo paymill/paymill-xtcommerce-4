@@ -38,11 +38,10 @@
             <hook>module_checkout.php:checkout_process_data</hook>
             <phpcode>
                 <![CDATA[
-                    $payment_code = $_SESSION['selected_payment'];
-                    if ($payment_code === "xt_paymill_cc" || $payment_code === "xt_paymill_elv") {
+                    if ($payment_code === "xt_paymill") {
                         require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . '/xt_paymill/classes/payment/' . 'class.xt_paymill.php');
                         $payment_module_data = new xt_paymill();
-                        $payment_module_data->checkoutProcessData($subpayment_code, $payment_code);
+                        $payment_module_data->checkoutProcessData($subpayment_code);
                     }
                 ]]>
             </phpcode>
@@ -53,11 +52,11 @@
             <hook>module_checkout.php:checkout_pre_data</hook>
             <phpcode>
                 <![CDATA[
-                    if ($_SESSION['selected_payment'] === "xt_paymill_cc") {
+                    if ($_SESSION['selected_payment'] === "xt_paymill" && substr($_SESSION['selected_payment_sub'], 0, 4) === '_cc_') {
                         define('TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']), TEXT_PAYMILL_CC_NAME);
                     }
                     
-                    if ($_SESSION['selected_payment'] === "xt_paymill_elv") {
+                    if ($_SESSION['selected_payment'] === "xt_paymill" && substr($_SESSION['selected_payment_sub'], 0, 4) === '_dd_') {
                         define('TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']), TEXT_PAYMILL_ELV_NAME);
                     }
                 ]]>
@@ -142,7 +141,7 @@
             <value>true</value>
             <url>conf_truefalse</url>
             <de>
-                <title>PAYMILL Label einbelnden</title>
+                <title>PAYMILL Label einblenden</title>
             </de>
             <en>
                 <title>Show PAYMILL label</title>
@@ -328,6 +327,26 @@
             </de>
             <en>
                 <value>The account number is invalid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ERR_TOKEN</key>
+            <class>store</class>
+            <de>
+                <value>Es trat ein Fehler während Ihrer Token erstellung auf.</value>
+            </de>
+            <en>
+                <value>An error has occurred during token creation.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ERR_ORDER</key>
+            <class>store</class>
+            <de>
+                <value>Es trat ein Fehler während Ihrer Bestellung auf.</value>
+            </de>
+            <en>
+                <value>An error has occurred during order creation.</value>
             </en>
         </phrase>
     </language_content>

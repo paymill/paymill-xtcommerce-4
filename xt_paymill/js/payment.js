@@ -14,7 +14,7 @@ $(document).ready(function ()
                 paymillDebug('Received a token: ' + result.token);
                 $("#payment-errors-elv").text("");
                 $("#payment-errors-elv").css('display', 'none');
-                $('#paymill_selector_elv').val('xt_paymill_elv:' + result.token);
+                $('#paymill_selector_elv').val('xt_paymill:' + '_dd_' + result.token);
                 $('form[name^="payment"]').append("<input type='hidden' name='paymill_token' value='" + result.token + "'/>");
                 $('form[name^="payment"]').get(1).submit();
             }
@@ -34,7 +34,7 @@ $(document).ready(function ()
                 paymillDebug('Received a token: ' + result.token);
                 $("#payment-errors-cc").text("");
                 $("#payment-errors-cc").css('display', 'none');
-                $('#paymill_selector_cc').val('xt_paymill_cc:' + result.token);
+                $('#paymill_selector_cc').val('xt_paymill:' + '_cc_' + result.token);
                 $('form[name^="payment"]').append("<input type='hidden' id='paymill_token' name='paymill_token' value='" + result.token + "'/>");
                 $('form[name^="payment"]').get(1).submit();
             }
@@ -93,8 +93,8 @@ $(document).ready(function ()
             exp_year : $('select[name="Paymill_Year"]').val(),
             cvc : $('#paymill-card-cvc').val(),
             cardholdername : $('#paymill-card-holdername').val(),
-            amount_int : $('#paymill_amount').val(),
-            currency : $('#paymill_currency').val()
+            amount_int : amount,
+            currency : currency
         }, paymillCcResponseHandler);
         
         return false;
