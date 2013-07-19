@@ -39,7 +39,7 @@
             <phpcode>
                 <![CDATA[
                     if ($payment_code === "xt_paymill") {
-                        require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . '/xt_paymill/classes/payment/' . 'class.xt_paymill.php');
+                        require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . '/xt_paymill/classes/' . 'class.xt_paymill.php');
                         $payment_module_data = new xt_paymill();
                         $payment_module_data->checkoutProcessData($subpayment_code);
                     }

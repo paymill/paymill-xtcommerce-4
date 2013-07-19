@@ -1,7 +1,7 @@
 <?php
 
-require_once(dirname(dirname(__FILE__)) . '/lib/Services/Paymill/PaymentProcessor.php');
-require_once(dirname(dirname(__FILE__)) . '/lib/Services/Paymill/LoggingInterface.php');
+require_once(dirname(__FILE__) . '/lib/Services/Paymill/PaymentProcessor.php');
+require_once(dirname(__FILE__) . '/lib/Services/Paymill/LoggingInterface.php');
 
 class xt_paymill implements Services_Paymill_LoggingInterface
 {
@@ -10,7 +10,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     public $subpayments = true;
     
     public $allowed_subpayments;
-    
+    public $data = array();
     /**
      * @var \Services_Paymill_PaymentProcessor
      */
