@@ -39,8 +39,6 @@
             <phpcode>
                 <![CDATA[
                     if ($payment_code === "xt_paymill") {
-                        require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . '/xt_paymill/classes/' . 'class.xt_paymill.php');
-                        $payment_module_data = new xt_paymill();
                         $payment_module_data->checkoutProcessData($subpayment_code);
                     }
                 ]]>
@@ -53,11 +51,15 @@
             <phpcode>
                 <![CDATA[
                     if ($_SESSION['selected_payment'] === "xt_paymill" && substr($_SESSION['selected_payment_sub'], 0, 4) === '_cc_') {
-                        define('TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']), TEXT_PAYMILL_CC_NAME);
+                        define('TEXT_PAYMENT_CC', TEXT_PAYMILL_CC_NAME);
+                        $_SESSION['token'] = substr($_SESSION['selected_payment_sub'], 4);
+                        $_SESSION['selected_payment_sub'] = 'cc';
                     }
                     
                     if ($_SESSION['selected_payment'] === "xt_paymill" && substr($_SESSION['selected_payment_sub'], 0, 4) === '_dd_') {
-                        define('TEXT_PAYMENT_' . strtoupper($_SESSION['selected_payment_sub']), TEXT_PAYMILL_ELV_NAME);
+                        define('TEXT_PAYMENT_DD', TEXT_PAYMILL_ELV_NAME);
+                        $_SESSION['token'] = substr($_SESSION['selected_payment_sub'], 4);
+                        $_SESSION['selected_payment_sub'] = 'dd';
                     }
                 ]]>
             </phpcode>

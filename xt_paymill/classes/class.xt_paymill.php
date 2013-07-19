@@ -10,7 +10,9 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     public $subpayments = true;
     
     public $allowed_subpayments;
+    
     public $data = array();
+    
     /**
      * @var \Services_Paymill_PaymentProcessor
      */
@@ -25,14 +27,14 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $this->_paymentProcessor->setLogger($this);
         $this->_paymentProcessor->setPrivateKey(trim($this->_getPaymentConfig('PRIVATE_API_KEY')));
         $this->_paymentProcessor->setSource($this->version . '_xt:Commerce_' . _SYSTEM_VERSION);
-        $this->allowed_subpayments = array('cc', 'elv');
+        $this->allowed_subpayments = array('cc', 'dd');
     }
     
     public function checkoutProcessData($subpayment_code)
     {
         global $xtLink, $currency;
-        $code  = 'xt_paymill' . substr($subpayment_code, 0, 3);
-        $token = substr($subpayment_code, 4);
+        $code  = 'xt_paymill_' . $subpayment_code;
+        $token = $_SESSION['token'];
         if (!$this->_isTokenAvailable($token)) {
             $_SESSION[$code . '_error'] = TEXT_PAYMILL_ERR_TOKEN;
             $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
@@ -58,7 +60,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
                 $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
             }
             
-            
+            unset($_SESSION['token']);
         }
     }
     
