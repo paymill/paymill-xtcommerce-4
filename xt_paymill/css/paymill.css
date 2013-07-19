@@ -64,3 +64,13 @@ select[name=Paymill_Year]
     display: none;
     width: 300px;
 }
+
+.paymill-header
+{
+    background-color: #DA9401;
+    padding: 2px;
+    padding-left: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin-bottom: 3px;
+}

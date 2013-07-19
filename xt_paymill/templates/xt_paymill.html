@@ -31,8 +31,11 @@
     <div>
         {php}echo $errorCc;{/php}
         <div id="payment-errors-cc" class="payment-error"></div>
-        <span>{form type=radio name=selected_payment id=paymill_selector_cc value=$payment_code:cc}</span>
-        <span>{$smarty.const.TEXT_PAYMILL_CC_NAME}</span>
+        <div class="paymill-header">
+            <span>{form type=radio name=selected_payment id=paymill_selector_cc value=$payment_code:cc}</span>
+            <span>{$smarty.const.TEXT_PAYMILL_CC_NAME}</span>
+            <span style="float: right;">{$payment_price.formated}</span>
+        </div>
         <div>
             <img src="plugins/xt_paymill/images/icon_mastercard.png" alt="Mastercard"/>
             <img src="plugins/xt_paymill/images/icon_visa.png" alt="Visa"/>
@@ -75,8 +78,11 @@
     <div class="paymill-elv">
         {php}echo $errorElv;{/php}
         <div id="payment-errors-elv" class="payment-error"></div>
-        <span>{form type=radio name=selected_payment id=paymill_selector_elv value=$payment_code:elv}</span>
-        <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
+        <div class="paymill-header">
+            <span>{form type=radio name=selected_payment id=paymill_selector_elv value=$payment_code:elv}</span>
+            <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
+            <span style="float: right;">{$payment_price.formated}</span>
+        </div>
         <div>
             <img src="plugins/xt_paymill/images/icon_elv.png" alt="ELV"/>
         </div>
