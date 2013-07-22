@@ -141,11 +141,15 @@ $(document).ready(function ()
     
     $('form[name^="payment"]').submit(function(event) {
         if ($("input[name='selected_payment']:checked").val() === 'xt_paymill:cc') {
-            paymillDebug('Paymill Creditcard: Payment method triggered');
-            return paymillCc();
+            if (fastCheckoutCc == 'false') {
+                paymillDebug('Paymill Creditcard: Payment method triggered');
+                return paymillCc();
+            }
         } else if($("input[name='selected_payment']:checked").val() === 'xt_paymill:elv') {
-            paymillDebug('Paymill ELV: Payment method triggered');
-            return paymillElv();
+            if (fastCheckoutElv == 'false') {
+                paymillDebug('Paymill ELV: Payment method triggered');
+                return paymillElv();
+            }
         }
         
         $('form[name^="payment"]').get(0).submit();

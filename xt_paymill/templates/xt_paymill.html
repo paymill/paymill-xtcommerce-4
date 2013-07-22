@@ -4,8 +4,13 @@
 {php}array_key_exists('xt_paymill_elv_error', $_SESSION) ? $errorElv = '<div class="payment-error" style="display: block;">' . $_SESSION['xt_paymill_elv_error'] . '</div>' : $errorElv =  '';{/php}
 {php}unset($_SESSION['xt_paymill_cc_error']);{/php}
 {php}unset($_SESSION['xt_paymill_elv_error']);{/php}
+{php}$fastCheckout = new FastCheckout();{/php}
+{php}$fastCheckoutCc = $fastCheckout->canCustomerFastCheckoutCcTemplate($_SESSION["customer"]->customers_id);{/php}
+{php}$fastCheckoutElv = $fastCheckout->canCustomerFastCheckoutElvTemplate($_SESSION["customer"]->customers_id);{/php}
 <script type="text/javascript">
     var flag = true;
+    var fastCheckoutCc = '{php}echo $fastCheckoutCc{/php}';
+    var fastCheckoutElv = '{php}echo $fastCheckoutElv;{/php}';
     var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY}';
     var debug = '{$smarty.const.XT_PAYMILL_DEBUG_MODE}';
     var paymentCode = '{$payment_code}';

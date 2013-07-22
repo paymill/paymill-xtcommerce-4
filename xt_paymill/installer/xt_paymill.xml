@@ -31,6 +31,14 @@
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 29, '', 0, 10000.00, 0, 1);");
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 30, '', 0, 10000.00, 0, 1);");
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 31, '', 0, 10000.00, 0, 1);");
+        
+            $db->Execute("CREATE TABLE `pi_paymill_fastcheckout` (
+              `userID` varchar(100),
+              `clientID` varchar(100),
+              `paymentID_CC` varchar(100),
+              `paymentID_ELV` varchar(100),
+              PRIMARY KEY (`userID`)
+            );");
         ]]>
     </db_install>
     <plugin_code>
@@ -147,6 +155,18 @@
             </de>
             <en>
                 <title>Show PAYMILL label</title>
+            </en>
+        </config>
+        <config>
+            <key>FAST_CHECKOUT</key>
+            <type>dropdown</type>
+            <value>true</value>
+            <url>conf_truefalse</url>
+            <de>
+                <title>Fast Checkout</title>
+            </de>
+            <en>
+                <title>Fast Checkout</title>
             </en>
         </config>
     </configuration_payment>
