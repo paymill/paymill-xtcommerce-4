@@ -15,7 +15,6 @@ $(document).ready(function ()
                 $("#payment-errors-elv").text("");
                 $("#payment-errors-elv").css('display', 'none');
                 $('#paymill_selector_elv').val('xt_paymill:' + '_dd_' + result.token);
-                $('form[name^="payment"]').append("<input type='hidden' name='paymill_token' value='" + result.token + "'/>");
                 $('form[name^="payment"]').get(1).submit();
             }
         }
@@ -35,7 +34,6 @@ $(document).ready(function ()
                 $("#payment-errors-cc").text("");
                 $("#payment-errors-cc").css('display', 'none');
                 $('#paymill_selector_cc').val('xt_paymill:' + '_cc_' + result.token);
-                $('form[name^="payment"]').append("<input type='hidden' id='paymill_token' name='paymill_token' value='" + result.token + "'/>");
                 $('form[name^="payment"]').get(1).submit();
             }
         }
@@ -98,6 +96,29 @@ $(document).ready(function ()
         return false;
     }
     
+    $('#paymill-card-number').focus(function() {
+        fastCheckoutCc = 'false';
+        $('#paymill-card-number').val('');
+    });
+    
+    $('select[name="Paymill_Month"]').focus(function() {
+        fastCheckoutCc = 'false';
+    });
+    
+    $('select[name="Paymill_Year"]').focus(function() {
+        fastCheckoutCc = 'false';
+    });
+    
+    $('#paymill-card-cvc').focus(function() {
+        fastCheckoutCc = 'false';
+        $('#paymill-card-cvc').val('');
+    });
+    
+    $('#paymill-card-holdername').focus(function() {
+        fastCheckoutCc = 'false';
+        $('#paymill-card-holdername').val('');
+    });
+    
     function paymillElv()
     {
         paymillDebug('Paymill ELV: Start form validation');
@@ -136,7 +157,24 @@ $(document).ready(function ()
         
         return false;
     }
-
+    
+    $('#paymill-account-number').focus(function() {
+        fastCheckoutElv = 'false';
+        $('#paymill-account-number').val('');
+    });
+    
+    
+    $('#paymill-bank-code').focus(function() {
+        fastCheckoutElv = 'false';
+        $('#paymill-bank-code').val('');
+    });
+    
+    
+    $('#paymill-bank-owner').focus(function() {
+        fastCheckoutElv = 'false';
+        $('#paymill-bank-owner').val('');
+    });
+    
     function paymillDebug(message)
     {
         if (debug === 'true') {
@@ -149,11 +187,15 @@ $(document).ready(function ()
             if (fastCheckoutCc == 'false') {
                 paymillDebug('Paymill Creditcard: Payment method triggered');
                 return paymillCc();
+            } else {
+                $('#paymill_selector_cc').val('xt_paymill:' + '_cc_dummyToken');
             }
         } else if($("input[name='selected_payment']:checked").val() === 'xt_paymill:elv') {
             if (fastCheckoutElv == 'false') {
                 paymillDebug('Paymill ELV: Payment method triggered');
                 return paymillElv();
+            } else {
+                $('#paymill_selector_elv').val('xt_paymill:' + '_dd_dummyToken');
             }
         }
         

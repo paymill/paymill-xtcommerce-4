@@ -42,22 +42,22 @@
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
             </div>
-            <input id="paymill-card-number" class="paymill-input" type="text" size="20" value=""/>
+            <input id="paymill-card-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.cc_number}"/>
             <div id="payment-error-cc-1" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_CVC}</label>
             </div>
-            <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value=""/>
+            <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value="{$xt_paymill.cvc}"/>
             <div id="payment-error-cc-2" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER}</label>
             </div>
-            <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value=""/>
+            <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value="{$xt_paymill.card_holder}"/>
             <div id="payment-error-cc-3" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_DATE}</label>
             </div>
-            {html_select_date display_days=false end_year='+15' field_separator=' / ' prefix='Paymill_'}
+            {html_select_date display_days=false end_year='+15' field_separator=' / ' prefix='Paymill_' time=$xt_paymill.expire_date}
             <div id="payment-error-cc-4" class="payment-error"></div>
         </div>
         {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
@@ -90,17 +90,17 @@
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER}</label>
             </div>
-            <input id="paymill-account-number" class="paymill-input" type="text" size="20" value=""/>
+            <input id="paymill-account-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_number}"/>
             <div id="payment-error-elv-1" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE}</label>
             </div>
-            <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value=""/>
+            <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value="{$xt_paymill.bank_code}"/>
             <div id="payment-error-elv-2" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER}</label>
             </div>
-            <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value=""/>
+            <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_holder}"/>
             <div id="payment-error-elv-3" class="payment-error"></div>
         </div>
         {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
