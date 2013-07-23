@@ -204,7 +204,12 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     {
         $client = $this->_clients->getOne($data->clientID);
         if ($client['email'] !== $_SESSION['customer']->customer_info['customers_email_address']) {
-            $this->_clients->update($_SESSION['customer']->customer_info['customers_email_address']);
+            $this->_clients->update(
+                array(
+                    'id' => $data->clientID,
+                    'email' => $_SESSION['customer']->customer_info['customers_email_address']
+                )
+            );
         }
 
         $this->_paymentProcessor->setClientId($client['id']);
