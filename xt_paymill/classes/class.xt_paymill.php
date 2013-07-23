@@ -1,5 +1,7 @@
 <?php
 
+defined('_VALID_CALL') or die('Direct Access is not allowed.');
+
 require_once(dirname(__FILE__) . '/lib/Services/Paymill/PaymentProcessor.php');
 require_once(dirname(__FILE__) . '/lib/Services/Paymill/LoggingInterface.php');
 require_once(dirname(__FILE__) . '/helpers/FastCheckout.php');
@@ -20,14 +22,50 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
     public function __construct()
     {
+        global $page;
+        
+        $this->_fastCheckout = new FastCheckout();
+        
+        if ($page->page_name == 'checkout' && $page->page_action == 'payment') {
+            $this->_setCheckoutData();
+        }
+        
         $this->_paymentProcessor = new Services_Paymill_PaymentProcessor();
         $this->_paymentProcessor->setApiUrl($this->_apiUrl);
         $this->_paymentProcessor->setLogger($this);
         $this->_paymentProcessor->setPrivateKey(trim($this->_getPaymentConfig('PRIVATE_API_KEY')));
         $this->_paymentProcessor->setSource($this->version . '_xt:Commerce_' . _SYSTEM_VERSION);
-        $this->allowed_subpayments = array('cc', 'dd');
+        $this->allowed_subpayments = array('cc', 'dd');    
+    }
     
-        $this->_fastCheckout = new FastCheckout();
+    private function _setCheckoutData()
+    {
+        global $currency;
+        
+        $_SESSION['paymillAuthorizedAmount'] = (int) round(
+            ($_SESSION['cart']->total_physical['plain'] + XT_PAYMILL_DIFFERENT_AMOUNT) * 100
+        );
+        
+        $this->data['xt_paymill']['fast_checkout_cc'] = $this->_fastCheckout->canCustomerFastCheckoutCcTemplate(
+            $_SESSION["customer"]->customers_id
+        );
+        
+        $this->data['xt_paymill']['fast_checkout_elv'] = $this->_fastCheckout->canCustomerFastCheckoutElvTemplate(
+            $_SESSION["customer"]->customers_id
+        );
+        
+        $this->data['xt_paymill']['currency'] = $currency->code;
+        $this->data['xt_paymill']['amount'] = $_SESSION['paymillAuthorizedAmount'];
+        
+        if (array_key_exists('xt_paymill_cc_error', $_SESSION)) {
+            $this->data['xt_paymill']['error_cc'] = $_SESSION['xt_paymill_cc_error'];
+            unset($_SESSION['xt_paymill_cc_error']);
+        }
+        
+        if (array_key_exists('xt_paymill_dd_error', $_SESSION)) {
+            $this->data['xt_paymill']['error_elv'] = $_SESSION['xt_paymill_dd_error'];
+            unset($_SESSION['xt_paymill_dd_error']);
+        }
     }
 
     public function checkoutProcessData($subpayment_code)

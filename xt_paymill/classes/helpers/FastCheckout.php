@@ -23,7 +23,7 @@ class FastCheckout
     }    
     
     public function canCustomerFastCheckoutCc($userId)
-    {
+    {   
         return $this->hasCcPaymentId($userId) && $this->_getPaymentConfig('FAST_CHECKOUT') === 'true';
     }
     
@@ -38,9 +38,9 @@ class FastCheckout
         
         $data = $this->loadFastCheckoutData($userId);
         if (!empty($data)) {
-            $sql = "UPDATE `xplugin_pi_paymill_tfastcheckout`SET `paymentID_CC` = '$newPaymentId' WHERE `userID` = '$userId'";
+            $sql = "UPDATE `pi_paymill_fastcheckout`SET `paymentID_CC` = '$newPaymentId' WHERE `userID` = '$userId'";
         } else {
-            $sql = "INSERT INTO `xplugin_pi_paymill_tfastcheckout` (`userID`, `clientID`, `paymentID_CC`) VALUES ('$userId', '$newClientId', '$newPaymentId')";
+            $sql = "INSERT INTO `pi_paymill_fastcheckout` (`userID`, `clientID`, `paymentID_CC`) VALUES ('$userId', '$newClientId', '$newPaymentId')";
         }
         
         $db->Execute($sql);
@@ -52,9 +52,9 @@ class FastCheckout
         
         $data = $this->loadFastCheckoutData($userId);
         if (!empty($data)) {
-            $sql = "UPDATE `xplugin_pi_paymill_tfastcheckout`SET `paymentID_ELV` = '$newPaymentId' WHERE `userID` = '$userId'";
+            $sql = "UPDATE `pi_paymill_fastcheckout`SET `paymentID_ELV` = '$newPaymentId' WHERE `userID` = '$userId'";
         } else {
-            $sql = "INSERT INTO `xplugin_pi_paymill_tfastcheckout` (`userID`, `clientID`, `paymentID_ELV`) VALUES ('$userId', '$newClientId', '$newPaymentId')";
+            $sql = "INSERT INTO `pi_paymill_fastcheckout` (`userID`, `clientID`, `paymentID_ELV`) VALUES ('$userId', '$newClientId', '$newPaymentId')";
         }
         
         $db->Execute($sql);
@@ -64,9 +64,9 @@ class FastCheckout
     {
         global $db;
         
-        $sql = "SELECT * FROM `xplugin_pi_paymill_tfastcheckout` WHERE `userID` = '$userId'";
+        $sql = "SELECT * FROM `pi_paymill_fastcheckout` WHERE `userID` = '$userId'";
         
-        return $db->Execute($sql);
+        return $db->Execute($sql)->FetchObj();
     }
     
     public function hasElvPaymentId($userId)

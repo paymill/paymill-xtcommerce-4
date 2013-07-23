@@ -1,21 +1,12 @@
-{php}$_SESSION['paymillAuthorizedAmount'] = (int) round(($_SESSION['cart']->total_physical['plain'] + XT_PAYMILL_DIFFERENT_AMOUNT) * 100);{/php}
-{php}global $currency;{/php}
-{php}array_key_exists('xt_paymill_cc_error', $_SESSION) ? $errorCc = '<div class="payment-error" style="display: block;">' . $_SESSION['xt_paymill_cc_error'] . '</div>' : $errorCc =  '';{/php}
-{php}array_key_exists('xt_paymill_elv_error', $_SESSION) ? $errorElv = '<div class="payment-error" style="display: block;">' . $_SESSION['xt_paymill_elv_error'] . '</div>' : $errorElv =  '';{/php}
-{php}unset($_SESSION['xt_paymill_cc_error']);{/php}
-{php}unset($_SESSION['xt_paymill_elv_error']);{/php}
-{php}$fastCheckout = new FastCheckout();{/php}
-{php}$fastCheckoutCc = $fastCheckout->canCustomerFastCheckoutCcTemplate($_SESSION["customer"]->customers_id);{/php}
-{php}$fastCheckoutElv = $fastCheckout->canCustomerFastCheckoutElvTemplate($_SESSION["customer"]->customers_id);{/php}
 <script type="text/javascript">
     var flag = true;
-    var fastCheckoutCc = '{php}echo $fastCheckoutCc{/php}';
-    var fastCheckoutElv = '{php}echo $fastCheckoutElv;{/php}';
+    var fastCheckoutCc = '{$xt_paymill.fast_checkout_cc}';
+    var fastCheckoutElv = '{$xt_paymill.fast_checkout_elv}';
     var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY}';
     var debug = '{$smarty.const.XT_PAYMILL_DEBUG_MODE}';
     var paymentCode = '{$payment_code}';
-    var amount = "{php}echo $_SESSION['paymillAuthorizedAmount'];{/php}";
-    var currency = "{php}echo $currency->code;{/php}";
+    var amount = "{$xt_paymill.amount}";
+    var currency = "{$xt_paymill.currency}";
     var lang = new Array();
     // Paymill cc js lang
     lang['card_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_NUMBER}';
@@ -34,7 +25,9 @@
 <div>
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLCC eq 'true'}
     <div>
-        {php}echo $errorCc;{/php}
+        {if $xt_paymill.error_cc}
+        <div class="payment-error" style="display: block;">{$xt_paymill.error_cc}</div>
+        {/if}
         <div id="payment-errors-cc" class="payment-error"></div>
         <div class="paymill-header">
             <span>{form type=radio name=selected_payment id=paymill_selector_cc value=$payment_code:cc}</span>
@@ -81,7 +74,9 @@
     {/if}
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLELV eq 'true'}
     <div class="paymill-elv">
-        {php}echo $errorElv;{/php}
+        {if $xt_paymill.error_elv}
+        <div class="payment-error" style="display: block;">{$xt_paymill.error_elv}</div>
+        {/if}
         <div id="payment-errors-elv" class="payment-error"></div>
         <div class="paymill-header">
             <span>{form type=radio name=selected_payment id=paymill_selector_elv value=$payment_code:elv}</span>

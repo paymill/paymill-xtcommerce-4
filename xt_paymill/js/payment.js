@@ -85,8 +85,6 @@ $(document).ready(function ()
             return ccErrorFlag;
         }
         
-        
-        
         paymill.createToken({
             number : $('#paymill-card-number').val(),
             exp_month : $('select[name="Paymill_Month"]').val(),
@@ -138,6 +136,13 @@ $(document).ready(function ()
         
         return false;
     }
+
+    function paymillDebug(message)
+    {
+        if (debug === 'true') {
+            console.log(message);
+        }
+    }
     
     $('form[name^="payment"]').submit(function(event) {
         if ($("input[name='selected_payment']:checked").val() === 'xt_paymill:cc') {
@@ -154,12 +159,4 @@ $(document).ready(function ()
         
         $('form[name^="payment"]').get(0).submit();
     });
-    
-    function paymillDebug(message)
-    {
-        if (debug === 'true') {
-            console.log(message);
-        }
-    }
-
 });
