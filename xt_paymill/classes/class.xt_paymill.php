@@ -57,12 +57,15 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
     public function __construct()
     {
-        global $page;
-        
         $this->_fastCheckout = new FastCheckout();
         $this->_payments = new Services_Paymill_Payments(
             trim($this->_getPaymentConfig('PRIVATE_API_KEY')), 
             $this->_apiUrl
+        );
+        
+        $this->_clients = new Services_Paymill_Clients(
+            trim($this->_getPaymentConfig('PRIVATE_API_KEY')), 
+            $this->_apiUrl   
         );
         
         $this->_setCheckoutData();
@@ -124,7 +127,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
     public function checkoutProcessData($subpayment_code)
     {
-        global $xtLink, $currency;
+        global $xtLink;
         $code = 'xt_paymill_' . $subpayment_code;
         $token = $_SESSION['token'];
         if (!$this->_isTokenAvailable($token)) {
@@ -132,21 +135,13 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
         } else {
             
-            $name = $_SESSION['customer']->customer_payment_address['customers_firstname']
-                  . ' '
-                  . $_SESSION['customer']->customer_payment_address['customers_lastname'];
-
-            $this->_paymentProcessor->setAmount((int) round($_SESSION['cart']->total_physical['plain'] * 100));
+            $this->_setTransaction($code);
             
-            $this->_paymentProcessor->setEmail($_SESSION['customer']->customer_info['customers_email_address']);
-            $this->_paymentProcessor->setName($name);
-            $this->_paymentProcessor->setCurrency($currency->code);
-            $this->_paymentProcessor->setDescription(_STORE_NAME . ' Order ID: ' . $this->_getNextOrderId());
-
-            if ($code === 'xt_paymill_cc') {
-                $this->_paymentProcessor->setPreAuthAmount($_SESSION['paymillAuthorizedAmount']);
+            $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
+            if (!empty($data->clientID)) {
+                $this->_existingClient($data);
             }
-
+            
             if ($token === 'dummyToken') {
                 $this->_fastCheckout($code);
             }
@@ -159,33 +154,66 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             }
             
             if ($this->_getPaymentConfig('FAST_CHECKOUT') === 'true') {
-
-                if ($code === 'xt_paymill_cc') {
-                    $this->_fastCheckout->saveCcIds(
-                        $_SESSION['customer']->customers_id, 
-                        $this->_paymentProcessor->getClientId(), 
-                        $this->_paymentProcessor->getPaymentId()
-                    );
-                }
-
-                if ($code === 'xt_paymill_dd') {
-                    $this->_fastCheckout->saveElvIds(
-                        $_SESSION['customer']->customers_id, 
-                        $this->_paymentProcessor->getClientId(), 
-                        $this->_paymentProcessor->getPaymentId()
-                    );
-                }
+                $this->_savePayment($code);
             }
 
             unset($_SESSION['token']);
         }
     }
     
+    private function _savePayment($code)
+    {
+        if ($code === 'xt_paymill_cc') {
+            $this->_fastCheckout->saveCcIds(
+                $_SESSION['customer']->customers_id, 
+                $this->_paymentProcessor->getClientId(), 
+                $this->_paymentProcessor->getPaymentId()
+            );
+        }
+
+        if ($code === 'xt_paymill_dd') {
+            $this->_fastCheckout->saveElvIds(
+                $_SESSION['customer']->customers_id, 
+                $this->_paymentProcessor->getClientId(), 
+                $this->_paymentProcessor->getPaymentId()
+            );
+        }
+    }
+    
+    private function _setTransaction($code)
+    {
+        global $currency;
+        
+        $name = $_SESSION['customer']->customer_payment_address['customers_firstname']
+              . ' '
+              . $_SESSION['customer']->customer_payment_address['customers_lastname'];
+
+        $this->_paymentProcessor->setAmount((int) round($_SESSION['cart']->total_physical['plain'] * 100));
+
+        $this->_paymentProcessor->setEmail($_SESSION['customer']->customer_info['customers_email_address']);
+        $this->_paymentProcessor->setName($name);
+        $this->_paymentProcessor->setCurrency($currency->code);
+        $this->_paymentProcessor->setDescription(_STORE_NAME . ' Order ID: ' . $this->_getNextOrderId());
+        
+        if ($code === 'xt_paymill_cc') {
+            $this->_paymentProcessor->setPreAuthAmount($_SESSION['paymillAuthorizedAmount']);
+        }
+    }
+    
+    private function _existingClient($data)
+    {
+        $client = $this->_clients->getOne($data->clientID);
+        if ($client['email'] !== $_SESSION['customer']->customer_info['customers_email_address']) {
+            $this->_clients->update($_SESSION['customer']->customer_info['customers_email_address']);
+        }
+
+        $this->_paymentProcessor->setClientId($client['id']);
+    }
+    
     private function _fastCheckout($code) 
     {
         if ($this->_fastCheckout->canCustomerFastCheckoutCc($_SESSION['customer']->customers_id) && $code === 'xt_paymill_cc') {
             $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
-            $this->_paymentProcessor->setClientId($data->clientID);
             if (!empty($data->paymentID_CC)) {
                 $this->_paymentProcessor->setPaymentId($data->paymentID_CC);
             }
@@ -193,7 +221,6 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
         if ($this->_fastCheckout->canCustomerFastCheckoutElv($_SESSION['customer']->customers_id) && $code === 'xt_paymill_dd') {
             $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
-            $this->_paymentProcessor->setClientId($data->clientID);
             if ($data->paymentID_ELV) {
                 $this->_paymentProcessor->setPaymentId($data->paymentID_ELV);
             }
