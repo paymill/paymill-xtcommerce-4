@@ -82,9 +82,11 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     {
         global $currency;
         
-        $_SESSION['paymillAuthorizedAmount'] = (int) round(
-            ($_SESSION['cart']->total_physical['plain'] + $this->_getPaymentConfig('DIFFERENT_AMOUNT')) * 100
-        );
+        if (!isset($_SESSION['paymillAuthorizedAmount'])) {
+            $_SESSION['paymillAuthorizedAmount'] = (int) round(
+                ($_SESSION['cart']->total_physical['plain'] + $this->_getPaymentConfig('DIFFERENT_AMOUNT')) * 100
+            );
+        }
         
         $this->data['xt_paymill']['fast_checkout_cc'] = $this->_fastCheckout->canCustomerFastCheckoutCcTemplate(
             $_SESSION["customer"]->customers_id
@@ -157,6 +159,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
                 $this->_savePayment($code);
             }
 
+            unset($_SESSION['paymillAuthorizedAmount']);
             unset($_SESSION['token']);
         }
     }
