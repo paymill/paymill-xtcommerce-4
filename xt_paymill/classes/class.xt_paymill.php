@@ -80,9 +80,10 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     
     private function _setCheckoutData()
     {
-        global $currency;
+        global $currency, $page;
         
-        if (!isset($_SESSION['paymillAuthorizedAmount'])) {
+        if ($page->page_name == 'checkout' && $page->page_action == 'payment') {
+            unset($_SESSION['paymillAuthorizedAmount']);
             $_SESSION['paymillAuthorizedAmount'] = (int) round(
                 ($_SESSION['cart']->total_physical['plain'] + $this->_getPaymentConfig('DIFFERENT_AMOUNT')) * 100
             );
@@ -149,7 +150,8 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             }
             
             $this->_paymentProcessor->setToken($token);
-  
+            unset($_SESSION['token']);
+            
             if (!$this->_paymentProcessor->processPayment()) {
                 $_SESSION[$code . '_error'] = TEXT_PAYMILL_ERR_ORDER;
                 $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
@@ -158,9 +160,6 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             if ($this->_getPaymentConfig('FAST_CHECKOUT') === 'true') {
                 $this->_savePayment($code);
             }
-
-            unset($_SESSION['paymillAuthorizedAmount']);
-            unset($_SESSION['token']);
         }
     }
     
@@ -200,6 +199,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         
         if ($code === 'xt_paymill_cc') {
             $this->_paymentProcessor->setPreAuthAmount($_SESSION['paymillAuthorizedAmount']);
+            unset($_SESSION['paymillAuthorizedAmount']);
         }
     }
     
