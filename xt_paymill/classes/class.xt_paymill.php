@@ -123,6 +123,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $this->data['xt_paymill']['expire_date'] = $payment['expire_year'] . '-' . $payment['expire_month'] . '-01';
             $this->data['xt_paymill']['cvc'] = '***';
             $this->data['xt_paymill']['card_holder'] = $payment['card_holder'];
+            $this->data['xt_paymill']['card_brand'] = $payment['card_type'];
         }
 
         if (!empty($data->paymentID_ELV)) {

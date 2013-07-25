@@ -27,11 +27,17 @@
 .paymill-input-label
 {
     font-size: 11px;
+    clear: both;
 }
 
 .paymill-input
 {
     width: 250px;
+}
+
+#paymill-card-number
+{
+    margin-right: 5px;
 }
 
 select[name=Paymill_Month]

@@ -35,14 +35,13 @@
             <span style="float: right;">{$payment_price.formated}</span>
         </div>
         <div>
-            <img src="plugins/xt_paymill/images/icon_mastercard.png" alt="Mastercard"/>
-            <img src="plugins/xt_paymill/images/icon_visa.png" alt="Visa"/>
-        </div>
-        <div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
             </div>
-            <input id="paymill-card-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.cc_number}"/>
+            <span class="card-icon-parent">
+                <span><input id="paymill-card-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.cc_number}"/></span>
+                <span class="card-icon">{if $xt_paymill.card_brand}<img src="plugins/xt_paymill/images/32x20_{$xt_paymill.card_brand}.png" style="position: absolute;"/>{/if}</span>
+            </span>
             <div id="payment-error-cc-1" class="payment-error"></div>
             <div class="paymill-input-label">
                 <label>{$smarty.const.TEXT_PAYMILL_CC_CVC}</label>
