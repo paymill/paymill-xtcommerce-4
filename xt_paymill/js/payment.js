@@ -88,7 +88,7 @@ $(document).ready(function ()
             exp_month : $('select[name="Paymill_Month"]').val(),
             exp_year : $('select[name="Paymill_Year"]').val(),
             cvc : $('#paymill-card-cvc').val(),
-            cardholdername : $('#paymill-card-holdername').val(),
+            cardholder : $('#paymill-card-holdername').val(),
             amount_int : amount,
             currency : currency
         }, paymillCcResponseHandler);

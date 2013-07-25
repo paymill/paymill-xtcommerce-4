@@ -36,12 +36,12 @@ class FastCheckout
     {
         global $db;
         
-        if ($this->hasCcPaymentId($userId)) {
+        if ($this->_canUpdate($userId)) {
             $sql = "UPDATE `pi_paymill_fastcheckout`SET `paymentID_CC` = '$newPaymentId' WHERE `userID` = '$userId'";
         } else {
             $sql = "INSERT INTO `pi_paymill_fastcheckout` (`userID`, `clientID`, `paymentID_CC`) VALUES ('$userId', '$newClientId', '$newPaymentId')";
         }
-        
+
         $db->Execute($sql);
     }
     
@@ -49,13 +49,19 @@ class FastCheckout
     {   
         global $db;
         
-        if ($this->hasElvPaymentId($userId)) {
+        if ($this->_canUpdate($userId)) {
             $sql = "UPDATE `pi_paymill_fastcheckout`SET `paymentID_ELV` = '$newPaymentId' WHERE `userID` = '$userId'";
         } else {
             $sql = "INSERT INTO `pi_paymill_fastcheckout` (`userID`, `clientID`, `paymentID_ELV`) VALUES ('$userId', '$newClientId', '$newPaymentId')";
         }
         
         $db->Execute($sql);
+    }
+    
+    private function _canUpdate($userId)
+    {
+        $data = $this->loadFastCheckoutData($userId);
+        return !empty($data->paymentID_CC) || !empty($data->paymentID_ELV);
     }
     
     public function loadFastCheckoutData($userId)

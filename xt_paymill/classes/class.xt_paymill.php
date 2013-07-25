@@ -99,6 +99,8 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         
         $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
         
+        
+        
         if (!empty($data->paymentID_CC)) {
             $payment = $this->_payments->getOne($data->paymentID_CC);
             $this->data['xt_paymill']['cc_number'] = '************' . $payment['last4'];
