@@ -2,7 +2,7 @@
     var flag = true;
     var fastCheckoutCc = '{$xt_paymill.fast_checkout_cc}';
     var fastCheckoutElv = '{$xt_paymill.fast_checkout_elv}';
-    var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY}';
+    var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY|trim}';
     var debug = '{$smarty.const.XT_PAYMILL_DEBUG_MODE}';
     var paymentCode = '{$payment_code}';
     var amount = "{$xt_paymill.amount}";
