@@ -39,6 +39,8 @@
               `paymentID_ELV` varchar(100),
               PRIMARY KEY (`userID`)
             );");
+            
+            $db->Execute("INSERT INTO `" . TABLE_ADMIN_NAVIGATION . "` (`pid`, `text`, `icon`, `url_i`, `url_d`, `sortorder`, `parent`, `type`, `navtype`) VALUES (NULL, 'paymill_logging', 'images/icons/date_edit.png', '&plugin=xt_paymill', 'adminHandler.php', '9010', 'xt_paymill', 'I', 'W');");  
         ]]>
     </db_install>
     <plugin_code>
