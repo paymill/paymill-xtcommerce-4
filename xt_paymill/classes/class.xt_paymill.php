@@ -60,26 +60,27 @@ class xt_paymill implements Services_Paymill_LoggingInterface
      * @var string
      */
     private $_apiUrl = 'https://api.paymill.com/v2/';
+    protected $_table = 'pi_paymill_logging';
+    protected $_tableLang = null;
+    protected $_tableSeo = null;
+    protected $_masterKey = 'id';
 
     public function __construct()
     {
         global $page;
-        
+
         $this->_fastCheckout = new FastCheckout();
-        
+
         $this->_transactions = new Services_Paymill_Transactions(
-            trim($this->_getPaymentConfig('PRIVATE_API_KEY')),
-            $this->_apiUrl
+                trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
         );
-        
+
         $this->_payments = new Services_Paymill_Payments(
-            trim($this->_getPaymentConfig('PRIVATE_API_KEY')),
-            $this->_apiUrl
+                trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
         );
 
         $this->_clients = new Services_Paymill_Clients(
-            trim($this->_getPaymentConfig('PRIVATE_API_KEY')),
-            $this->_apiUrl
+                trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
         );
 
         $this->_setCheckoutData();
@@ -90,7 +91,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $this->_paymentProcessor->setPrivateKey(trim($this->_getPaymentConfig('PRIVATE_API_KEY')));
         $this->_paymentProcessor->setSource($this->version . '_xt:Commerce_' . _SYSTEM_VERSION);
         $this->allowed_subpayments = array('cc', 'dd');
-        
+
         if ($page->page_name == 'checkout' && $page->page_action == 'success') {
             $this->_success();
         }
@@ -190,13 +191,13 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     {
         if ($code === 'xt_paymill_cc') {
             $this->_fastCheckout->saveCcIds(
-                $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
+                    $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
             );
         }
 
         if ($code === 'xt_paymill_dd') {
             $this->_fastCheckout->saveElvIds(
-                $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
+                    $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
             );
         }
     }
@@ -285,14 +286,75 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     private function _success()
     {
         $this->_transactions->update(
-            array(
-                'id' => $_SESSION['paymillTransactionId'],
-                'description' => _STORE_NAME . ' Order ID: ' . $_SESSION['success_order_id']
-            )
+                array(
+                    'id' => $_SESSION['paymillTransactionId'],
+                    'description' => _STORE_NAME . ' Order ID: ' . $_SESSION['success_order_id']
+                )
         );
 
 
         unset($_SESSION['paymillTransactionId']);
+    }
+
+    function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    function _getParams()
+    {
+        $header = array();
+        $header['paymill_id'] = array('type' => 'hidden');
+        $header['language_code'] = array('type' => 'hidden');
+        $header['customers_id'] = array('type' => 'hidden');
+
+        $params['header'] = $header;
+        $params['master_key'] = $this->_masterKey;
+        $params['default_sort'] = $this->_masterKey;
+        $params['SortField'] = $this->_masterKey;
+        $params['SortDir'] = "DESC";
+
+        $params['display_checkCol'] = true;
+        $params['display_statusTrueBtn'] = false;
+        $params['display_statusFalseBtn'] = false;
+        $params['display_newBtn'] = false;
+        $params['display_editBtn'] = false;
+
+        return $params;
+    }
+
+    function _get($id = 0)
+    {
+        if ($this->position != 'admin') {
+            return false;
+        }
+
+        $tableData = new adminDB_DataRead(
+                $this->_table, $this->_tableLang, $this->_tableSeo, $this->_masterKey
+        );
+
+        $obj = new stdClass();
+        $obj->totalCount = count($tableData->getData());
+
+        $obj->data = $tableData->getHeader();
+        if (!is_null($tableData->getData())) {
+            $obj->data = $tableData->getData();
+        }
+
+        return $obj;
+    }
+
+    function _unset($id = 0)
+    {
+        global $db;
+        
+        $id = (int) $id;
+        
+        if ($id == 0 || !is_int($id) || $this->position != 'admin') {
+            return false;
+        }
+        
+        $db->Execute("DELETE FROM " . $this->_table . " WHERE " . $this->_masterKey . " = '" . $id . "'");
     }
 
 }
