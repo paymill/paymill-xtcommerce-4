@@ -40,7 +40,7 @@
               PRIMARY KEY (`userID`)
             );");
             
-            $db->Execute("INSERT INTO `" . TABLE_ADMIN_NAVIGATION . "` (`pid`, `text`, `icon`, `url_i`, `url_d`, `sortorder`, `parent`, `type`, `navtype`) VALUES (NULL, 'paymill_logging', 'images/icons/date_edit.png', '&plugin=xt_paymill', 'adminHandler.php', '9010', 'xt_paymill', 'I', 'W');");  
+            $db->Execute("INSERT INTO `" . TABLE_ADMIN_NAVIGATION . "` (`pid`, `text`, `icon`, `url_i`, `url_d`, `sortorder`, `parent`, `type`, `navtype`, `cls`, `handler`, `iconCls`) VALUES (NULL, 'paymill_menu', NULL, NULL, NULL, '50000', 0, 'G', 'W', NULL, NULL, 'paymill_menu');");  
         ]]>
     </db_install>
     <plugin_code>
