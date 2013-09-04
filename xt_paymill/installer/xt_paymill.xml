@@ -388,7 +388,7 @@
         </phrase>
         <phrase>
             <key>TEXT_XT_PAYMILL</key>
-            <class>store</class>
+            <class>admin</class>
             <de>
                 <value>PAYMILL Log</value>
             </de>
@@ -398,7 +398,7 @@
         </phrase>
         <phrase>
             <key>TEXT_DEBUG</key>
-            <class>store</class>
+            <class>admin</class>
             <de>
                 <value>Debug</value>
             </de>
@@ -408,7 +408,7 @@
         </phrase>
         <phrase>
             <key>TEXT_MESSAGE</key>
-            <class>store</class>
+            <class>admin</class>
             <de>
                 <value>Message</value>
             </de>
@@ -418,7 +418,7 @@
         </phrase>
         <phrase>
             <key>TEXT_DATE</key>
-            <class>store</class>
+            <class>admin</class>
             <de>
                 <value>Date</value>
             </de>

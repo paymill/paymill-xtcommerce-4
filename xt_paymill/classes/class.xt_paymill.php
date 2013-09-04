@@ -41,17 +41,17 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     private $_paymentProcessor;
 
     /**
-     * @var \Services_Paymill_Clients 
+     * @var \Services_Paymill_Clients
      */
     private $_clients;
 
     /**
-     * @var \Services_Paymill_Clients 
+     * @var \Services_Paymill_Clients
      */
     private $_payments;
 
     /**
-     * @var \Services_Paymill_Transactions 
+     * @var \Services_Paymill_Transactions
      */
     private $_transactions;
 
@@ -72,15 +72,15 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $this->_fastCheckout = new FastCheckout();
 
         $this->_transactions = new Services_Paymill_Transactions(
-                trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
+            trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
         );
 
         $this->_payments = new Services_Paymill_Payments(
-                trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
+            trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
         );
 
         $this->_clients = new Services_Paymill_Clients(
-                trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
+            trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
         );
 
         $this->_setCheckoutData();
@@ -104,16 +104,16 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         if ($page->page_name == 'checkout' && $page->page_action == 'payment') {
             unset($_SESSION['paymillAuthorizedAmount']);
             $_SESSION['paymillAuthorizedAmount'] = (int) round(
-                            ($_SESSION['cart']->total_physical['plain'] + $this->_getPaymentConfig('DIFFERENT_AMOUNT')) * 100
+                ($_SESSION['cart']->total_physical['plain'] + $this->_getPaymentConfig('DIFFERENT_AMOUNT')) * 100
             );
         }
 
         $this->data['xt_paymill']['fast_checkout_cc'] = $this->_fastCheckout->canCustomerFastCheckoutCcTemplate(
-                $_SESSION["customer"]->customers_id
+            $_SESSION["customer"]->customers_id
         );
 
         $this->data['xt_paymill']['fast_checkout_elv'] = $this->_fastCheckout->canCustomerFastCheckoutElvTemplate(
-                $_SESSION["customer"]->customers_id
+            $_SESSION["customer"]->customers_id
         );
 
         $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
@@ -191,13 +191,13 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     {
         if ($code === 'xt_paymill_cc') {
             $this->_fastCheckout->saveCcIds(
-                    $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
+                $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
             );
         }
 
         if ($code === 'xt_paymill_dd') {
             $this->_fastCheckout->saveElvIds(
-                    $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
+                $_SESSION['customer']->customers_id, $this->_paymentProcessor->getClientId(), $this->_paymentProcessor->getPaymentId()
             );
         }
     }
@@ -207,8 +207,8 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         global $currency;
 
         $name = $_SESSION['customer']->customer_payment_address['customers_firstname']
-                . ' '
-                . $_SESSION['customer']->customer_payment_address['customers_lastname'];
+            . ' '
+            . $_SESSION['customer']->customer_payment_address['customers_lastname'];
 
         $this->_paymentProcessor->setAmount((int) round($_SESSION['cart']->total_physical['plain'] * 100));
 
@@ -228,10 +228,10 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $client = $this->_clients->getOne($data->clientID);
         if ($client['email'] !== $_SESSION['customer']->customer_info['customers_email_address']) {
             $this->_clients->update(
-                    array(
-                        'id' => $data->clientID,
-                        'email' => $_SESSION['customer']->customer_info['customers_email_address']
-                    )
+                array(
+                    'id' => $data->clientID,
+                    'email' => $_SESSION['customer']->customer_info['customers_email_address']
+                )
             );
         }
 
@@ -257,14 +257,9 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
     public function log($message, $debugInfo)
     {
+        global $db;
         if ($this->_getPaymentConfig('DEBUG_MODE') === 'true') {
-            $logfile = _SRV_WEBROOT . _SRV_WEB_PLUGINS . '/xt_paymill/log/log.txt';
-            if (file_exists($logfile) && is_writable($logfile)) {
-                $handle = fopen($logfile, 'a+');
-                fwrite($handle, "[" . date(DATE_RFC822) . "] " . $message . "\n");
-                fwrite($handle, "[" . date(DATE_RFC822) . "] " . $debugInfo . "\n");
-                fclose($handle);
-            }
+            $db->Execute("INSERT INTO `pi_paymill_logging` (debug, message) VALUES('" . $debugInfo . "', '" . $message . "')");
         }
     }
 
@@ -286,10 +281,10 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     private function _success()
     {
         $this->_transactions->update(
-                array(
-                    'id' => $_SESSION['paymillTransactionId'],
-                    'description' => _STORE_NAME . ' Order ID: ' . $_SESSION['success_order_id']
-                )
+            array(
+                'id' => $_SESSION['paymillTransactionId'],
+                'description' => _STORE_NAME . ' Order ID: ' . $_SESSION['success_order_id']
+            )
         );
 
 
@@ -330,7 +325,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         }
 
         $tableData = new adminDB_DataRead(
-                $this->_table, $this->_tableLang, $this->_tableSeo, $this->_masterKey
+            $this->_table, $this->_tableLang, $this->_tableSeo, $this->_masterKey
         );
 
         $obj = new stdClass();
@@ -347,14 +342,16 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     function _unset($id = 0)
     {
         global $db;
-        
+
         $id = (int) $id;
-        
+
         if ($id == 0 || !is_int($id) || $this->position != 'admin') {
             return false;
         }
-        
+
         $db->Execute("DELETE FROM " . $this->_table . " WHERE " . $this->_masterKey . " = '" . $id . "'");
+
+        return true;
     }
 
 }
