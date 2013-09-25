@@ -1,50 +1,46 @@
 
 $(document).ready(function () 
 {
+	
+    var cssClass = "paymill-card-number-";
+	
     $('#paymill-card-number').keyup(function() {
-        switch(paymill.cardType($('#paymill-card-number').val()).toLowerCase()){
+		
+        switch (paymill.cardType($('#paymill-card-number').val()).toLowerCase()) {
             case 'visa':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_visa.png" >');
-                $('.card-icon').show();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'visa');
                 break;
             case 'mastercard':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_mastercard.png" >');
-                $('.card-icon').show();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'mastercard');
                 break;
             case 'american express':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_amex.png" >');
-                $('.card-icon').show();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'american');
                 break;
             case 'jcb':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_jcb.png" >');
-                $('.card-icon').show();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'jcb');
                 break;
             case 'maestro':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_maestro.png" >');
-                $('.card-icon').show();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'maestro');
                 break;
             case 'diners club':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_dinersclub.png" >');
-                $('.card-icon').show();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'diners');
                 break;
             case 'discover':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_discover.png" >');
-                $('.card-icon').show();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'discover');
                 break;
             case 'unionpay':
-                $('.card-icon').html('<img src="plugins/xt_paymill/images/32x20_unionpay.png" >');
-                $('.card-icon').show();
-                break;
-            case 'unknown':
-            default:
-                $('.card-icon').hide();
+                $('#paymill-card-number').removeClass();
+                $('#paymill-card-number').addClass('paymill-input ' + cssClass + 'unionpay');
                 break;
         }
-        
-        $('.card-icon :first-child').css('position','absolute');
     });
-
-    
     
     function paymillElvResponseHandler(error, result) 
     {

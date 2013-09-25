@@ -39,8 +39,7 @@
                 <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
             </div>
             <span class="card-icon-parent">
-                <span><input id="paymill-card-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.cc_number}"/></span>
-                <span class="card-icon">{if $xt_paymill.card_brand}<img src="plugins/xt_paymill/images/32x20_{$xt_paymill.card_brand}.png" style="position: absolute;"/>{/if}</span>
+                <span><input id="paymill-card-number" class="paymill-input{if $xt_paymill.card_brand} paymill-card-number-{$xt_paymill.card_brand|lower}{/if}" type="text" size="20" value="{$xt_paymill.cc_number}"/></span>
             </span>
             <div id="payment-error-cc-1" class="payment-error"></div>
             <div class="paymill-input-label">
