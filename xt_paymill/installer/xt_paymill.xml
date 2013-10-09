@@ -111,7 +111,7 @@
             <url>conf_truefalse</url>
             <sort_order>5</sort_order>
             <de>
-                <title>PAYMILL Lastschrift aktivieren</title>
+                <title>PAYMILL ELV aktivieren</title>
             </de>
             <en>
                 <title>Activate PAYMILL Direct Debit</title>
@@ -200,7 +200,7 @@
             <key>TEXT_PAYMILL_ELV_NAME</key>
             <class>store</class>
             <de>
-                <value>Lastschrift</value>
+                <value>ELV</value>
             </de>
             <en>
                 <value>Direct Debit</value>
@@ -290,7 +290,7 @@
             <key>TEXT_PAYMILL_LABEL_ELV</key>
             <class>store</class>
             <de>
-                <value>Lastschrift powered by</value>
+                <value>ELV powered by</value>
             </de>
             <en>
                 <value>Direct debit payment powered by</value>
