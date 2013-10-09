@@ -313,7 +313,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $params['display_statusTrueBtn'] = false;
         $params['display_statusFalseBtn'] = false;
         $params['display_newBtn'] = false;
-        $params['display_editBtn'] = false;
+        $params['display_editBtn'] = true;
 
         return $params;
     }

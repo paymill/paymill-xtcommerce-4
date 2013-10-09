@@ -22,6 +22,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://bridge.paymill.com/"></script>
 <script type="text/javascript" src="plugins/xt_paymill/js/payment.js"></script>
+{if $smarty.const.XT_PAYMILL_PUBLIC_API_KEY neq ''  && $smarty.const.XT_PAYMILL_PRIVATE_API_KEY neq ''}
 <div>
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLCC eq 'true'}
     <div>
@@ -114,3 +115,4 @@
     </div>
     {/if}
 </div>
+{/if}
