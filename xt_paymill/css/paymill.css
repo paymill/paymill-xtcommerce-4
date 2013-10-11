@@ -28,6 +28,8 @@
 {
     font-size: 11px;
     clear: both;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .paymill-input
@@ -121,4 +123,14 @@ select[name=Paymill_Year]
 .paymill-card-number-discover
 {
     background: url('../images/32x20_discover.png') no-repeat center right;
+}
+
+.tooltip
+{
+    margin-left: 3px;
+    font-size: 11px;
+    color: #E2E2E2;
+    padding: 0 5px;
+    border-radius: 100px;
+    background: #636363;
 }
