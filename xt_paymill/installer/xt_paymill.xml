@@ -330,10 +330,10 @@
             <key>TEXT_PAYMILL_CC_ERR_HOLDER</key>
             <class>store</class>
             <de>
-                <value>Bitte geben Sie den Karteninhaber an.</value>
+                <value>Der Karteninhaber ist ungültig. Bitte korrigieren Sie Ihre Eingabe.</value>
             </de>
             <en>
-                <value>Credit Card Holder is missing.</value>
+                <value>Credit Card Holder is invalid.</value>
             </en>
         </phrase>
         <phrase>
