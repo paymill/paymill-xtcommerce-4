@@ -324,19 +324,53 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             return false;
         }
 
+        
         $tableData = new adminDB_DataRead(
             $this->_table, $this->_tableLang, $this->_tableSeo, $this->_masterKey
         );
 
+        
+        if (!empty($id)) {
+            $html = '<h2>No Debug available</h2>';
+            $data = $tableData->getData();
+            foreach ($data as $value) {
+                if ($value['id'] == $id && !empty($value['debug'])) {
+                    $html = '<h2>Debug</h2>';
+                    $debug = str_replace('\n', "\n", $value['debug']);
+                    $html.= '<pre>' . print_r($debug, true) . '</pre>';
+                }
+            }
+            
+            exit($html);
+        }
+        
         $obj = new stdClass();
         $obj->totalCount = count($tableData->getData());
 
-        $obj->data = $tableData->getHeader();
+        $obj->data = $this->getDataWithoutDebug($tableData->getHeader());
+        
         if (!is_null($tableData->getData())) {
-            $obj->data = $tableData->getData();
+            $obj->data = $this->getDataWithoutDebug($tableData->getData());
         }
-
+        
         return $obj;
+    }
+    
+    function getDataWithoutDebug($data)
+    {
+        $output = array();
+        foreach ($data as $key => $value) {
+            $entry = array();
+            foreach ($value as $innerKey => $innerValue) {
+                if ($innerKey !== 'debug') {
+                    $entry[$innerKey] = $innerValue;
+                }
+            }
+            
+            $output[$key] = $entry;
+        }
+        
+        return $output;
     }
 
     function _unset($id = 0)

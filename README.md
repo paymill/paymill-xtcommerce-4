@@ -1,4 +1,4 @@
-PAYMILL-xtCommerce-4
+PAYMILL - xtCommerce 4 /Veyton
 ====================
 
 xtCommerce (Version 4 / Veyton) Plugin for PAYMILL credit card and elv payments
