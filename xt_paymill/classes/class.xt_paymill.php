@@ -314,25 +314,41 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $params['display_statusFalseBtn'] = false;
         $params['display_newBtn'] = false;
         $params['display_editBtn'] = true;
+        $params['display_searchPanel']  = true;
+        
+        $params['exclude'] = array('debug');  
 
         return $params;
     }
-
+    
     function _get($id = 0)
     {
-        if ($this->position != 'admin') {
-            return false;
+        global $db;
+        
+        $where = '';
+        
+        if ($this->url_data['query']) {
+            $where = ' WHERE debug like "%' . $this->url_data['query'] . '%"';
         }
 
+        $record = $db->Execute("SELECT * FROM pi_paymill_logging" . $where);
+        
+        $data = array();
+        while (!$record->EOF) {
+            $data[] = $record->fields;
+            $record->MoveNext();
+        }
         
         $tableData = new adminDB_DataRead(
             $this->_table, $this->_tableLang, $this->_tableSeo, $this->_masterKey
         );
 
+        if ($this->position != 'admin') {
+            return false;
+        }
         
         if (!empty($id)) {
             $html = '<h2>No Debug available</h2>';
-            $data = $tableData->getData();
             foreach ($data as $value) {
                 if ($value['id'] == $id && !empty($value['debug'])) {
                     $html = '<h2>Debug</h2>';
@@ -344,35 +360,19 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             exit($html);
         }
         
-        $obj = new stdClass();
-        $obj->totalCount = count($tableData->getData());
 
-        $obj->data = $this->getDataWithoutDebug($tableData->getHeader());
+        $obj = new stdClass();
+        $obj->totalCount = $record->RecordCount();
+
+        $obj->data = $tableData->getHeader();
         
-        if (!is_null($tableData->getData())) {
-            $obj->data = $this->getDataWithoutDebug($tableData->getData());
+        if (!empty($data)) {
+            $obj->data = $data;
         }
         
         return $obj;
     }
     
-    function getDataWithoutDebug($data)
-    {
-        $output = array();
-        foreach ($data as $key => $value) {
-            $entry = array();
-            foreach ($value as $innerKey => $innerValue) {
-                if ($innerKey !== 'debug') {
-                    $entry[$innerKey] = $innerValue;
-                }
-            }
-            
-            $output[$key] = $entry;
-        }
-        
-        return $output;
-    }
-
     function _unset($id = 0)
     {
         global $db;
