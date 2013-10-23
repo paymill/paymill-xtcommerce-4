@@ -11,7 +11,6 @@ require_once(dirname(__FILE__) . '/helpers/FastCheckout.php');
 
 class xt_paymill implements Services_Paymill_LoggingInterface
 {
-
     /**
      * Version
      * @var string
@@ -83,7 +82,9 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             trim($this->_getPaymentConfig('PRIVATE_API_KEY')), $this->_apiUrl
         );
 
-        $this->_setCheckoutData();
+        if ($page->page_name == 'checkout' && $page->page_action == 'confirmation') {
+            $this->_setCheckoutData();
+        }
 
         $this->_paymentProcessor = new Services_Paymill_PaymentProcessor();
         $this->_paymentProcessor->setApiUrl($this->_apiUrl);
@@ -99,14 +100,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
     private function _setCheckoutData()
     {
-        global $currency, $page;
-
-        if ($page->page_name == 'checkout' && $page->page_action == 'payment') {
-            unset($_SESSION['paymillAuthorizedAmount']);
-            $_SESSION['paymillAuthorizedAmount'] = (int) round(
-                ($_SESSION['cart']->total_physical['plain'] + $this->_getPaymentConfig('DIFFERENT_AMOUNT')) * 100
-            );
-        }
+        global $currency;
 
         $this->data['xt_paymill']['fast_checkout_cc'] = $this->_fastCheckout->canCustomerFastCheckoutCcTemplate(
             $_SESSION["customer"]->customers_id
@@ -135,7 +129,9 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         }
 
         $this->data['xt_paymill']['currency'] = $currency->code;
-        $this->data['xt_paymill']['amount'] = $_SESSION['paymillAuthorizedAmount'];
+        $this->data['xt_paymill']['amount'] = (int) round(
+            $_SESSION['cart']->total_physical['plain'] * 100
+        );
 
         if (array_key_exists('xt_paymill_cc_error', $_SESSION)) {
             $this->data['xt_paymill']['error_cc'] = $_SESSION['xt_paymill_cc_error'];
@@ -148,11 +144,11 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         }
     }
 
-    public function checkoutProcessData($subpayment_code)
+    public function checkoutProcessData()
     {
         global $xtLink;
-        $code = 'xt_paymill_' . $subpayment_code;
-        $token = $_SESSION['token'];
+        $code = 'xt_paymill_' . $_SESSION['selected_payment_sub'];
+        $token = $_POST['paymillToken'];
         if (!$this->_isTokenAvailable($token)) {
             $_SESSION[$code . '_error'] = TEXT_PAYMILL_ERR_TOKEN;
             $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
@@ -180,8 +176,6 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             if ($this->_getPaymentConfig('FAST_CHECKOUT') === 'true') {
                 $this->_savePayment($code);
             }
-
-            unset($_SESSION['paymillAuthorizedAmount']);
 
             $_SESSION['paymillTransactionId'] = $this->_paymentProcessor->getTransactionId();
         }
@@ -216,11 +210,6 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $this->_paymentProcessor->setName($name);
         $this->_paymentProcessor->setCurrency($currency->code);
         $this->_paymentProcessor->setDescription(_STORE_NAME);
-
-        if ($code === 'xt_paymill_cc') {
-            $this->_paymentProcessor->setPreAuthAmount($_SESSION['paymillAuthorizedAmount']);
-            unset($_SESSION['paymillAuthorizedAmount']);
-        }
     }
 
     private function _existingClient($data)

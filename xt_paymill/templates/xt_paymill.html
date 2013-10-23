@@ -1,28 +1,5 @@
-<script type="text/javascript">
-    var flag = true;
-    var fastCheckoutCc = '{$xt_paymill.fast_checkout_cc}';
-    var fastCheckoutElv = '{$xt_paymill.fast_checkout_elv}';
-    var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY|trim}';
-    var debug = '{$smarty.const.XT_PAYMILL_DEBUG_MODE}';
-    var paymentCode = '{$payment_code}';
-    var amount = "{$xt_paymill.amount}";
-    var currency = "{$xt_paymill.currency}";
-    var lang = new Array();
-    // Paymill cc js lang
-    lang['card_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_NUMBER}';
-    lang['verfication_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_CVC}';
-    lang['expiration_date_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_DATE}';
-    lang['card_holder_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_HOLDER}';
-    // Paymill elv js lang
-    lang['account_owner_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_HOLDER}';
-    lang['sort_code_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_BANK_CODE}';
-    lang['account_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_ACCOUNT_NUMBER}';
-</script>
 <link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://bridge.paymill.com/"></script>
-<script type="text/javascript" src="plugins/xt_paymill/js/payment.js"></script>
-{if $smarty.const.XT_PAYMILL_PUBLIC_API_KEY neq ''  && $smarty.const.XT_PAYMILL_PRIVATE_API_KEY neq ''}
+{if $smarty.const.XT_PAYMILL_PUBLIC_API_KEY neq '' && $smarty.const.XT_PAYMILL_PRIVATE_API_KEY neq ''}
 <div>
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLCC eq 'true'}
     <div>
@@ -34,30 +11,6 @@
             <span>{form type=radio name=selected_payment id=paymill_selector_cc value=$payment_code:cc}</span>
             <span>{$smarty.const.TEXT_PAYMILL_CC_NAME}</span>
             <span style="float: right;">{$payment_price.formated}</span>
-        </div>
-        <div>
-            <div class="paymill-input-label">
-                <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
-            </div>
-            <span class="card-icon-parent">
-                <span><input id="paymill-card-number" class="paymill-input{if $xt_paymill.card_brand} paymill-card-number-{$xt_paymill.card_brand|lower}{/if}" type="text" size="20" value="{$xt_paymill.cc_number}"/></span>
-            </span>
-            <div id="payment-error-cc-1" class="payment-error"></div>
-            <div class="paymill-input-label">
-                <label>{$smarty.const.TEXT_PAYMILL_CC_CVC}</label><span class="tooltip" title="{$smarty.const.TEXT_PAYMILL_CC_TOOLTIP}">?</span>
-            </div>
-            <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value="{$xt_paymill.cvc}"/>
-            <div id="payment-error-cc-2" class="payment-error"></div>
-            <div class="paymill-input-label">
-                <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER}</label>
-            </div>
-            <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value="{$xt_paymill.card_holder}"/>
-            <div id="payment-error-cc-3" class="payment-error"></div>
-            <div class="paymill-input-label">
-                <label>{$smarty.const.TEXT_PAYMILL_CC_DATE}</label>
-            </div>
-            {html_select_date display_days=false end_year='+15' field_separator=' / ' prefix='Paymill_' time=$xt_paymill.expire_date}
-            <div id="payment-error-cc-4" class="payment-error"></div>
         </div>
         {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
         <div class="form-row">
@@ -78,29 +31,9 @@
         {/if}
         <div id="payment-errors-elv" class="payment-error"></div>
         <div class="paymill-header">
-            <span>{form type=radio name=selected_payment id=paymill_selector_elv value=$payment_code:elv}</span>
+            <span>{form type=radio name=selected_payment id=paymill_selector_elv value=$payment_code:dd}</span>
             <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
             <span style="float: right;">{$payment_price.formated}</span>
-        </div>
-        <div>
-            <img src="plugins/xt_paymill/images/icon_elv.png" alt="ELV"/>
-        </div>
-        <div>
-            <div class="paymill-input-label">
-                <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER}</label>
-            </div>
-            <input id="paymill-account-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_number}"/>
-            <div id="payment-error-elv-1" class="payment-error"></div>
-            <div class="paymill-input-label">
-                <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE}</label>
-            </div>
-            <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value="{$xt_paymill.bank_code}"/>
-            <div id="payment-error-elv-2" class="payment-error"></div>
-            <div class="paymill-input-label">
-                <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER}</label>
-            </div>
-            <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_holder}"/>
-            <div id="payment-error-elv-3" class="payment-error"></div>
         </div>
         {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
         <div class="form-row">

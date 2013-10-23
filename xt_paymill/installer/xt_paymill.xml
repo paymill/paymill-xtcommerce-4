@@ -62,7 +62,7 @@
             <phpcode>
                 <![CDATA[
                     if ($payment_code === "xt_paymill") {
-                        $payment_module_data->checkoutProcessData($subpayment_code);
+                        $payment_module_data->checkoutProcessData();
                     }
                 ]]>
             </phpcode>
@@ -73,20 +73,26 @@
             <hook>module_checkout.php:checkout_pre_data</hook>
             <phpcode>
                 <![CDATA[
-                    if ($_SESSION['selected_payment'] === "xt_paymill" && substr($_SESSION['selected_payment_sub'], 0, 4) === '_cc_') {
+                    if ($_SESSION['selected_payment'] === "xt_paymill" && $_SESSION['selected_payment_sub'] === 'cc') {
                         define('TEXT_PAYMENT_CC', TEXT_PAYMILL_CC_NAME);
-                        $_SESSION['token'] = substr($_SESSION['selected_payment_sub'], 4);
-                        $_SESSION['selected_payment_sub'] = 'cc';
                     }
                     
-                    if ($_SESSION['selected_payment'] === "xt_paymill" && substr($_SESSION['selected_payment_sub'], 0, 4) === '_dd_') {
+                    if ($_SESSION['selected_payment'] === "xt_paymill" && $_SESSION['selected_payment_sub'] === 'dd') {
                         define('TEXT_PAYMENT_DD', TEXT_PAYMILL_ELV_NAME);
-                        $_SESSION['token'] = substr($_SESSION['selected_payment_sub'], 4);
-                        $_SESSION['selected_payment_sub'] = 'dd';
                     }
                 ]]>
             </phpcode>
             <order>2</order>
+            <active>1</active>
+        </code>
+        <code>
+            <hook>checkout_tpl_info</hook>
+            <phpcode>
+                <![CDATA[
+                    include _SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/hooks/checkout_tpl_info.php';
+                ]]>
+            </phpcode>
+            <order>3</order>
             <active>1</active>
         </code>
     </plugin_code>
@@ -135,17 +141,6 @@
             </de>
             <en>
                 <title>Public API Key</title>
-            </en>
-        </config>
-        <config>
-            <key>DIFFERENT_AMOUNT</key>
-            <type>textfield</type>
-            <value>10</value>
-            <de>
-                <title>Abweichender Betrag</title>
-            </de>
-            <en>
-                <title>Different amount</title>
             </en>
         </config>
         <config>

@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    var flag = true;
+    var fastCheckoutCc = '{$xt_paymill.fast_checkout_cc}';
+    var fastCheckoutElv = '{$xt_paymill.fast_checkout_elv}';
+    var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY|trim}';
+    var debug = '{$smarty.const.XT_PAYMILL_DEBUG_MODE}';
+    var paymentCode = '{$payment_code}';
+    var amount = "{$xt_paymill.amount}";
+    var currency = "{$xt_paymill.currency}";
+    var lang = new Array();
+    // Paymill cc js lang
+    lang['card_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_NUMBER}';
+    lang['verfication_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_CVC}';
+    lang['expiration_date_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_DATE}';
+    lang['card_holder_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_HOLDER}';
+    // Paymill elv js lang
+    lang['account_owner_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_HOLDER}';
+    lang['sort_code_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_BANK_CODE}';
+    lang['account_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_ACCOUNT_NUMBER}';
+</script>
+<link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://bridge.paymill.com/"></script>
+<script type="text/javascript" src="plugins/xt_paymill/js/payment.js"></script>
+<script type="text/javascript" src="plugins/xt_paymill/js/dd.js"></script>
+<div style="position: relative; left: 55%;">
+    <div class="paymill-input-label">
+        <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER}</label>
+    </div>
+    <input id="paymill-account-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_number}"/>
+    <div id="payment-error-elv-1" class="payment-error"></div>
+    <div class="paymill-input-label">
+        <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE}</label>
+    </div>
+    <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value="{$xt_paymill.bank_code}"/>
+    <div id="payment-error-elv-2" class="payment-error"></div>
+    <div class="paymill-input-label">
+        <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER}</label>
+    </div>
+    <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_holder}"/>
+    <div id="payment-error-elv-3" class="payment-error"></div>
+</div>
