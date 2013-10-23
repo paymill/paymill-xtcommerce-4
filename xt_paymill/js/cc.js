@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+	var submitFlag = false;
+	
 	var cssClass = "paymill-card-number-";
 
 	$('#paymill-card-number').keyup(function() {
@@ -54,7 +56,7 @@ $(document).ready(function()
 				$("#payment-errors-cc").text("");
 				$("#payment-errors-cc").css('display', 'none');
 				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='" + result.token + "'/>");
-				$('form[name^="process"]').get(1).submit();
+				$('form[name^="process"]').submit();
 			}
 		}
 	}
@@ -138,12 +140,16 @@ $(document).ready(function()
 	});
 	
 	$('form[name^="process"]').submit(function(event) {
-		if (fastCheckoutCc === 'false') {
-			paymillDebug('Paymill Creditcard: Payment method triggered');
-			return paymillCc();
-		} else {
-			$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
-			$('form[name^="process"]').get(1).submit();
+		if (!submitFlag) {
+			event.preventDefault();
+			submitFlag = true;
+			if (fastCheckoutCc === 'false') {
+				paymillDebug('Paymill Creditcard: Payment method triggered');
+				return paymillCc();
+			} else {
+				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
+				$('form[name^="process"]').submit();
+			}
 		}
 	});
 });

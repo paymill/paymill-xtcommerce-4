@@ -1,6 +1,8 @@
 
 $(document).ready(function()
 {
+	var submitFlag = false;
+	
 	function paymillElvResponseHandler(error, result)
 	{
 		if (flag) {
@@ -15,7 +17,7 @@ $(document).ready(function()
 				$("#payment-errors-elv").text("");
 				$("#payment-errors-elv").css('display', 'none');
 				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='" + result.token + "'/>");
-				$('form[name^="process"]').get(1).submit();
+				$('form[name^="process"]').submit();
 			}
 		}
 	}
@@ -75,12 +77,16 @@ $(document).ready(function()
 	});
 	
 	$('form[name^="process"]').submit(function(event) {
-		if (fastCheckoutElv === 'false') {
-			paymillDebug('Paymill ELV: Payment method triggered');
-			return paymillElv();
-		} else {
-			$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
-			$('form[name^="process"]').get(1).submit();
+		if (!submitFlag) {
+			event.preventDefault();
+			submitFlag = true;
+			if (fastCheckoutElv === 'false') {
+				paymillDebug('Paymill ELV: Payment method triggered');
+				return paymillElv();
+			} else {
+				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
+				$('form[name^="process"]').submit();
+			}
 		}
 	});
 });
