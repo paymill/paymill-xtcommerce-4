@@ -8,6 +8,7 @@ $(document).ready(function()
 		if (flag) {
 			paymillDebug('Paymill: Start response handler');
 			if (error) {
+				flag = false;
 				paymillDebug('An API error occured:' + error.apierror);
 				$("#payment-errors-elv").text(error.apierror);
 				$("#payment-errors-elv").css('display', 'block');

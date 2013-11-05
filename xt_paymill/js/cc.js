@@ -47,9 +47,11 @@ $(document).ready(function()
 		if (flag) {
 			paymillDebug('Paymill: Start response handler');
 			if (error) {
+				flag = false;
 				paymillDebug('An API error occured:' + error.apierror);
 				$("#payment-errors-cc").text(error.apierror);
 				$("#payment-errors-cc").css('display', 'block');
+				window.location.href = "datei2.htm";
 			} else {
 				flag = false;
 				paymillDebug('Received a token: ' + result.token);
