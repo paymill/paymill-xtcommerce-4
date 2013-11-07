@@ -53,7 +53,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
      * @var \Services_Paymill_Transactions
      */
     private $_transactions;
-
+    
     /**
      * Api endpoint
      * @var string
@@ -97,7 +97,23 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $this->_success();
         }
     }
-
+    
+    /**
+     * Return message for the given error code
+     * 
+     * @param string $code
+     * @return string
+     */
+    private function _getErrorMessage($code)
+    {
+        $langKey = 'PAYMILL_' . $code;
+        if (!defined($langKey)) {
+            $langKey = 'PAYMILL_10001';
+        }
+        
+        return constant($langKey);
+    }
+    
     private function _setCheckoutData()
     {
         global $currency;
@@ -154,7 +170,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
         } else {
 
-            $this->_setTransaction($code);
+            $this->_setTransaction();
 
             $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
             if (!empty($data->clientID)) {
@@ -168,8 +184,10 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $this->_paymentProcessor->setToken($token);
             unset($_SESSION['token']);
 
-            if (!$this->_paymentProcessor->processPayment()) {
-                $_SESSION[$code . '_error'] = TEXT_PAYMILL_ERR_ORDER;
+            $result = $this->_paymentProcessor->processPayment();
+            
+            if (!$result) {
+                $_SESSION[$code . '_error'] = $this->_getErrorMessage($this->_paymentProcessor->getErrorCode());
                 $xtLink->_redirect($xtLink->_link(array('page' => 'checkout', 'paction' => 'payment', 'conn' => 'SSL')));
             }
 
@@ -196,7 +214,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         }
     }
 
-    private function _setTransaction($code)
+    private function _setTransaction()
     {
         global $currency;
 
