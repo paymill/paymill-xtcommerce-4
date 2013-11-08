@@ -182,13 +182,383 @@
     </configuration_payment>
     <language_content>
         <phrase>
+            <key>PAYMILL_10001</key>
+            <class>store</class>
+            <de>
+                <value>Genereller Fehler, bitte wenden Sie sich an den Support.</value>
+            </de>
+            <en>
+                <value>General undefined response.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_10002</key>
+            <class>store</class>
+            <de>
+                <value>Wir warten noch immer auf etwas.</value>
+            </de>
+            <en>
+                <value>Still waiting on something.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_20000</key>
+            <class>store</class>
+            <de>
+                <value>General success response.</value>
+            </de>
+            <en>
+                <value>General success response.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40000</key>
+            <class>store</class>
+            <de>
+                <value>Generelles Problem mit den Daten.</value>
+            </de>
+            <en>
+                <value>General problem with data.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40001</key>
+            <class>store</class>
+            <de>
+                <value>Es gibt ein Problem mit den Payment Daten.</value>
+            </de>
+            <en>
+                <value>General problem with payment data.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40100</key>
+            <class>store</class>
+            <de>
+                <value>Es existieren Probleme mit der Kreditkarte. Nähere Details können nicht übergeben werden.</value>
+            </de>
+            <en>
+                <value>Problem with credit card data.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40101</key>
+            <class>store</class>
+            <de>
+                <value>Der CVV ist nicht korrekt.</value>
+            </de>
+            <en>
+                <value>Problem with cvv.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40102</key>
+            <class>store</class>
+            <de>
+                <value>Die Kreditkarte ist abgelaufen oder noch gültig.</value>
+            </de>
+            <en>
+                <value>Card expired or not yet valid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40103</key>
+            <class>store</class>
+            <de>
+                <value>Das Umsatzimit der Kreditkarte wurde mit dieser Transaktion überschritten oder ist bereits überschritten.</value>
+            </de>
+            <en>
+                <value>Limit exceeded.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40104</key>
+            <class>store</class>
+            <de>
+                <value>Die Kreditkarte ist ungültig</value>
+            </de>
+            <en>
+                <value>Card invalid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40105</key>
+            <class>store</class>
+            <de>
+                <value>Das Kreditkartenablaufdatum ist nicht korrekt.</value>
+            </de>
+            <en>
+                <value>Expiry date not valid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40106</key>
+            <class>store</class>
+            <de>
+                <value>Kreditkarten-Anbieter ist erforderlich.</value>
+            </de>
+            <en>
+                <value>Credit card brand required.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40200</key>
+            <class>store</class>
+            <de>
+                <value>Probleme mit den Konto Daten.</value>
+            </de>
+            <en>
+                <value>Problem with bank account data.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40201</key>
+            <class>store</class>
+            <de>
+                <value>Daten stimmen nicht mit dem Bank-Account überein.</value>
+            </de>
+            <en>
+                <value>Bank account data combination mismatch.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40202</key>
+            <class>store</class>
+            <de>
+                <value>Die Benutzer-Authentifizierung ist fehlgeschlagen.</value>
+            </de>
+            <en>
+                <value>User authentication failed.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40300</key>
+            <class>store</class>
+            <de>
+                <value>Es gibt es Problem mit den 3DSecure Daten.</value>
+            </de>
+            <en>
+                <value>Problem with 3d secure data.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40301</key>
+            <class>store</class>
+            <de>
+                <value>Währung oder Betrag stimmen nicht überein.</value>
+            </de>
+            <en>
+                <value>Currency / amount mismatch</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40400</key>
+            <class>store</class>
+            <de>
+                <value>Es gibt ein Problem mit den Eingabe Daten.</value>
+            </de>
+            <en>
+                <value>Problem with input data.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40401</key>
+            <class>store</class>
+            <de>
+                <value>Der Betrag ist zu niedrig oder null.</value>
+            </de>
+            <en>
+                <value>Amount too low or zero.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40402</key>
+            <class>store</class>
+            <de>
+                <value>Der Verwendungszweck ist zu lang.</value>
+            </de>
+            <en>
+                <value>Usage field too long.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_40403</key>
+            <class>store</class>
+            <de>
+                <value>Die Währung ist nicht für den Kunden konfigurierten.</value>
+            </de>
+            <en>
+                <value>Currency not allowed.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50000</key>
+            <class>store</class>
+            <de>
+                <value>Generelles Problem mit dem Backend.</value>
+            </de>
+            <en>
+                <value>General problem with backend.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50001</key>
+            <class>store</class>
+            <de>
+                <value>Die Kreditkarte ist auf einer Schwarzen Liste.</value>
+            </de>
+            <en>
+                <value>Country blacklisted.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50100</key>
+            <class>store</class>
+            <de>
+                <value>Technisches Problem mit der Kreditkarte.</value>
+            </de>
+            <en>
+                <value>Technical error with credit card.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50101</key>
+            <class>store</class>
+            <de>
+                <value>Limit überschritten.</value>
+            </de>
+            <en>
+                <value>Error limit exceeded.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50102</key>
+            <class>store</class>
+            <de>
+                <value>Diese Karte wurde ohne weitere Gründe abgelehnt.</value>
+            </de>
+            <en>
+                <value>Card declined by authorization system.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50103</key>
+            <class>store</class>
+            <de>
+                <value>Diese Karte wurde wegen Kartenmanipulationen abgelehnt.</value>
+            </de>
+            <en>
+                <value>Manipulation or stolen card.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50104</key>
+            <class>store</class>
+            <de>
+                <value>Die Transaktion wurde vom Authorisierungs-System abgelehnt (Karte durch Bank eingeschränkt).</value>
+            </de>
+            <en>
+                <value>Card restricted.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50105</key>
+            <class>store</class>
+            <de>
+                <value>Die Konfiguration ist ungültig.</value>
+            </de>
+            <en>
+                <value>Invalid card configuration data.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50200</key>
+            <class>store</class>
+            <de>
+                <value>Technischer Fehler mit dem Bankkonto.</value>
+            </de>
+            <en>
+                <value>Technical error with bank account.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50201</key>
+            <class>store</class>
+            <de>
+                <value>Dieser Kundenaccount ist auf einer Schwarzen Liste.</value>
+            </de>
+            <en>
+                <value>Card blacklisted.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50300</key>
+            <class>store</class>
+            <de>
+                <value>Es gibt einen teschnischen Fehler mit 3-D Secure.</value>
+            </de>
+            <en>
+                <value>Technical error with 3D secure.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50400</key>
+            <class>store</class>
+            <de>
+                <value>Ablehnung aufgrund von Risiko Problemen.</value>
+            </de>
+            <en>
+                <value>Decline because of risk issues.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50500</key>
+            <class>store</class>
+            <de>
+                <value>Generelle Zeitüberschreitung.</value>
+            </de>
+            <en>
+                <value>General timeout.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50501</key>
+            <class>store</class>
+            <de>
+                <value>Die Schnittstelle zum Acquirer reagiert nicht, daher bekommen wir keine Antwort ob die Transaktion erfolgreich durchgelaufen ist.</value>
+            </de>
+            <en>
+                <value>Timeout on side of the acquirer.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50502</key>
+            <class>store</class>
+            <de>
+                <value>Es gibt eine Zeitüberschreitung bei der Risiko-Management Transaktion.</value>
+            </de>
+            <en>
+                <value>Risk management transaction timeout.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_50600</key>
+            <class>store</class>
+            <de>
+                <value>Doppelte Transaktion.</value>
+            </de>
+            <en>
+                <value>Duplicate transaction.</value>
+            </en>
+        </phrase>
+        <phrase>
             <key>TEXT_PAYMILL_CC_NAME</key>
             <class>store</class>
             <de>
                 <value>Kreditkarte</value>
             </de>
             <en>
-                <value>Creditcard</value>
+                <value>Credit Card</value>
             </en>
         </phrase>
         <phrase>

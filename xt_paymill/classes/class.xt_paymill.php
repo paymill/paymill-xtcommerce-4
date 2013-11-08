@@ -96,6 +96,18 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         if ($page->page_name == 'checkout' && $page->page_action == 'success') {
             $this->_success();
         }
+        
+        if ($page->page_name == 'checkout' && $page->page_action == 'payment') {  
+            if (array_key_exists('xt_paymill_cc_error', $_SESSION)) {
+                $this->data['xt_paymill']['error_cc'] = $_SESSION['xt_paymill_cc_error'];
+                unset($_SESSION['xt_paymill_cc_error']);
+            }
+
+            if (array_key_exists('xt_paymill_dd_error', $_SESSION)) {
+                $this->data['xt_paymill']['error_elv'] = $_SESSION['xt_paymill_dd_error'];
+                unset($_SESSION['xt_paymill_dd_error']);
+            }
+        }
     }
     
     /**
@@ -148,16 +160,6 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $this->data['xt_paymill']['amount'] = (int) round(
             $_SESSION['cart']->total_physical['plain'] * 100
         );
-
-        if (array_key_exists('xt_paymill_cc_error', $_SESSION)) {
-            $this->data['xt_paymill']['error_cc'] = $_SESSION['xt_paymill_cc_error'];
-            unset($_SESSION['xt_paymill_cc_error']);
-        }
-
-        if (array_key_exists('xt_paymill_dd_error', $_SESSION)) {
-            $this->data['xt_paymill']['error_elv'] = $_SESSION['xt_paymill_dd_error'];
-            unset($_SESSION['xt_paymill_dd_error']);
-        }
     }
 
     public function checkoutProcessData()
