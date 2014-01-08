@@ -2,46 +2,27 @@ $(document).ready(function()
 {
 	var submitFlag = false;
 
-	var cssClass = "paymill-card-number-";
-
 	$('#paymill-card-number').keyup(function() 
 	{
-		switch (detectCreditcardBranding($('#paymill-card-number').val()).toLowerCase()) {
-			case 'visa':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'visa');
-				break;
-			case 'mastercard':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'mastercard');
-				break;
-			case 'american express':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'american');
-				break;
-			case 'jcb':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'jcb');
-				break;
-			case 'maestro':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'maestro');
-				break;
-			case 'diners club':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'diners');
-				break;
-			case 'discover':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'discover');
-				break;
-			case 'unionpay':
-				$('#paymill-card-number').removeClass();
-				$('#paymill-card-number').addClass('paymill-input ' + cssClass + 'unionpay');
-				break;
-		}
+		paymillShowCardIcon()
 	});
+	
+	/**
+	* Event Handler for the display of the card icons
+	*/
+   function paymillShowCardIcon()
+   {
+	    var brand = detectCreditcardBranding($('#paymill-card-number').val());
+	    brand = brand.toLowerCase();
+	    $('#paymill-card-number')[0].className = $('#paymill-card-number')[0].className.replace(/paymill-card-number-.*/g, '');
+		if (brand !== 'unknown') {
+		    if (brand === 'american express') {
+				brand = 'amex';
+		    }
 
+			$('#paymill-card-number').addClass("paymill-card-number-" + brand);
+		}
+    }
 	function detectCreditcardBranding(creditcardNumber) 
 	{
 		var brand = 'unknown';
