@@ -1,27 +1,7 @@
 <?php
 
 class FastCheckout
-{
-    public function canCustomerFastCheckoutCcTemplate($userId)
-    {
-        $flag = 'false';
-        if ($this->canCustomerFastCheckoutCc($userId)) {
-            $flag = 'true';
-        }
-        
-        return $flag;
-    }    
-    
-    public function canCustomerFastCheckoutElvTemplate($userId)
-    {
-        $flag = 'false';
-        if ($this->canCustomerFastCheckoutElv($userId)) {
-            $flag = 'true';
-        }
-        
-        return $flag;
-    }    
-    
+{    
     public function canCustomerFastCheckoutCc($userId)
     {   
         return $this->hasCcPaymentId($userId) && $this->_getPaymentConfig('FAST_CHECKOUT') === 'true';

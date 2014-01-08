@@ -126,21 +126,44 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         return constant($langKey);
     }
     
+    private function _canFastCheckoutCc()
+    {
+        $fastCheckout = 'false';
+        if ($this->_fastCheckout->canCustomerFastCheckoutCc($_SESSION["customer"]->customers_id)) {
+            $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
+            $payment = $this->_payments->getOne($data->paymentID_CC);
+            if (array_key_exists('last4', $payment)) {
+                $fastCheckout = 'true';
+            }
+        }
+     
+        $this->data['xt_paymill']['fast_checkout_cc'] = $fastCheckout;
+    }
+    
+    private function _canFastCheckoutElv()
+    {
+        $fastCheckout = 'false';
+        if ($this->_fastCheckout->canCustomerFastCheckoutElv($_SESSION["customer"]->customers_id)) {
+            $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
+            $payment = $this->_payments->getOne($data->paymentID_ELV);
+            if (array_key_exists('code', $payment)) {
+                $fastCheckout = 'true';
+            }
+        }
+     
+        $this->data['xt_paymill']['fast_checkout_elv'] = $fastCheckout;
+    }
+    
     private function _setCheckoutData()
     {
         global $currency;
 
-        $this->data['xt_paymill']['fast_checkout_cc'] = $this->_fastCheckout->canCustomerFastCheckoutCcTemplate(
-            $_SESSION["customer"]->customers_id
-        );
-
-        $this->data['xt_paymill']['fast_checkout_elv'] = $this->_fastCheckout->canCustomerFastCheckoutElvTemplate(
-            $_SESSION["customer"]->customers_id
-        );
+        $this->_canFastCheckoutCc();
+        $this->_canFastCheckoutElv();
 
         $data = $this->_fastCheckout->loadFastCheckoutData($_SESSION['customer']->customers_id);
 
-        if (!empty($data->paymentID_CC)) {
+        if ($this->data['xt_paymill']['fast_checkout_cc'] === 'true') {
             $payment = $this->_payments->getOne($data->paymentID_CC);
             $this->data['xt_paymill']['cc_number'] = '************' . $payment['last4'];
             $this->data['xt_paymill']['expire_date'] = $payment['expire_year'] . '-' . $payment['expire_month'] . '-01';
@@ -149,7 +172,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $this->data['xt_paymill']['card_brand'] = $payment['card_type'];
         }
 
-        if (!empty($data->paymentID_ELV)) {
+        if ($this->data['xt_paymill']['fast_checkout_elv'] === 'true') {
             $payment = $this->_payments->getOne($data->paymentID_ELV);
             $this->data['xt_paymill']['bank_code'] = $payment['code'];
             $this->data['xt_paymill']['account_holder'] = $payment['holder'];
