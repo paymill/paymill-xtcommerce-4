@@ -266,8 +266,10 @@ class xt_paymill implements Services_Paymill_LoggingInterface
                 )
             );
         }
-
-        $this->_paymentProcessor->setClientId($client['id']);
+        
+        if (array_key_exists('email', $client)) {
+            $this->_paymentProcessor->setClientId($client['id']);
+        }        
     }
 
     private function _fastCheckout($code)
