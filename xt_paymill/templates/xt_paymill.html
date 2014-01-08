@@ -12,16 +12,6 @@
             <span>{$smarty.const.TEXT_PAYMILL_CC_NAME}</span>
             <span style="float: right;">{$payment_price.formated}</span>
         </div>
-        {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
-        <div class="form-row">
-            <div class="paymill_powered">
-                <div class="paymill_credits">
-                    {$smarty.const.TEXT_PAYMILL_LABEL_CC}
-                    <a href="http://www.paymill.de" target="_blank">PAYMILL</a>
-                </div>
-            </div>
-        </div>
-        {/if}
     </div>
     {/if}
     {if $smarty.const.XT_PAYMILL_ACTIVATE_PAYMILLELV eq 'true'}
@@ -35,16 +25,6 @@
             <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
             <span style="float: right;">{$payment_price.formated}</span>
         </div>
-        {if $smarty.const.XT_PAYMILL_SHOW_PAYMILL_LABEL eq 'true'}
-        <div class="form-row">
-            <div class="paymill_powered">
-                <div class="paymill_credits">
-                    {$smarty.const.TEXT_PAYMILL_LABEL_ELV}
-                    <a href="http://www.paymill.de" target="_blank">PAYMILL</a>
-                </div>
-            </div>
-        </div>
-        {/if}
     </div>
     {/if}
 </div>

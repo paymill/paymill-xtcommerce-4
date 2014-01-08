@@ -156,18 +156,6 @@
             </en>
         </config>
         <config>
-            <key>SHOW_PAYMILL_LABEL</key>
-            <type>dropdown</type>
-            <value>true</value>
-            <url>conf_truefalse</url>
-            <de>
-                <title>PAYMILL Label einblenden</title>
-            </de>
-            <en>
-                <title>Show PAYMILL label</title>
-            </en>
-        </config>
-        <config>
             <key>FAST_CHECKOUT</key>
             <type>dropdown</type>
             <value>true</value>

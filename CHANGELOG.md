@@ -1,5 +1,5 @@
 ## v2.5.0
- * 
+ * remove paymill label
 
 ## v2.4.0
  * better error messages
