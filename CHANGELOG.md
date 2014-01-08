@@ -1,5 +1,6 @@
 ## v2.5.0
  * remove paymill label
+ * use only existing clients and payments
 
 ## v2.4.0
  * better error messages
