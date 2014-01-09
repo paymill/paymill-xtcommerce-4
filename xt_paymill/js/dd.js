@@ -10,7 +10,7 @@ $(document).ready(function()
 			if (error) {
 				flag = false;
 				paymillDebug('An API error occured:' + error.apierror);
-				$("#payment-errors-elv").text(error.apierror);
+				$("#payment-errors-elv").text(lang['PAYMILL_' + error.apierror]);
 				$("#payment-errors-elv").css('display', 'block');
 			} else {
 				flag = false;
@@ -103,17 +103,22 @@ $(document).ready(function()
 
 	$('#paymill-account-number').focus(function() {
 		fastCheckoutElv = 'false';
-		$('#paymill-account-number').val('');
 	});
 
 	$('#paymill-bank-code').focus(function() {
 		fastCheckoutElv = 'false';
-		$('#paymill-bank-code').val('');
 	});
 
 	$('#paymill-bank-owner').focus(function() {
 		fastCheckoutElv = 'false';
-		$('#paymill-bank-owner').val('');
+	});
+	
+	$('#paymill-iban').focus(function() {
+		fastCheckoutElv = 'false';
+	});
+	
+	$('#paymill-bic').focus(function() {
+		fastCheckoutElv = 'false';
 	});
 	
 	$('form[name^="process"]').submit(function(event) {

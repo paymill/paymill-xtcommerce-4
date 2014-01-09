@@ -73,7 +73,7 @@ $(document).ready(function()
 			if (error) {
 				flag = false;
 				paymillDebug('An API error occured:' + error.apierror);
-				$("#payment-errors-cc").text(error.apierror);
+				$("#payment-errors-cc").text(lang['PAYMILL_' + error.apierror]);
 				$("#payment-errors-cc").css('display', 'block');
 			} else {
 				flag = false;
@@ -143,7 +143,6 @@ $(document).ready(function()
 
 	$('#paymill-card-number').focus(function() {
 		fastCheckoutCc = 'false';
-		$('#paymill-card-number').val('');
 	});
 
 	$('select[name="Paymill_Month"]').focus(function() {
@@ -156,12 +155,10 @@ $(document).ready(function()
 
 	$('#paymill-card-cvc').focus(function() {
 		fastCheckoutCc = 'false';
-		$('#paymill-card-cvc').val('');
 	});
 
 	$('#paymill-card-holdername').focus(function() {
 		fastCheckoutCc = 'false';
-		$('#paymill-card-holdername').val('');
 	});
 
 	$('form[name^="process"]').submit(function(event) {

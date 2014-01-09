@@ -841,5 +841,215 @@
                 <value>What is a CVV/CVC number? Prospective credit cards will have a 3 to 4-digit number, usually on the back of the card. It ascertains that the payment is carried out by the credit card holder and the card account is legitimate. On Visa the CVV (Card Verification Value) appears after and to the right of your card number. Same goes for Mastercard’s CVC (Card Verfication Code), which also appears after and to the right of  your card number, and has 3-digits. Diners Club, Discover, and JCB credit and debit cards have a three-digit card security code which also appears after and to the right of your card number. The American Express CID (Card Identification Number) is a 4-digit number printed on the front of your card. It appears above and to the right of your card number. On Maestro the CVV appears after and to the right of your number. If you don’t have a CVV for your Maestro card you can use 000.</value>
             </en>
         </phrase>
+        <phrase>
+            <key>PAYMILL_INTERNAL_SERVER_ERROR</key>            
+            <class>store</class>
+            <en>
+                <value>Communication with PSP failed</value>
+            </en>
+            <de>
+                <value>Kommunikation mit dem PSP fehlgeschlagen</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_INVALID_PUBLIC_KEY</key>            
+            <class>store</class>
+            <en>
+                <value>Public Key is invalid</value>
+            </en>
+            <de>
+                <value> Public Key ungültig</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_INVALID_PAYMENT_DATA</key>            
+            <class>store</class>
+            <en>
+                <value>Payment mode, card type, currency or country not accepted.</value>
+            </en>
+            <de>
+                <value>Für diesen Zahlungsmodus, Kreditkartentyp, Währung oder Land nicht zugelassen</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_UNKNOWN_ERROR</key>            
+            <class>store</class>
+            <en>
+                <value>Unknown Error</value>
+            </en>
+            <de>
+                <value>Unbekannter Fehler</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_3DS_CANCELLED</key>            
+            <class>store</class>
+            <en>
+                <value>3-D Secure process has been aborted</value>
+            </en>
+            <de>
+                <value>3-D Secure Prozess wurde vom User abgebrochen</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_CARD_NUMBER</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing card number</value>
+            </en>
+            <de>
+                <value>Fehlende oder ungültige Kreditkartennummer</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_CARD_EXP_YEAR</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing expiry year</value>
+            </en>
+            <de>
+                <value>Fehlendes oder ungültiges Ablaufjahr</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_CARD_EXP_MONTH</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing expiry month</value>
+            </en>
+            <de>
+                <value>Fehlender oder ungültiger Ablaufmonat</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_CARD_EXP</key>            
+            <class>store</class>
+            <en>
+                <value>Card no longer (or not yet) valid</value>
+            </en>
+            <de>
+                <value>Karte nicht mehr gültig oder noch nicht gültig</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_CARD_CVC</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid CVC</value>
+            </en>
+            <de>
+                <value>Ungültige Prüfziffer</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_CARD_HOLDER</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid card holder</value>
+            </en>
+            <de>
+                <value>Ungültiger Karteninhaber</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_AMOUNT_INT</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing amount for 3-D Secure</value>
+            </en>
+            <de>
+                <value>Fehlender oder ungültiger Betrag für 3-D Secure</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_FIELD_INVALID_AMOUNT</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing amount for 3-D Secure</value>
+            </en>
+            <de>
+                <value>Fehlender oder ungültiger Betrag für 3-D Secure</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_FIELD_FIELD_INVALID_CURRENCY</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing currency for 3-D Secure</value>
+            </en>
+            <de>
+                <value>Fehlende oder ungültige Währung für 3-D Secure</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_ACCOUNT_NUMBER</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing account number</value>
+            </en>
+            <de>
+                <value>Fehlende oder ungültige Kontonummer</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_ACCOUNT_HOLDER</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing account holder</value>
+            </en>
+            <de>
+                <value>Fehlender oder ungültiger Karteninhaber</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_BANK_CODE</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing bank code</value>
+            </en>
+            <de>
+                <value>Fehlende oder ungültige Bankleitzahl</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_IBAN</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing IBAN</value>
+            </en>
+            <de>
+                <value>Fehlende oder ungültige IBAN</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_BIC</key>            
+            <class>store</class>
+            <en>
+                <value>Invalid or missing BIC</value>
+            </en>
+            <de>
+                <value>Fehlende oder ungültiger BIC</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_COUNTRY</key>            
+            <class>store</class>
+            <en>
+                <value>Missing or not supported country</value>
+            </en>
+            <de>
+                <value>Fehlendes oder nicht unterstütztes Land</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>PAYMILL_FIELD_INVALID_BANK_DATA</key>            
+            <class>store</class>
+            <en>
+                <value>Bank data does not match</value>
+            </en>
+            <de>
+                <value>Fehlende oder ungültige Bankdatenkombination</value>
+            </de>
+        </phrase>
     </language_content>
 </xtcommerceplugin>
