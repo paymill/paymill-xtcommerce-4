@@ -167,6 +167,18 @@
                 <title>Fast Checkout</title>
             </en>
         </config>
+        <config>
+            <key>SEPA</key>
+            <type>dropdown</type>
+            <value>true</value>
+            <url>conf_truefalse</url>
+            <de>
+                <title>SEPA</title>
+            </de>
+            <en>
+                <title>SEPA</title>
+            </en>
+        </config>
     </configuration_payment>
     <language_content>
         <phrase>
@@ -540,6 +552,26 @@
             </en>
         </phrase>
         <phrase>
+            <key>TEXT_PAYMILL_ELV_BIC</key>
+            <class>store</class>
+            <de>
+                <value>BIC</value>
+            </de>
+            <en>
+                <value>BIC</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ELV_IBAN</key>
+            <class>store</class>
+            <de>
+                <value>IBAN</value>
+            </de>
+            <en>
+                <value>IBAN</value>
+            </en>
+        </phrase>
+        <phrase>
             <key>TEXT_PAYMILL_CC_NAME</key>
             <class>store</class>
             <de>
@@ -717,6 +749,26 @@
             </de>
             <en>
                 <value>The account number is invalid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ELV_ERR_IBAN</key>
+            <class>store</class>
+            <de>
+                <value>Die IBAN ist ungültig.</value>
+            </de>
+            <en>
+                <value>The IBAN is invalid.</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_ELV_ERR_BIC</key>
+            <class>store</class>
+            <de>
+                <value>Die BIC ist ungültig.</value>
+            </de>
+            <en>
+                <value>The BIC is invalid.</value>
             </en>
         </phrase>
         <phrase>

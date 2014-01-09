@@ -61,6 +61,45 @@ $(document).ready(function()
 
 		return false;
 	}
+	
+	function paymillSepa()
+	{
+		paymillDebug('Paymill SEPA: Start form validation');
+
+		hideErrorBoxes('elv', 3);
+
+		var elvErrorFlag = true;
+
+		if ($('#paymill-iban').val() === "") {
+			$("#payment-error-elv-1").text(lang['iban_invalid']);
+			$("#payment-error-elv-1").css('display', 'block');
+			elvErrorFlag = false;
+		}
+
+		if ($('#paymill-bic').val() === "") {
+			$("#payment-error-elv-2").text(lang['bic_invalid']);
+			$("#payment-error-elv-2").css('display', 'block');
+			elvErrorFlag = false;
+		}
+
+		if ($('#paymill-bank-owner').val() === "") {
+			$("#payment-error-elv-3").text(lang['account_owner_invalid']);
+			$("#payment-error-elv-3").css('display', 'block');
+			elvErrorFlag = false;
+		}
+
+		if (!elvErrorFlag) {
+			return elvErrorFlag;
+		}
+
+		paymill.createToken({
+			iban: $('#paymill-iban').val(),
+			bic: $('#paymill-bic').val(),
+			accountholder: $('#paymill-bank-owner').val()
+		}, paymillElvResponseHandler);
+
+		return false;
+	}
 
 	$('#paymill-account-number').focus(function() {
 		fastCheckoutElv = 'false';
@@ -83,7 +122,12 @@ $(document).ready(function()
 			submitFlag = true;
 			if (fastCheckoutElv === 'false') {
 				paymillDebug('Paymill ELV: Payment method triggered');
-				return paymillElv();
+				if (sepa === 'false') {
+					return paymillElv();
+				} else if(sepa === "true") {
+					return paymillSepa();
+				}
+				
 			} else {
 				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
 				$('form[name^="process"]').submit();

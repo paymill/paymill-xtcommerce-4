@@ -1,5 +1,6 @@
 <script type="text/javascript">
     var flag = true;
+    var sepa = "{$smarty.const.XT_PAYMILL_SEPA}";
     var fastCheckoutCc = '{$xt_paymill.fast_checkout_cc}';
     var fastCheckoutElv = '{$xt_paymill.fast_checkout_elv}';
     var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY|trim}';
@@ -17,6 +18,8 @@
     lang['account_owner_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_HOLDER}';
     lang['sort_code_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_BANK_CODE}';
     lang['account_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_ACCOUNT_NUMBER}';
+    lang['iban_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_IBAN}';
+    lang['bic_invalid'] = '{$smarty.const.TEXT_PAYMILL_ELV_ERR_BIC}';
 </script>
 <link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -25,6 +28,7 @@
 <script type="text/javascript" src="plugins/xt_paymill/js/dd.js"></script>
 <div style="position: relative; left: 55%;">
     <div id="payment-errors-elv" class="payment-error"></div>
+    {if $smarty.const.XT_PAYMILL_SEPA eq 'false'}
     <div class="paymill-input-label">
         <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER}</label>
     </div>
@@ -35,6 +39,18 @@
     </div>
     <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value="{$xt_paymill.bank_code}"/>
     <div id="payment-error-elv-2" class="payment-error"></div>
+    {else}
+    <div class="paymill-input-label">
+        <label>{$smarty.const.TEXT_PAYMILL_ELV_IBAN}</label>
+    </div>
+    <input id="paymill-iban" class="paymill-input" type="text" size="20" value="{$xt_paymill.iban}"/>
+    <div id="payment-error-elv-1" class="payment-error"></div>
+    <div class="paymill-input-label">
+        <label>{$smarty.const.TEXT_PAYMILL_ELV_BIC}</label>
+    </div>
+    <input id="paymill-bic" class="paymill-input" type="text" size="20" value="{$xt_paymill.bic}"/>
+    <div id="payment-error-elv-2" class="payment-error"></div>
+    {/if}
     <div class="paymill-input-label">
         <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER}</label>
     </div>

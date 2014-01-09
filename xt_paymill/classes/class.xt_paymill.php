@@ -174,9 +174,16 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
         if ($this->data['xt_paymill']['fast_checkout_elv'] === 'true') {
             $payment = $this->_payments->getOne($data->paymentID_ELV);
-            $this->data['xt_paymill']['bank_code'] = $payment['code'];
             $this->data['xt_paymill']['account_holder'] = $payment['holder'];
-            $this->data['xt_paymill']['account_number'] = $payment['account'];
+            if (array_key_exists('code', $payment)) {
+                $this->data['xt_paymill']['bank_code'] = $payment['code'];
+                $this->data['xt_paymill']['account_number'] = $payment['account'];
+            }
+
+            if (array_key_exists('iban', $payment)) {
+                $this->data['xt_paymill']['iban'] = $payment['iban'];
+                $this->data['xt_paymill']['bic'] = $payment['bic'];
+            }
         }
 
         $this->data['xt_paymill']['currency'] = $currency->code;
