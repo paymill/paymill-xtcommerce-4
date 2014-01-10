@@ -23,7 +23,8 @@
     </payment>
     <db_install>
         <![CDATA[
-            $db->Execute("INSERT INTO ".TABLE_ADMIN_NAVIGATION." (`pid` ,`text` ,`icon` ,`url_i` ,`url_d` ,`sortorder` ,`parent` ,`type` ,`navtype`) VALUES (NULL , 'xt_paymill', 'images/icons/user_comment.png', '&plugin=xt_paymill', 'adminHandler.php', '4000', 'shop', 'I', 'W');");
+            $db->Execute("INSERT INTO ".TABLE_ADMIN_NAVIGATION." (`pid` ,`text` ,`icon` ,`url_i` ,`url_d` ,`sortorder` ,`parent` ,`type` ,`navtype`) VALUES (NULL , 'xt_paymill_log', 'images/icons/user_comment.png', '&plugin=xt_paymill&load_section=xt_paymill_log', 'adminHandler.php', '4000', 'shop', 'I', 'W');");
+            $db->Execute("INSERT INTO ".TABLE_ADMIN_NAVIGATION." (`pid` ,`text` ,`icon` ,`url_i` ,`url_d` ,`sortorder` ,`parent` ,`type` ,`navtype`) VALUES (NULL , 'xt_paymill_hooks', 'images/icons/user_comment.png', '&plugin=xt_paymill&load_section=xt_paymill_hook_registration', 'adminHandler.php', '4000', 'shop', 'I', 'W');");
         
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 24, '', 0, 10000.00, 0, 1);");
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 25, '', 0, 10000.00, 0, 1);");
@@ -33,6 +34,13 @@
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 29, '', 0, 10000.00, 0, 1);");
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 30, '', 0, 10000.00, 0, 1);");
             $db->Execute("INSERT INTO ".TABLE_PAYMENT_COST." (`payment_id`, `payment_geo_zone`, `payment_country_code`, `payment_type_value_from`, `payment_type_value_to`, `payment_price`,`payment_allowed`) VALUES(".$payment_id.", 31, '', 0, 10000.00, 0, 1);");
+            
+            $db->Execute("CREATE TABLE IF NOT EXISTS `pi_paymill_hooks` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `type` text NOT NULL,
+                `endpoint_url` text NOT NULL,
+                PRIMARY KEY (`id`)
+            ) AUTO_INCREMENT=1;");
             
             $db->Execute("CREATE TABLE IF NOT EXISTS `pi_paymill_logging` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -792,13 +800,23 @@
             </en>
         </phrase>
         <phrase>
-            <key>TEXT_XT_PAYMILL</key>
+            <key>TEXT_XT_PAYMILL_LOG</key>
             <class>admin</class>
             <de>
                 <value>PAYMILL Log</value>
             </de>
             <en>
                 <value>PAYMILL Log</value>
+            </en>
+        </phrase>
+        <phrase>
+            <key>TEXT_XT_PAYMILL_HOOKS</key>
+            <class>admin</class>
+            <de>
+                <value>PAYMILL Hooks</value>
+            </de>
+            <en>
+                <value>PAYMILL Hooks</value>
             </en>
         </phrase>
         <phrase>
