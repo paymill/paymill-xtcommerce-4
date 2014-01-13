@@ -2,6 +2,8 @@
 
 defined('_VALID_CALL') or die('Direct Access is not allowed.');
 
+require_once(dirname(__FILE__) . '/lib/Services/Paymill/Webhooks.php');
+
 class xt_paymill_hook_registration
 {
 
@@ -27,7 +29,7 @@ class xt_paymill_hook_registration
             'default_sort' => $this->_masterKey,
             'SortField' => $this->_masterKey,
             'SortDir' => 'DESC',
-            'exclude' => array('type')
+            'exclude' => array('type', 'hook_id')
         );
 
         return $params;
@@ -71,15 +73,28 @@ class xt_paymill_hook_registration
             
     function _set($data, $set_type = 'edit')
     {
+        global $db;
         
         if ($this->position != 'admin') {
             return false;
         }
         
+        $webhooks = new Services_Paymill_Webhooks(
+            XT_PAYMILL_PRIVATE_API_KEY,
+            'https://api.paymill.com/v2/'
+        );
         
+        $result = $webhooks->create(array(
+            "url" => $data['endpoint_url'],
+            "event_types" => array('refund.succeeded', 'chargeback.executed')
+        ));
         
+        if (array_key_exists('id', $result)) {
+            $db->Execute("INSERT INTO " . $this->_table . "(`hook_id`, `type`, `endpoint_url`) VALUES ('" . $result['id'] . "', '" . print_r($result['event_types'], true) . "', '" . $result['url'] . "')");
+            return true;
+        }
         
-        return true;
+        return false;
     }
 
     function _unset($id = 0)
@@ -91,7 +106,16 @@ class xt_paymill_hook_registration
         if ($id == 0 || !is_int($id) || $this->position != 'admin') {
             return false;
         }
+        
+        $record = $db->Execute("SELECT * FROM " . $this->_table . " WHERE id = " . $id);
 
+        $webhooks = new Services_Paymill_Webhooks(
+            XT_PAYMILL_PRIVATE_API_KEY,
+            'https://api.paymill.com/v2/'
+        );
+        
+        $webhooks->delete($record->fields['hook_id']);
+        
         $db->Execute("DELETE FROM " . $this->_table . " WHERE " . $this->_masterKey . " = '" . $id . "'");
 
         return true;

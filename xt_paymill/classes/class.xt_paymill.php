@@ -320,7 +320,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         $this->_transactions->update(
             array(
                 'id' => $_SESSION['paymillTransactionId'],
-                'description' => _STORE_NAME . ' Order ID: ' . $_SESSION['success_order_id']
+                'description' => ' OrderID: ' . $_SESSION['success_order_id'] . ' ' . _STORE_NAME
             )
         );
 
