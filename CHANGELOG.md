@@ -1,6 +1,10 @@
 ## v2.5.0
  * remove paymill label
  * use only existing clients and payments
+ * add elv sepa
+ * webhooks added
+ * client update
+ * add bridge translations
 
 ## v2.4.0
  * better error messages
