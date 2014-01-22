@@ -95,7 +95,7 @@ $(document).ready(function()
 			ccErrorFlag = false;
 		}
 
-		if (!paymill.validateExpiry($('select[name="Paymill_Month"]').val(), $('select[name="Paymill_Year"]').val())) {
+		if (!paymill.validateExpiry($('#Paymill_Month').val(), $('#Paymill_Year').val())) {
 			$("#payment-error-cc-4").text(lang['expiration_date_invalid']);
 			$("#payment-error-cc-4").css('display', 'block');
 			ccErrorFlag = false;
@@ -125,8 +125,8 @@ $(document).ready(function()
 
 		paymill.createToken({
 			number: $('#paymill-card-number').val(),
-			exp_month: $('select[name="Paymill_Month"]').val(),
-			exp_year: $('select[name="Paymill_Year"]').val(),
+			exp_month: $('#Paymill_Month').val(),
+			exp_year: $('#Paymill_Year').val(),
 			cvc: cvc,
 			cardholder: $('#paymill-card-holdername').val(),
 			amount_int: amount,
@@ -140,11 +140,11 @@ $(document).ready(function()
 		fastCheckoutCc = 'false';
 	});
 
-	$('select[name="Paymill_Month"]').focus(function() {
+	$('#Paymill_Month').focus(function() {
 		fastCheckoutCc = 'false';
 	});
 
-	$('select[name="Paymill_Year"]').focus(function() {
+	$('#Paymill_Year').focus(function() {
 		fastCheckoutCc = 'false';
 	});
 

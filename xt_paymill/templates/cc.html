@@ -62,6 +62,25 @@
     <div class="paymill-input-label">
         <label>{$smarty.const.TEXT_PAYMILL_CC_DATE}</label>
     </div>
-    {html_select_date display_days=false end_year='+15' field_separator=' / ' prefix='Paymill_' time=$xt_paymill.expire_date}
+    <select id="Paymill_Month">
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_JANUARY}" value="01">{$smarty.const.TEXT_PAYMILL_CC_JANUARY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}" value="02">{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_MARCH}" value="03">{$smarty.const.TEXT_PAYMILL_CC_MARCH}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_APRIL}" value="04">{$smarty.const.TEXT_PAYMILL_CC_APRIL}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_MAY}" value="05">{$smarty.const.TEXT_PAYMILL_CC_MAY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_JUNE}" value="06">{$smarty.const.TEXT_PAYMILL_CC_JUNE}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_JULY}" value="07">{$smarty.const.TEXT_PAYMILL_CC_JULY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_AUGUST}" value="08">{$smarty.const.TEXT_PAYMILL_CC_AUGUST}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER}" value="09">{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_OCTOBER}" value="10">{$smarty.const.TEXT_PAYMILL_CC_OCTOBER}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER}" value="11">{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_DECEMBER}" value="12">{$smarty.const.TEXT_PAYMILL_CC_DECEMBER}</option>
+    </select>
+    /
+    <select id="Paymill_Year">
+        {php} for($year=date("Y");$year<=date("Y")+15;$year++): {/php}
+        {php} echo '<option label="' . $year . '" value="' . $year . '">' . $year . '</option>'; {/php}
+        {php} endfor; {/php}
+    </select>
     <div id="payment-error-cc-4" class="payment-error"></div>
 </div>

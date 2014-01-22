@@ -43,12 +43,12 @@
     margin-right: 5px;
 }
 
-select[name=Paymill_Month]
+#Paymill_Month
 {
     width: 155px;
 }
 
-select[name=Paymill_Year]
+#Paymill_Year
 {
     width: 82px;
 }

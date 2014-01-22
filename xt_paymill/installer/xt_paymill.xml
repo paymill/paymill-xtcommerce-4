@@ -69,7 +69,8 @@
     </db_install>
     <db_uninstall>
         <![CDATA[
-            $db->Execute("DELETE FROM ".TABLE_ADMIN_NAVIGATION." WHERE text = 'xt_paymill'");
+            $db->Execute("DELETE FROM ".TABLE_ADMIN_NAVIGATION." WHERE text = 'xt_paymill_log'");
+            $db->Execute("DELETE FROM ".TABLE_ADMIN_NAVIGATION." WHERE text = 'xt_paymill_hooks'");
         ]]>
     </db_uninstall>
     <plugin_code>
@@ -1075,6 +1076,126 @@
             </en>
             <de>
                 <value>Fehlende oder ungültige Bankdatenkombination</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_JANUARY</key>            
+            <class>store</class>
+            <en>
+                <value>January</value>
+            </en>
+            <de>
+                <value>Januar</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_FEBRUARY</key>            
+            <class>store</class>
+            <en>
+                <value>February</value>
+            </en>
+            <de>
+                <value>Februar</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_MARCH</key>            
+            <class>store</class>
+            <en>
+                <value>March</value>
+            </en>
+            <de>
+                <value>März</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_APRIL</key>            
+            <class>store</class>
+            <en>
+                <value>April</value>
+            </en>
+            <de>
+                <value>April</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_MAY</key>            
+            <class>store</class>
+            <en>
+                <value>May</value>
+            </en>
+            <de>
+                <value>Mai</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_JUNE</key>            
+            <class>store</class>
+            <en>
+                <value>June</value>
+            </en>
+            <de>
+                <value>Juni</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_JULY</key>            
+            <class>store</class>
+            <en>
+                <value>July</value>
+            </en>
+            <de>
+                <value>Juli</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_AUGUST</key>            
+            <class>store</class>
+            <en>
+                <value>August</value>
+            </en>
+            <de>
+                <value>August</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_SEPTEMBER</key>            
+            <class>store</class>
+            <en>
+                <value>September</value>
+            </en>
+            <de>
+                <value>September</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_OCTOBER</key>            
+            <class>store</class>
+            <en>
+                <value>October</value>
+            </en>
+            <de>
+                <value>Oktober</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_NOVEMBER</key>            
+            <class>store</class>
+            <en>
+                <value>November</value>
+            </en>
+            <de>
+                <value>November</value>
+            </de>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_DECEMBER</key>            
+            <class>store</class>
+            <en>
+                <value>December</value>
+            </en>
+            <de>
+                <value>Dezember</value>
             </de>
         </phrase>
     </language_content>

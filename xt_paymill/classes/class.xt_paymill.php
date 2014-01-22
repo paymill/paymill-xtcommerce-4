@@ -154,6 +154,9 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     {
         global $currency;
 
+        $this->data['paymill_cc_start_year'] = date("Y");
+        $this->data['paymill_cc_end_year'] = $this->data['paymill_cc_start_year'] + 15;
+        
         $this->_canFastCheckoutCc();
         $this->_canFastCheckoutElv();
 
