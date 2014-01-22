@@ -295,8 +295,9 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     public function log($message, $debugInfo)
     {
         global $db;
+        
         if ($this->_getPaymentConfig('DEBUG_MODE') === 'true') {
-            $db->Execute("INSERT INTO `pi_paymill_logging` (debug, message) VALUES('" . $debugInfo . "', '" . $message . "')");
+            $db->Execute($db->Prepare("INSERT INTO `pi_paymill_logging` (debug, message) VALUES(?, ?)"), array($debugInfo, $message));
         }
     }
 
