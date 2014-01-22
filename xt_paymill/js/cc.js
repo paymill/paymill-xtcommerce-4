@@ -1,7 +1,5 @@
 $(document).ready(function()
 {
-	var submitFlag = false;
-
 	$('#paymill-card-number').keyup(function() 
 	{
 		paymillShowCardIcon()
@@ -68,21 +66,18 @@ $(document).ready(function()
 
 	function paymillCcResponseHandler(error, result)
 	{
-		if (flag) {
-			paymillDebug('Paymill: Start response handler');
-			if (error) {
-				flag = false;
-				paymillDebug('An API error occured:' + error.apierror);
-				$("#payment-errors-cc").text(lang['PAYMILL_' + error.apierror]);
-				$("#payment-errors-cc").css('display', 'block');
-			} else {
-				flag = false;
-				paymillDebug('Received a token: ' + result.token);
-				$("#payment-errors-cc").text("");
-				$("#payment-errors-cc").css('display', 'none');
-				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='" + result.token + "'/>");
-				$('form[name^="process"]').submit();
-			}
+		paymillDebug('Paymill: Start response handler');
+		if (error) {
+			paymillDebug('An API error occured:' + error.apierror);
+			$("#payment-errors-cc").text(lang['PAYMILL_' + error.apierror]);
+			$("#payment-errors-cc").css('display', 'block');
+		} else {
+			preventDefault = false;
+			paymillDebug('Received a token: ' + result.token);
+			$("#payment-errors-cc").text("");
+			$("#payment-errors-cc").css('display', 'none');
+			$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='" + result.token + "'/>");
+			$('form[name^="process"]').submit();
 		}
 	}
 
@@ -162,13 +157,13 @@ $(document).ready(function()
 	});
 
 	$('form[name^="process"]').submit(function(event) {
-		if (!submitFlag) {
+		if (preventDefault) {
 			event.preventDefault();
-			submitFlag = true;
 			if (fastCheckoutCc === 'false') {
 				paymillDebug('Paymill Creditcard: Payment method triggered');
 				return paymillCc();
 			} else {
+				preventDefault = false;
 				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
 				$('form[name^="process"]').submit();
 			}
