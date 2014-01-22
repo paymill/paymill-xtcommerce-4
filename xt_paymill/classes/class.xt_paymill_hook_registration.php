@@ -37,7 +37,7 @@ class xt_paymill_hook_registration
 
     function _get($id = 0)
     {
-        global $db;
+        global $db, $xtLink;
         
         $record = $db->Execute("SELECT * FROM " . $this->_table);
 
@@ -65,7 +65,8 @@ class xt_paymill_hook_registration
         }
         
         if ($id === 'new') {
-            $obj->data[0]['endpoint_url'] = _SYSTEM_BASE_HTTPS . _SRV_WEB_UPLOAD . 'plugins/xt_paymill/callback/notification_endpoint.php';
+            ;
+            $obj->data[0]['endpoint_url'] = _SYSTEM_BASE_HTTPS . _SRV_WEB_UPLOAD . 'index.php?page=callback&page_action=xt_paymill';
         }
 
         return $obj;

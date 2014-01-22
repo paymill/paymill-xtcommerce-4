@@ -37,6 +37,7 @@
             
             $paymillRefunded = $db->GetOne("SELECT status_id FROM " . TABLE_SYSTEM_STATUS_DESCRIPTION . " WHERE status_name = 'Refund / Chargeback (PAYMILL)'");
             if (!$paymillRefunded) {
+                $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS." (`status_class`, `status_values`) VALUES ('order_status', '".'a:1:{s:4:"data";a:5:{s:15:"enable_download";i:0;s:7:"visible";s:1:"1";s:13:"visible_admin";i:1;s:19:"calculate_statistic";i:0;s:12:"reduce_stock";i:1;}}'."');");
                 $paymillRefundedId = $db->Insert_ID(TABLE_SYSTEM_STATUS, 'status_id');
                 $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS_DESCRIPTION." (`status_id`, `language_code`, `status_name`) VALUES ($paymillRefundedId, 'en', 'Refund / Chargeback (PAYMILL)');");
                 $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS_DESCRIPTION." (`status_id`, `language_code`, `status_name`) VALUES ($paymillRefundedId, 'de', 'Retoure / Chargeback (PAYMILL)');");
