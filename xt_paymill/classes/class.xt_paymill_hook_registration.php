@@ -90,7 +90,7 @@ class xt_paymill_hook_registration
         ));
         
         if (array_key_exists('id', $result)) {
-            $db->Execute("INSERT INTO " . $this->_table . "(`hook_id`, `type`, `endpoint_url`) VALUES ('" . $result['id'] . "', '" . print_r($result['event_types'], true) . "', '" . $result['url'] . "')");
+            $db->Execute($db->Prepare("INSERT INTO " . $this->_table . "(`hook_id`, `type`, `endpoint_url`) VALUES (?, ?, ?)"), array($result['id'], print_r($result['event_types'], true), $result['url']));
             return true;
         }
         
