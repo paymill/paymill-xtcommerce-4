@@ -1,25 +1,20 @@
 
 $(document).ready(function()
-{
-	var submitFlag = false;
-	
+{	
 	function paymillElvResponseHandler(error, result)
 	{
-		if (flag) {
-			paymillDebug('Paymill: Start response handler');
-			if (error) {
-				flag = false;
-				paymillDebug('An API error occured:' + error.apierror);
-				$("#payment-errors-elv").text(lang['PAYMILL_' + error.apierror]);
-				$("#payment-errors-elv").css('display', 'block');
-			} else {
-				flag = false;
-				paymillDebug('Received a token: ' + result.token);
-				$("#payment-errors-elv").text("");
-				$("#payment-errors-elv").css('display', 'none');
-				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='" + result.token + "'/>");
-				$('form[name^="process"]').submit();
-			}
+		paymillDebug('Paymill: Start response handler');
+		if (error) {
+			paymillDebug('An API error occured:' + error.apierror);
+			$("#payment-errors-elv").text(lang['PAYMILL_' + error.apierror]);
+			$("#payment-errors-elv").css('display', 'block');
+		} else {
+			preventDefault = false;
+			paymillDebug('Received a token: ' + result.token);
+			$("#payment-errors-elv").text("");
+			$("#payment-errors-elv").css('display', 'none');
+			$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='" + result.token + "'/>");
+			$('form[name^="process"]').submit();
 		}
 	}
 
@@ -122,9 +117,8 @@ $(document).ready(function()
 	});
 	
 	$('form[name^="process"]').submit(function(event) {
-		if (!submitFlag) {
+		if (preventDefault) {
 			event.preventDefault();
-			submitFlag = true;
 			if (fastCheckoutElv === 'false') {
 				paymillDebug('Paymill ELV: Payment method triggered');
 				if (sepa === 'false') {
@@ -134,6 +128,7 @@ $(document).ready(function()
 				}
 				
 			} else {
+				preventDefault = false;
 				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
 				$('form[name^="process"]').submit();
 			}
