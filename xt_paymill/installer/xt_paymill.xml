@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xtcommerceplugin>
     <title>PAYMILL</title>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
     <code>xt_paymill</code>
     <url>http://www.paymill.de</url>
     <description>Paymill Payment Plugin</description>
@@ -10,15 +10,15 @@
     <payment>
         <payment_code>xt_paymill</payment_code>
         <payment_dir>xt_paymill</payment_dir>
-        <payment_icon></payment_icon>
+        <payment_icon/>
         <payment_tpl>xt_paymill.html</payment_tpl>
         <de>
             <title>PAYMILL</title>
-            <description></description>
+            <description/>
         </de>
         <en>
             <title>PAYMILL</title>
-            <description></description>
+            <description/>
         </en>
     </payment>
     <db_install>
@@ -122,11 +122,23 @@
             <url>conf_truefalse</url>
             <sort_order>5</sort_order>
             <de>
-                <title>PAYMILL Kreditkarte aktivieren</title>
+                <title></title>
             </de>
             <en>
-                <title>Activate PAYMILL Creditcard</title>
+                <title></title>
             </en>
+            <es>
+                <title/>
+            </es>
+            <fr>
+                <title/>
+            </fr>
+            <it>
+                <title/>
+            </it>
+            <pt>
+                <title/>
+            </pt>
         </config>
         <config>
             <key>ACTIVATE_PAYMILLELV</key>
@@ -135,31 +147,67 @@
             <url>conf_truefalse</url>
             <sort_order>5</sort_order>
             <de>
-                <title>PAYMILL ELV aktivieren</title>
+                <title></title>
             </de>
             <en>
-                <title>Activate PAYMILL Direct Debit</title>
+                <title></title>
             </en>
+            <es>
+                <title/>
+            </es>
+            <fr>
+                <title/>
+            </fr>
+            <it>
+                <title/>
+            </it>
+            <pt>
+                <title/>
+            </pt>
         </config>
         <config>
             <key>PRIVATE_API_KEY</key>
             <type>textfield</type>
             <de>
-                <title>Geheimer API Key</title>
+                <title>Private Key</title>
             </de>
             <en>
-                <title>Private API Key</title>
+                <title>Private key</title>
             </en>
+            <es>
+                <title>Clave privada</title>
+            </es>
+            <fr>
+                <title>Clé privée</title>
+            </fr>
+            <it>
+                <title>Chiave privata</title>
+            </it>
+            <pt>
+                <title>Chave privada</title>
+            </pt>
         </config>
         <config>
             <key>PUBLIC_API_KEY</key>
             <type>textfield</type>
             <de>
-                <title>Öffentlicher API Key</title>
+                <title>Public Key</title>
             </de>
             <en>
-                <title>Public API Key</title>
+                <title>Public key</title>
             </en>
+            <es>
+                <title>Clave pública</title>
+            </es>
+            <fr>
+                <title>Clé publique</title>
+            </fr>
+            <it>
+                <title>Chiave pubblica</title>
+            </it>
+            <pt>
+                <title>Chave pública</title>
+            </pt>
         </config>
         <config>
             <key>DEBUG_MODE</key>
@@ -167,11 +215,23 @@
             <value>false</value>
             <url>conf_truefalse</url>
             <de>
-                <title>Debug Modus</title>
+                <title>Debugging aktivieren</title>
             </de>
             <en>
-                <title>Debug Mode</title>
+                <title>Activate debugging</title>
             </en>
+            <es>
+                <title>Activar debugging</title>
+            </es>
+            <fr>
+                <title>Activer le débogage</title>
+            </fr>
+            <it>
+                <title>Attivare il debug</title>
+            </it>
+            <pt>
+                <title>Ativar a depuração</title>
+            </pt>
         </config>
         <config>
             <key>FAST_CHECKOUT</key>
@@ -179,11 +239,23 @@
             <value>true</value>
             <url>conf_truefalse</url>
             <de>
-                <title>Fast Checkout</title>
+                <title>Fast Checkout erlauben</title>
             </de>
             <en>
-                <title>Fast Checkout</title>
+                <title>Enable fast checkout</title>
             </en>
+            <es>
+                <title>Activar la compra rápida</title>
+            </es>
+            <fr>
+                <title>Activer le paiement rapide.</title>
+            </fr>
+            <it>
+                <title>Abilitare pagamento veloce</title>
+            </it>
+            <pt>
+                <title>Ativar o checkout rápido</title>
+            </pt>
         </config>
         <config>
             <key>SEPA</key>
@@ -191,11 +263,23 @@
             <value>true</value>
             <url>conf_truefalse</url>
             <de>
-                <title>SEPA</title>
+                <title></title>
             </de>
             <en>
-                <title>SEPA</title>
+                <title></title>
             </en>
+            <es>
+                <title/>
+            </es>
+            <fr>
+                <title/>
+            </fr>
+            <it>
+                <title/>
+            </it>
+            <pt>
+                <title/>
+            </pt>
         </config>
     </configuration_payment>
     <language_content>
@@ -203,391 +287,859 @@
             <key>PAYMILL_10001</key>
             <class>store</class>
             <de>
-                <value>Genereller Fehler, bitte wenden Sie sich an den Support.</value>
+                <value></value>
             </de>
             <en>
-                <value>General undefined response.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_10002</key>
             <class>store</class>
             <de>
-                <value>Wir warten noch immer auf etwas.</value>
+                <value></value>
             </de>
             <en>
-                <value>Still waiting on something.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_20000</key>
             <class>store</class>
             <de>
-                <value>General success response.</value>
+                <value></value>
             </de>
             <en>
-                <value>General success response.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40000</key>
             <class>store</class>
             <de>
-                <value>Generelles Problem mit den Daten.</value>
+                <value></value>
             </de>
             <en>
-                <value>General problem with data.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40001</key>
             <class>store</class>
             <de>
-                <value>Es gibt ein Problem mit den Payment Daten.</value>
+                <value></value>
             </de>
             <en>
-                <value>General problem with payment data.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40100</key>
             <class>store</class>
             <de>
-                <value>Es existieren Probleme mit der Kreditkarte. Nähere Details können nicht übergeben werden.</value>
+                <value></value>
             </de>
             <en>
-                <value>Problem with credit card data.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40101</key>
             <class>store</class>
             <de>
-                <value>Der CVV ist nicht korrekt.</value>
+                <value></value>
             </de>
             <en>
-                <value>Problem with cvv.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40102</key>
             <class>store</class>
             <de>
-                <value>Die Kreditkarte ist abgelaufen oder noch gültig.</value>
+                <value></value>
             </de>
             <en>
-                <value>Card expired or not yet valid.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40103</key>
             <class>store</class>
             <de>
-                <value>Das Umsatzimit der Kreditkarte wurde mit dieser Transaktion überschritten oder ist bereits überschritten.</value>
+                <value></value>
             </de>
             <en>
-                <value>Limit exceeded.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40104</key>
             <class>store</class>
             <de>
-                <value>Die Kreditkarte ist ungültig</value>
+                <value></value>
             </de>
             <en>
-                <value>Card invalid.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40105</key>
             <class>store</class>
             <de>
-                <value>Das Kreditkartenablaufdatum ist nicht korrekt.</value>
+                <value></value>
             </de>
             <en>
-                <value>Expiry date not valid.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40106</key>
             <class>store</class>
             <de>
-                <value>Kreditkarten-Anbieter ist erforderlich.</value>
+                <value></value>
             </de>
             <en>
-                <value>Credit card brand required.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40200</key>
             <class>store</class>
             <de>
-                <value>Probleme mit den Konto Daten.</value>
+                <value></value>
             </de>
             <en>
-                <value>Problem with bank account data.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40201</key>
             <class>store</class>
             <de>
-                <value>Daten stimmen nicht mit dem Bank-Account überein.</value>
+                <value></value>
             </de>
             <en>
-                <value>Bank account data combination mismatch.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40202</key>
             <class>store</class>
             <de>
-                <value>Die Benutzer-Authentifizierung ist fehlgeschlagen.</value>
+                <value></value>
             </de>
             <en>
-                <value>User authentication failed.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40300</key>
             <class>store</class>
             <de>
-                <value>Es gibt es Problem mit den 3DSecure Daten.</value>
+                <value></value>
             </de>
             <en>
-                <value>Problem with 3d secure data.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40301</key>
             <class>store</class>
             <de>
-                <value>Währung oder Betrag stimmen nicht überein.</value>
+                <value></value>
             </de>
             <en>
-                <value>Currency / amount mismatch</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40400</key>
             <class>store</class>
             <de>
-                <value>Es gibt ein Problem mit den Eingabe Daten.</value>
+                <value></value>
             </de>
             <en>
-                <value>Problem with input data.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40401</key>
             <class>store</class>
             <de>
-                <value>Der Betrag ist zu niedrig oder null.</value>
+                <value></value>
             </de>
             <en>
-                <value>Amount too low or zero.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40402</key>
             <class>store</class>
             <de>
-                <value>Der Verwendungszweck ist zu lang.</value>
+                <value></value>
             </de>
             <en>
-                <value>Usage field too long.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_40403</key>
             <class>store</class>
             <de>
-                <value>Die Währung ist nicht für den Kunden konfigurierten.</value>
+                <value></value>
             </de>
             <en>
-                <value>Currency not allowed.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50000</key>
             <class>store</class>
             <de>
-                <value>Generelles Problem mit dem Backend.</value>
+                <value></value>
             </de>
             <en>
-                <value>General problem with backend.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50001</key>
             <class>store</class>
             <de>
-                <value>Die Kreditkarte ist auf einer Schwarzen Liste.</value>
+                <value></value>
             </de>
             <en>
-                <value>Country blacklisted.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50100</key>
             <class>store</class>
             <de>
-                <value>Technisches Problem mit der Kreditkarte.</value>
+                <value></value>
             </de>
             <en>
-                <value>Technical error with credit card.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50101</key>
             <class>store</class>
             <de>
-                <value>Limit überschritten.</value>
+                <value></value>
             </de>
             <en>
-                <value>Error limit exceeded.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50102</key>
             <class>store</class>
             <de>
-                <value>Diese Karte wurde ohne weitere Gründe abgelehnt.</value>
+                <value></value>
             </de>
             <en>
-                <value>Card declined by authorization system.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50103</key>
             <class>store</class>
             <de>
-                <value>Diese Karte wurde wegen Kartenmanipulationen abgelehnt.</value>
+                <value></value>
             </de>
             <en>
-                <value>Manipulation or stolen card.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50104</key>
             <class>store</class>
             <de>
-                <value>Die Transaktion wurde vom Authorisierungs-System abgelehnt (Karte durch Bank eingeschränkt).</value>
+                <value></value>
             </de>
             <en>
-                <value>Card restricted.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50105</key>
             <class>store</class>
             <de>
-                <value>Die Konfiguration ist ungültig.</value>
+                <value></value>
             </de>
             <en>
-                <value>Invalid card configuration data.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50200</key>
             <class>store</class>
             <de>
-                <value>Technischer Fehler mit dem Bankkonto.</value>
+                <value></value>
             </de>
             <en>
-                <value>Technical error with bank account.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50201</key>
             <class>store</class>
             <de>
-                <value>Dieser Kundenaccount ist auf einer Schwarzen Liste.</value>
+                <value></value>
             </de>
             <en>
-                <value>Card blacklisted.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50300</key>
             <class>store</class>
             <de>
-                <value>Es gibt einen teschnischen Fehler mit 3-D Secure.</value>
+                <value></value>
             </de>
             <en>
-                <value>Technical error with 3D secure.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50400</key>
             <class>store</class>
             <de>
-                <value>Ablehnung aufgrund von Risiko Problemen.</value>
+                <value></value>
             </de>
             <en>
-                <value>Decline because of risk issues.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50500</key>
             <class>store</class>
             <de>
-                <value>Generelle Zeitüberschreitung.</value>
+                <value></value>
             </de>
             <en>
-                <value>General timeout.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50501</key>
             <class>store</class>
             <de>
-                <value>Die Schnittstelle zum Acquirer reagiert nicht, daher bekommen wir keine Antwort ob die Transaktion erfolgreich durchgelaufen ist.</value>
+                <value></value>
             </de>
             <en>
-                <value>Timeout on side of the acquirer.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50502</key>
             <class>store</class>
             <de>
-                <value>Es gibt eine Zeitüberschreitung bei der Risiko-Management Transaktion.</value>
+                <value></value>
             </de>
             <en>
-                <value>Risk management transaction timeout.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_50600</key>
             <class>store</class>
             <de>
-                <value>Doppelte Transaktion.</value>
+                <value></value>
             </de>
             <en>
-                <value>Duplicate transaction.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_BIC</key>
             <class>store</class>
             <de>
-                <value>BIC</value>
+                <value></value>
             </de>
             <en>
-                <value>BIC</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_IBAN</key>
             <class>store</class>
             <de>
-                <value>IBAN</value>
+                <value></value>
             </de>
             <en>
-                <value>IBAN</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_NAME</key>
@@ -596,8 +1148,20 @@
                 <value>Kreditkarte</value>
             </de>
             <en>
-                <value>Credit Card</value>
+                <value>Credit card</value>
             </en>
+            <es>
+                <value>Tarjeta de crédito</value>
+            </es>
+            <fr>
+                <value>Carte de crédit</value>
+            </fr>
+            <it>
+                <value>Carta di credito</value>
+            </it>
+            <pt>
+                <value>Cartão de crédito</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_NAME</key>
@@ -606,28 +1170,64 @@
                 <value>ELV</value>
             </de>
             <en>
-                <value>Direct Debit</value>
+                <value>Direct debit</value>
             </en>
+            <es>
+                <value>Domiciliación bancaria</value>
+            </es>
+            <fr>
+                <value>Débit direct</value>
+            </fr>
+            <it>
+                <value>Addebito diretto</value>
+            </it>
+            <pt>
+                <value>Débito direto</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_CCNR</key>
             <class>store</class>
             <de>
-                <value>Kreditkartennummer</value>
+                <value>Kartennummer</value>
             </de>
             <en>
-                <value>Credit Card Number</value>
+                <value>Card number</value>
             </en>
+            <es>
+                <value>Número de tarjeta</value>
+            </es>
+            <fr>
+                <value>Numéro de carte</value>
+            </fr>
+            <it>
+                <value>Numero carta</value>
+            </it>
+            <pt>
+                <value>Número do cartão</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_CVC</key>
             <class>store</class>
             <de>
-                <value>Kreditkartenprüfnummer</value>
+                <value>CVC</value>
             </de>
             <en>
-                <value>Credit Card Verification Number</value>
+                <value>CVC</value>
             </en>
+            <es>
+                <value>Código CVC</value>
+            </es>
+            <fr>
+                <value>CVC</value>
+            </fr>
+            <it>
+                <value>CVC</value>
+            </it>
+            <pt>
+                <value>CVC</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_HOLDER</key>
@@ -636,18 +1236,42 @@
                 <value>Karteninhaber</value>
             </de>
             <en>
-                <value>Credit Card Holder</value>
+                <value>Card holder</value>
             </en>
+            <es>
+                <value>Titular de la tarjeta</value>
+            </es>
+            <fr>
+                <value>Titulaire de la carte</value>
+            </fr>
+            <it>
+                <value>Titolare carta</value>
+            </it>
+            <pt>
+                <value>Titular do cartão</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_DATE</key>
             <class>store</class>
             <de>
-                <value>Gültigkeitsdatum (MM/JJJJ)</value>
+                <value>Gültig bis</value>
             </de>
             <en>
-                <value>Expiry date (MM/YYYY)</value>
+                <value>Valid until</value>
             </en>
+            <es>
+                <value>Válida hasta</value>
+            </es>
+            <fr>
+                <value>Valable jusqu'au</value>
+            </fr>
+            <it>
+                <value>Valida fino al</value>
+            </it>
+            <pt>
+                <value>Válido até</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_ACCOUNT_NUMBER</key>
@@ -656,8 +1280,20 @@
                 <value>Kontonummer</value>
             </de>
             <en>
-                <value>Account Number</value>
+                <value>Account number</value>
             </en>
+            <es>
+                <value>Número de cuenta</value>
+            </es>
+            <fr>
+                <value>Numéro de compte</value>
+            </fr>
+            <it>
+                <value>Numero conto</value>
+            </it>
+            <pt>
+                <value>Número da conta</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_BANK_CODE</key>
@@ -666,148 +1302,328 @@
                 <value>Bankleitzahl</value>
             </de>
             <en>
-                <value>Bank Code</value>
+                <value>Bank code</value>
             </en>
+            <es>
+                <value>Código bancario</value>
+            </es>
+            <fr>
+                <value>Code bancaire</value>
+            </fr>
+            <it>
+                <value>Codice bancario</value>
+            </it>
+            <pt>
+                <value>Código do banco</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_OWNER</key>
             <class>store</class>
             <de>
-                <value>Kontoinahber</value>
+                <value>Kontoinhaber</value>
             </de>
             <en>
-                <value>Account Owner</value>
+                <value>Account holder</value>
             </en>
+            <es>
+                <value>Titular de la cuenta</value>
+            </es>
+            <fr>
+                <value>Titulaire du compte</value>
+            </fr>
+            <it>
+                <value>Titolare conto</value>
+            </it>
+            <pt>
+                <value>Titular da conta</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_LABEL_CC</key>
             <class>store</class>
             <de>
-                <value>Sichere Kreditkartenzahlung powered by</value>
+                <value>Sichere Kreditkartenzahlung powered by </value>
             </de>
             <en>
-                <value>Secure credit card payment powered by</value>
+                <value>Secure credit card payments powered by</value>
             </en>
+            <es>
+                <value>Pagos seguros con tarjeta de crédito gestionados por</value>
+            </es>
+            <fr>
+                <value>Paiements par carte de crédit sécurisés fonctionnant avec</value>
+            </fr>
+            <it>
+                <value>Pagamenti sicuri con carta di credito con tecnologia</value>
+            </it>
+            <pt>
+                <value>Pagamentos com cartão de crédito seguros fornecidos por</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_LABEL_ELV</key>
             <class>store</class>
             <de>
-                <value>ELV powered by</value>
+                <value>ELV powered by </value>
             </de>
             <en>
-                <value>Direct debit payment powered by</value>
+                <value>Direct debit powered by</value>
             </en>
+            <es>
+                <value>Domiciliación bancaria gestionada por</value>
+            </es>
+            <fr>
+                <value>Débit direct fonctionnant avec</value>
+            </fr>
+            <it>
+                <value>Addebito diretto con tecnologia</value>
+            </it>
+            <pt>
+                <value>Débito direto fornecido por</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_ERR_NUMBER</key>
             <class>store</class>
             <de>
-                <value>Ihre Kreditkartennummer ist ungültig.</value>
+                <value>Bitte geben Sie eine gültige Kreditkartennummer ein.</value>
             </de>
             <en>
-                <value>Your credit card number is invalid.</value>
+                <value>Please enter a valid credit card number.</value>
             </en>
+            <es>
+                <value>Por favor, introduce un número válido de tarjeta de crédito.</value>
+            </es>
+            <fr>
+                <value>Veuillez saisir un numéro de carte de crédit valide.</value>
+            </fr>
+            <it>
+                <value>Inserire un numero di carta di credito valido.</value>
+            </it>
+            <pt>
+                <value>Por favor, introduza um número de cartão de crédito válido.</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_ERR_DATE</key>
             <class>store</class>
             <de>
-                <value>Das Gültigkeitsdatum ist ungültig.</value>
+                <value>Ungültiges Ablaufdatum</value>
             </de>
             <en>
-                <value>The expiry date is invalid.</value>
+                <value>Invalid expiration date</value>
             </en>
+            <es>
+                <value>Fecha de expiración inválida</value>
+            </es>
+            <fr>
+                <value>Date d'expiration invalide</value>
+            </fr>
+            <it>
+                <value>Data scadenza non valida</value>
+            </it>
+            <pt>
+                <value>Data de validade inválida</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_ERR_CVC</key>
             <class>store</class>
             <de>
-                <value>Die Kartenprüfnummer ist ungültig.</value>
+                <value>Ungültige CVC</value>
             </de>
             <en>
-                <value>Your credit card verification code is invalid.</value>
+                <value>Invalid CVC</value>
             </en>
+            <es>
+                <value>CVC inválido</value>
+            </es>
+            <fr>
+                <value>CVC invalide</value>
+            </fr>
+            <it>
+                <value>CVC non valido</value>
+            </it>
+            <pt>
+                <value>CVC inválido</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_ERR_HOLDER</key>
             <class>store</class>
             <de>
-                <value>Der Karteninhaber ist ungültig. Bitte korrigieren Sie Ihre Eingabe.</value>
+                <value>Bitte geben Sie einen Inhabernamen an.</value>
             </de>
             <en>
-                <value>Credit Card Holder is invalid.</value>
+                <value>Please enter the card holder's name.</value>
             </en>
+            <es>
+                <value>Por favor, introduce el nombre del titular de la tarjeta</value>
+            </es>
+            <fr>
+                <value>Veuillez saisir le nom du titulaire de la carte.</value>
+            </fr>
+            <it>
+                <value>Inserire il nome del titolare della carta.</value>
+            </it>
+            <pt>
+                <value>Por favor, introduza o nome do titular do cartão.</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_ERR_HOLDER</key>
             <class>store</class>
             <de>
-                <value>Bitte geben Sie den Kontoinhaber an.</value>
+                <value>Bitte geben Sie den Namen des Kontoinhabers an</value>
             </de>
             <en>
-                <value>Account Holder is missing.</value>
+                <value>Please enter the name of the direct debit account holder</value>
             </en>
+            <es>
+                <value>Por favor, introduce el nombre del titular de la cuenta para la domiciliación bancaria.</value>
+            </es>
+            <fr>
+                <value>Veuillez saisir le nom du titulaire du compte de débit direct</value>
+            </fr>
+            <it>
+                <value>Inserire il nome del titolare del conto di addebito diretto</value>
+            </it>
+            <pt>
+                <value>Por favor, introduza o nome do titular da conta de débito direto</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_ERR_BANK_CODE</key>
             <class>store</class>
             <de>
-                <value>Die Bankleitzahl ist ungültig.</value>
+                <value>Bitte geben Sie eine gültige Bankleitzahl an</value>
             </de>
             <en>
-                <value>The sort code is invalid.</value>
+                <value>Please enter a valid direct debit bank code.</value>
             </en>
+            <es>
+                <value>Por favor, introduce un código bancario válido de domiciliación bancaria.</value>
+            </es>
+            <fr>
+                <value>Veuillez saisir un code bancaire de débit direct valide.</value>
+            </fr>
+            <it>
+                <value>Inserire un codice di addebito bancario diretto valido.</value>
+            </it>
+            <pt>
+                <value>Por favor, introduza um código bancário de débito direto válido.</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_ERR_ACCOUNT_NUMBER</key>
             <class>store</class>
             <de>
-                <value>Die Kontonummer ist ungültig.</value>
+                <value>Bitte geben Sie eine gültige Kontonummer ein</value>
             </de>
             <en>
-                <value>The account number is invalid.</value>
+                <value>Please enter a valid direct debit account number</value>
             </en>
+            <es>
+                <value>Por favor, introduce un número válido de la cuenta para la domiciliación bancaria.</value>
+            </es>
+            <fr>
+                <value>Veuillez saisir un numéro de compte de débit direct valide</value>
+            </fr>
+            <it>
+                <value>Inserire un numero di conto di addebito diretto valido</value>
+            </it>
+            <pt>
+                <value>Por favor, introduza um número de conta de débito direto válido</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_ERR_IBAN</key>
             <class>store</class>
             <de>
-                <value>Die IBAN ist ungültig.</value>
+                <value></value>
             </de>
             <en>
-                <value>The IBAN is invalid.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ELV_ERR_BIC</key>
             <class>store</class>
             <de>
-                <value>Die BIC ist ungültig.</value>
+                <value></value>
             </de>
             <en>
-                <value>The BIC is invalid.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ERR_TOKEN</key>
             <class>store</class>
             <de>
-                <value>Es trat ein Fehler während Ihrer Token erstellung auf.</value>
+                <value></value>
             </de>
             <en>
-                <value>An error has occurred during token creation.</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_ERR_ORDER</key>
             <class>store</class>
             <de>
-                <value>Es trat ein Fehler während Ihrer Bestellung auf.</value>
+                <value>Während Ihrer Zahlung ist ein Fehler aufgetreten.</value>
             </de>
             <en>
-                <value>An error has occurred during order creation.</value>
+                <value>An error has occurred while processing your payment.</value>
             </en>
+            <es>
+                <value>Ha ocurrido un error mientras procesábamos tu pago.</value>
+            </es>
+            <fr>
+                <value>Une erreur s'est produit pendant le traiement de votre paiement.</value>
+            </fr>
+            <it>
+                <value>Si è verificato un errore durante l'elaborazione del pagamento.</value>
+            </it>
+            <pt>
+                <value>Ocorreu um erro durante o processamento do seu pagamento.</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_XT_PAYMILL_LOG</key>
@@ -816,388 +1632,856 @@
                 <value>PAYMILL Log</value>
             </de>
             <en>
-                <value>PAYMILL Log</value>
+                <value>PAYMILL log</value>
             </en>
+            <es>
+                <value>Registro de PAYMILL</value>
+            </es>
+            <fr>
+                <value>Journal PAYMILL</value>
+            </fr>
+            <it>
+                <value>Registro PAYMILL</value>
+            </it>
+            <pt>
+                <value>Registo PAYMILL</value>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_XT_PAYMILL_HOOKS</key>
             <class>admin</class>
             <de>
-                <value>PAYMILL Hooks</value>
+                <value></value>
             </de>
             <en>
-                <value>PAYMILL Hooks</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_DEBUG</key>
             <class>admin</class>
             <de>
-                <value>Debug</value>
+                <value></value>
             </de>
             <en>
-                <value>Debug</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_MESSAGE</key>
             <class>admin</class>
             <de>
-                <value>Message</value>
+                <value></value>
             </de>
             <en>
-                <value>Nachricht</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_DATE</key>
             <class>admin</class>
             <de>
-                <value>Date</value>
+                <value></value>
             </de>
             <en>
-                <value>Datum</value>
+                <value></value>
             </en>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_TOOLTIP</key>
             <class>store</class>
             <de>
-                <value>Hinter dem CVV-Code bzw. CVC verbirgt sich ein Sicherheitsmerkmal von Kreditkarten, üblicherweise handelt es sich dabei um eine drei- bis vierstelligen Nummer. Der CVV-Code befindet sich auf VISA-Kreditkarten. Der gleiche Code ist auch auf MasterCard-Kreditkarten zu finden, hier allerdings unter dem Namen CVC. Die Abkürzung CVC steht dabei für Card Validation Code. Bei VISA wird der Code als Card Verification Value-Code bezeichnet. Ähnlich wie bei Mastercard und VISA gibt es auch bei Diners Club, Discover und JCB eine dreistellige  Nummer, die meist auf der Rückseite der Karte zu finden ist. Bei Maestro-Karten gibt es mit und ohne dreistelligen CVV. Wird eine Maestro-Karte ohne CVV verwendet kann einfach 000 eingetragen werden. American Express verwendet die CID (Card Identification Number). Dabei handelt es sich um eine vierstellige Nummer, die meist auf der Vorderseite der Karte, rechts oberhalb der Kartennummer zu finden ist.</value>
+                <value>Hinter dem CVV-Code bzw. CVC verbirgt sich ein Sicherheitsmerkmal von Kreditkarten, üblicherweise handelt es sich dabei um eine drei- bis vierstelligen Nummer. Der CVV-Code befindet sich auf VISA-Kreditkarten. Der gleiche Code ist auch auf MasterCard-Kreditkarten zu finden, hier allerdings unter dem Namen CVC. Die Abkürzung CVC steht dabei für Card Validation Code. Bei VISA wird der Code als Card Verification Value-Code bezeichnet. Ähnlich wie bei Mastercard und VISA gibt es auch bei Diners Club, Discover und JCB eine dreistellige Nummer, die meist auf der Rückseite der Karte zu finden ist. Bei Maestro-Karten gibt es mit und ohne dreistelligen CVV. Wird eine Maestro-Karte ohne CVV verwendet kann einfach 000 eingetragen werden. American Express verwendet die CID (Card Identification Number). Dabei handelt es sich um eine vierstellige Nummer, die meist auf der Vorderseite der Karte, rechts oberhalb der Kartennummer zu finden ist.</value>
             </de>
             <en>
-                <value>What is a CVV/CVC number? Prospective credit cards will have a 3 to 4-digit number, usually on the back of the card. It ascertains that the payment is carried out by the credit card holder and the card account is legitimate. On Visa the CVV (Card Verification Value) appears after and to the right of your card number. Same goes for Mastercard’s CVC (Card Verfication Code), which also appears after and to the right of  your card number, and has 3-digits. Diners Club, Discover, and JCB credit and debit cards have a three-digit card security code which also appears after and to the right of your card number. The American Express CID (Card Identification Number) is a 4-digit number printed on the front of your card. It appears above and to the right of your card number. On Maestro the CVV appears after and to the right of your number. If you don’t have a CVV for your Maestro card you can use 000.</value>
+                <value>The CVV code or CVC is a security feature of credit cards. It usually is a  three to four digit long number. On VISA credit cards, it is called CVV code. The same code can be found on MasterCard credit cards - where however it is called CVC. CVC is an abbreviation for 'Card Validation Code'. CVV code on the other hand is an abbreviation for 'Card Validation Value code'. Similar to MasterCard and Visa, other brands such as Diners Club, Discover and JCB contain a three digit number that can usually be found on the back of the credit card. MAESTRO cards exist with and without a three digit CVV. In case a MAESTRO card without a CVV will be used, it is possible to enter 000 to the form instead. American Express uses the CID (card identification number). The CID is a four digit number that can usually be found on the front of the card, top right from the credit card number. </value>
             </en>
+            <es>
+                <value>El código CVV o CVC es una medida de seguridad de las tarjetas de crédito. Normalmente es un número de tres a cuatro dígitos de longitud. En las tarjetas de crédito VISA, se le llama código CVV. Se puede encontrar este mismo código en las tarjetas de crédito MasterCard -donde se le llama CVC. CVC es la abreviatura de 'código de validez de la tarjeta'. El código CVV, por otro lado, es la abreviatura de 'código de valor de verificación de la tarjeta'. Parecidas a MasterCard y Visa, otras tarjetas como Diners Club, Discover y JCB contienen un número de tres dígitos que se encuentra normalmente en el reverso de la tarjeta de crédito. Las tarjetas MAESTRO pueden tener o no el código CVV de tres dígitos. En caso de usar una tarjeta MAESTRO sin CVV, puede introducir 000 en el formulario en su lugar. American Express usa el CID (número de identificación de la tarjeta). El CID es un número de cuatro dígitos que normalmente se encuentra en el anverso de la tarjeta, arriba a la derecha del número de la tarjeta de crédito.</value>
+            </es>
+            <fr>
+                <value>Le code CVV ou CVC est une fonctionnalité de sécurité des cartes de crédit. Il se compose en général d'un nombre de trois à quatre chiffres. Sur les cartes de crédit VISA, il est appelé code CVV. On trouve le même code sur les cartes de crédit MasterCard, où il est appelé cependant CVC. CVC signifie « Card Validation Code » (« Code de validation de carte »). Le code CVV signifie quant à lui « Card Validation Value code » (« code de Valeur de validation de carte »). Similaires à MasterCard et Visa, les autres marques telles que Diners Club, Discover et JCB contiennent un nombre à trois chiffres que l'on retrouve généralement au dos de la carte de crédit. Les cartes MAESTRO existent avec et sans le CVV à trois chiffres. Si vous utilisez une carte MAESTRO sans CVV, vous pourrez saisir 000 dans le formulaire. American Express utilise le CID (card identification number - numéro d'identification de carte). Le CID est un nombre à quatre chiffres que l'on retrouve généralement à l'avant de la carte, en haut à droite du numéro de carte de crédit.</value>
+            </fr>
+            <it>
+                <value>Il codice CVV o CVC è una funzione di sicurezza delle carte di credito. Di solito, è un numero composto da tre o quattro cifre. Sulle carte di credito VISA, è indicato come codice CVV. Lo stesso codice può essere trovato sulle carte di credito MasterCard, dove però è denominato CVC. CVC è l'abbreviazione di  'Card Validation Code' (Codice di validazione della carta). Il codice CVV, invece, è l'abbreviazione di 'Card Validation Value code' (Codice del valore di verifica della carta). Similmente alla MasterCard e alla Visa, altre marche come la Diners Club, la Discover e la JCB contengono un numero a tre cifre che di solito può essere trovato sul retro della carta di credito. Esistono carte MAESTRO con o senza un codice CVV a tre cifre. Nel caso in cui venga utilizzata una carta MAESTRO priva di CVV, è possibile inserire 000 nel modulo. L'American Express utilizza il CID (Numero di identificazione della carta). Il CID è un numero a quattro cifre che di solito si trova sulla parte anteriore della carta, in alto a destra dal numero della carta di credito.</value>
+            </it>
+            <pt>
+                <value>O código CVV ou CVC é uma funcionalidade de segurança dos cartões de crédito. Normalmente é um número com três ou quatro dígitos. Nos cartões de crédito VISA, é chamado de código CVV. O mesmo código pode ser encontrado nos cartões de crédito MasterCard - onde no entanto é chamado de CVC. CVC é uma abreviatura para 'Código de Validação do Cartão'. O código CVV, por outro lado, é uma abreviatura para 'Código para Valor de Validação do Cartão'. De forma semelhante à MasterCard e à Visa, outras marcas tais como o Diners Club, Discover e JCB contêm um número de três dígitos que normalmente pode ser encontrado na parte de trás do cartão de crédito. Existem cartões MAESTRO com e sem um CVV de três dígitos. No caso de ser utilizado um cartão MAESTRO sem CVV, é possível introduzir 000 no formulário. A American Express utiliza o CID (número de identificação do cartão). O CID é um número de quatro dígitos que pode ser encontrado na parte da frente do cartão, no topo à direita do número do cartão de crédito.</value>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_INTERNAL_SERVER_ERROR</key>            
             <class>store</class>
             <en>
-                <value>Communication with PSP failed</value>
+                <value></value>
             </en>
             <de>
-                <value>Kommunikation mit dem PSP fehlgeschlagen</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_INVALID_PUBLIC_KEY</key>            
             <class>store</class>
             <en>
-                <value>Public Key is invalid</value>
+                <value></value>
             </en>
             <de>
-                <value> Public Key ungültig</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_INVALID_PAYMENT_DATA</key>            
             <class>store</class>
             <en>
-                <value>Payment mode, card type, currency or country not accepted.</value>
+                <value></value>
             </en>
             <de>
-                <value>Für diesen Zahlungsmodus, Kreditkartentyp, Währung oder Land nicht zugelassen</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_UNKNOWN_ERROR</key>            
             <class>store</class>
             <en>
-                <value>Unknown Error</value>
+                <value></value>
             </en>
             <de>
-                <value>Unbekannter Fehler</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_3DS_CANCELLED</key>            
             <class>store</class>
             <en>
-                <value>3-D Secure process has been aborted</value>
+                <value></value>
             </en>
             <de>
-                <value>3-D Secure Prozess wurde vom User abgebrochen</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_CARD_NUMBER</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing card number</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlende oder ungültige Kreditkartennummer</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_CARD_EXP_YEAR</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing expiry year</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlendes oder ungültiges Ablaufjahr</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_CARD_EXP_MONTH</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing expiry month</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlender oder ungültiger Ablaufmonat</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_CARD_EXP</key>            
             <class>store</class>
             <en>
-                <value>Card no longer (or not yet) valid</value>
+                <value></value>
             </en>
             <de>
-                <value>Karte nicht mehr gültig oder noch nicht gültig</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_CARD_CVC</key>            
             <class>store</class>
             <en>
-                <value>Invalid CVC</value>
+                <value></value>
             </en>
             <de>
-                <value>Ungültige Prüfziffer</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_CARD_HOLDER</key>            
             <class>store</class>
             <en>
-                <value>Invalid card holder</value>
+                <value></value>
             </en>
             <de>
-                <value>Ungültiger Karteninhaber</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_AMOUNT_INT</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing amount for 3-D Secure</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlender oder ungültiger Betrag für 3-D Secure</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_FIELD_INVALID_AMOUNT</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing amount for 3-D Secure</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlender oder ungültiger Betrag für 3-D Secure</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_FIELD_FIELD_INVALID_CURRENCY</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing currency for 3-D Secure</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlende oder ungültige Währung für 3-D Secure</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_ACCOUNT_NUMBER</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing account number</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlende oder ungültige Kontonummer</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_ACCOUNT_HOLDER</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing account holder</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlender oder ungültiger Karteninhaber</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_BANK_CODE</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing bank code</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlende oder ungültige Bankleitzahl</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_IBAN</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing IBAN</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlende oder ungültige IBAN</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_BIC</key>            
             <class>store</class>
             <en>
-                <value>Invalid or missing BIC</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlende oder ungültiger BIC</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_COUNTRY</key>            
             <class>store</class>
             <en>
-                <value>Missing or not supported country</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlendes oder nicht unterstütztes Land</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>PAYMILL_FIELD_INVALID_BANK_DATA</key>            
             <class>store</class>
             <en>
-                <value>Bank data does not match</value>
+                <value></value>
             </en>
             <de>
-                <value>Fehlende oder ungültige Bankdatenkombination</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_JANUARY</key>            
             <class>store</class>
             <en>
-                <value>January</value>
+                <value></value>
             </en>
             <de>
-                <value>Januar</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_FEBRUARY</key>            
             <class>store</class>
             <en>
-                <value>February</value>
+                <value></value>
             </en>
             <de>
-                <value>Februar</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_MARCH</key>            
             <class>store</class>
             <en>
-                <value>March</value>
+                <value></value>
             </en>
             <de>
-                <value>März</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_APRIL</key>            
             <class>store</class>
             <en>
-                <value>April</value>
+                <value></value>
             </en>
             <de>
-                <value>April</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_MAY</key>            
             <class>store</class>
             <en>
-                <value>May</value>
+                <value></value>
             </en>
             <de>
-                <value>Mai</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_JUNE</key>            
             <class>store</class>
             <en>
-                <value>June</value>
+                <value></value>
             </en>
             <de>
-                <value>Juni</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_JULY</key>            
             <class>store</class>
             <en>
-                <value>July</value>
+                <value></value>
             </en>
             <de>
-                <value>Juli</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_AUGUST</key>            
             <class>store</class>
             <en>
-                <value>August</value>
+                <value></value>
             </en>
             <de>
-                <value>August</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_SEPTEMBER</key>            
             <class>store</class>
             <en>
-                <value>September</value>
+                <value></value>
             </en>
             <de>
-                <value>September</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_OCTOBER</key>            
             <class>store</class>
             <en>
-                <value>October</value>
+                <value></value>
             </en>
             <de>
-                <value>Oktober</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_NOVEMBER</key>            
             <class>store</class>
             <en>
-                <value>November</value>
+                <value></value>
             </en>
             <de>
-                <value>November</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
         <phrase>
             <key>TEXT_PAYMILL_CC_DECEMBER</key>            
             <class>store</class>
             <en>
-                <value>December</value>
+                <value></value>
             </en>
             <de>
-                <value>Dezember</value>
+                <value></value>
             </de>
+            <es>
+                <value/>
+            </es>
+            <fr>
+                <value/>
+            </fr>
+            <it>
+                <value/>
+            </it>
+            <pt>
+                <value/>
+            </pt>
         </phrase>
     </language_content>
 </xtcommerceplugin>

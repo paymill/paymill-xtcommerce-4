@@ -64,8 +64,8 @@ $(document).ready(function()
 		hideErrorBoxes('elv', 3);
 
 		var elvErrorFlag = true;
-
-		if ($('#paymill-iban').val() === "") {
+		iban = new Iban();
+		if (!iban.validate($('#paymill-iban').val())) {
 			$("#payment-error-elv-1").text(lang['iban_invalid']);
 			$("#payment-error-elv-1").css('display', 'block');
 			elvErrorFlag = false;
