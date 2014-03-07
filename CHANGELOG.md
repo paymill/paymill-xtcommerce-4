@@ -1,3 +1,8 @@
+## v2.6.0
+ * add IBAN validation
+ * multi lang support
+ * better creditcard detection
+
 ## v2.5.0
  * remove paymill label
  * use only existing clients and payments
