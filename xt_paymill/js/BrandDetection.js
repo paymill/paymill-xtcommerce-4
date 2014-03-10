@@ -1,11 +1,11 @@
 BrandDetection = function() {};
 
-BrandDetection.prototype.option = 
+BrandDetection.prototype.option =
 {
     'minlength': 6
 };
 
-BrandDetection.prototype.creditcard = 
+BrandDetection.prototype.creditcard =
 {
     'carte-bleue' : {
         'pattern': /^(415006|497|407497|513)/,
@@ -38,7 +38,7 @@ BrandDetection.prototype.creditcard =
         'cvc': [3]
     },
     'diners-club' : {
-        'pattern': /^6(011|5)/,
+        'pattern': /^3(0[0-5]|[68])/,
         'cardlength': [14],
         'luhn': false,
         'cvc': [3]
@@ -75,27 +75,26 @@ BrandDetection.prototype.creditcard =
     }
 };
 
-BrandDetection.prototype.detect = function(cardnumber) 
+BrandDetection.prototype.detect = function(cardnumber)
 {
     var brand = 'unknown';
     if (cardnumber.length >= this.option.minlength) {
-		for (var cardinfo in this.creditcard) {
-			if (this.creditcard[cardinfo].pattern.test(cardnumber)) {
+        for (var cardinfo in this.creditcard) {
+            if (this.creditcard[cardinfo].pattern.test(cardnumber)) {
                 brand = cardinfo;
+                break;
             }
-		}
+        }
     }
-	
     return brand;
 };
 
-BrandDetection.prototype.validate = function(cardnumber) 
+BrandDetection.prototype.validate = function(cardnumber)
 {
-	
-	return this.creditcard[this.detect(cardnumber)].cardlength.indexOf(cardnumber.length) !== -1;
+    return this.creditcard[this.detect(cardnumber)].cardlength.indexOf(cardnumber.length)  !== -1;
 };
 
-BrandDetection.prototype.luhn = function(cardnumber) 
+BrandDetection.prototype.luhn = function(cardnumber)
 {
     //todo
 };
