@@ -20,6 +20,22 @@
             <title>PAYMILL</title>
             <description/>
         </en>
+        <es>
+            <title>PAYMILL</title>
+            <description/>
+        </es>
+        <it>
+            <title>PAYMILL</title>
+            <description/>
+        </it>
+        <fr>
+            <title>PAYMILL</title>
+            <description/>
+        </fr>
+        <pt>
+            <title>PAYMILL</title>
+            <description/>
+        </pt>
     </payment>
     <db_install>
         <![CDATA[
