@@ -127,7 +127,7 @@
     background-position: right center !important;
 }
 
-.paymill-card-number-diners
+.paymill-card-number-diners-club
 {
     background-image: url('../images/32x20_dinersclub.png') !important;
     background-repeat: no-repeat !important;
@@ -137,6 +137,34 @@
 .paymill-card-number-discover
 {
     background-image: url('../images/32x20_discover.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+}
+
+.paymill-card-number-carte-bleue
+{
+    background-image: url('../images/32x20_carte-bleue.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+}
+
+.paymill-card-number-china-unionpay
+{
+    background-image: url('../images/32x20_unionpay.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+}
+
+.paymill-card-number-carta-si
+{
+    background-image: url('../images/32x20_carta-si.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right center !important;
+}
+
+.paymill-card-number-dankort
+{
+    background-image: url('../images/32x20_dankort.png') !important;
     background-repeat: no-repeat !important;
     background-position: right center !important;
 }
