@@ -15,7 +15,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
      * Version
      * @var string
      */
-    public $version = '2.5.0';
+    public $version = '2.6.0';
 
     /**
      * @var boolean
@@ -214,7 +214,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
             $this->_paymentProcessor->setToken($token);
             unset($_SESSION['token']);
-
+            
             $result = $this->_paymentProcessor->processPayment();
             
             if (!$result) {
