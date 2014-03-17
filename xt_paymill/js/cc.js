@@ -38,7 +38,7 @@ $(document).ready(function()
 		paymillDebug('Paymill: Start response handler');
 		if (error) {
 			paymillDebug('An API error occured:' + error.apierror);
-			$("#payment-errors-cc").text(lang['PAYMILL_' + error.apierror]);
+			$("#payment-errors-cc").text($('<div/>').html(lang['PAYMILL_' + error.apierror]).text());
 			$("#payment-errors-cc").css('display', 'block');
 		} else {
 			preventDefault = false;
@@ -59,25 +59,25 @@ $(document).ready(function()
 		var ccErrorFlag = true;
 
 		if (!paymill.validateCardNumber($('#paymill-card-number').val())) {
-			$("#payment-error-cc-1").text(lang['card_number_invalid']);
+			$("#payment-error-cc-1").text($('<div/>').html(lang['card_number_invalid']).text());
 			$("#payment-error-cc-1").css('display', 'block');
 			ccErrorFlag = false;
 		}
 
 		if (!paymill.validateExpiry($('#Paymill_Month').val(), $('#Paymill_Year').val())) {
-			$("#payment-error-cc-4").text(lang['expiration_date_invalid']);
+			$("#payment-error-cc-4").text($('<div/>').html(lang['expiration_date_invalid']).text());
 			$("#payment-error-cc-4").css('display', 'block');
 			ccErrorFlag = false;
 		}
 
 		if (!paymill.validateCvc($('#paymill-card-cvc').val()) && detectCreditcardBranding($('#paymill-card-number').val()).toLowerCase() !== 'maestro') {
-			$("#payment-error-cc-2").text(lang['verfication_number_invalid']);
+			$("#payment-error-cc-2").text($('<div/>').html(lang['verfication_number_invalid']).text());
 			$("#payment-error-cc-2").css('display', 'block');
 			ccErrorFlag = false;
 		}
 
 		if (!paymill.validateHolder($('#paymill-card-holdername').val())) {
-			$("#payment-error-cc-3").text(lang['card_holder_invalid']);
+			$("#payment-error-cc-3").text($('<div/>').html(lang['card_holder_invalid']).text());
 			$("#payment-error-cc-3").css('display', 'block');
 			ccErrorFlag = false;
 		}

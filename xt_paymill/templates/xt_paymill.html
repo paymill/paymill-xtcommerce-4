@@ -9,7 +9,7 @@
         <div id="payment-errors-cc" class="payment-error"></div>
         <div class="paymill-header">
             <span>{form type=radio name=selected_payment id=paymill_selector_cc value=$payment_code:cc}</span>
-            <span>{$smarty.const.TEXT_PAYMILL_CC_NAME}</span>
+            <span>{$smarty.const.TEXT_PAYMILL_CC_NAME|stripslashes}</span>
             <span style="float: right;">{$payment_price.formated}</span>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <div id="payment-errors-elv" class="payment-error"></div>
         <div class="paymill-header">
             <span>{form type=radio name=selected_payment id=paymill_selector_elv value=$payment_code:dd}</span>
-            <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME}</span>
+            <span>{$smarty.const.TEXT_PAYMILL_ELV_NAME|stripslashes}</span>
             <span style="float: right;">{$payment_price.formated}</span>
         </div>
     </div>

@@ -6,7 +6,7 @@ $(document).ready(function()
 		paymillDebug('Paymill: Start response handler');
 		if (error) {
 			paymillDebug('An API error occured:' + error.apierror);
-			$("#payment-errors-elv").text(lang['PAYMILL_' + error.apierror]);
+			$("#payment-errors-elv").text($('<div/>').html(lang['PAYMILL_' + error.apierror]).text());
 			$("#payment-errors-elv").css('display', 'block');
 		} else {
 			preventDefault = false;
@@ -27,19 +27,19 @@ $(document).ready(function()
 		var elvErrorFlag = true;
 
 		if (!paymill.validateAccountNumber($('#paymill-account-number').val())) {
-			$("#payment-error-elv-1").text(lang['account_number_invalid']);
+			$("#payment-error-elv-1").text($('<div/>').html(lang['account_number_invalid']).text());
 			$("#payment-error-elv-1").css('display', 'block');
 			elvErrorFlag = false;
 		}
 
 		if (!paymill.validateBankCode($('#paymill-bank-code').val())) {
-			$("#payment-error-elv-2").text(lang['sort_code_invalid']);
+			$("#payment-error-elv-2").text($('<div/>').html(lang['sort_code_invalid']).text());
 			$("#payment-error-elv-2").css('display', 'block');
 			elvErrorFlag = false;
 		}
 
 		if ($('#paymill-bank-owner').val() === "") {
-			$("#payment-error-elv-3").text(lang['account_owner_invalid']);
+			$("#payment-error-elv-3").text($('<div/>').html(lang['account_owner_invalid']).text());
 			$("#payment-error-elv-3").css('display', 'block');
 			elvErrorFlag = false;
 		}
@@ -66,19 +66,19 @@ $(document).ready(function()
 		var elvErrorFlag = true;
 		iban = new Iban();
 		if (!iban.validate($('#paymill-iban').val())) {
-			$("#payment-error-elv-1").text(lang['iban_invalid']);
+			$("#payment-error-elv-1").text($('<div/>').html(lang['iban_invalid']).text());
 			$("#payment-error-elv-1").css('display', 'block');
 			elvErrorFlag = false;
 		}
 
 		if ($('#paymill-bic').val() === "") {
-			$("#payment-error-elv-2").text(lang['bic_invalid']);
+			$("#payment-error-elv-2").text($('<div/>').html(lang['bic_invalid']).text());
 			$("#payment-error-elv-2").css('display', 'block');
 			elvErrorFlag = false;
 		}
 
 		if ($('#paymill-bank-owner').val() === "") {
-			$("#payment-error-elv-3").text(lang['account_owner_invalid']);
+			$("#payment-error-elv-3").text($('<div/>').html(lang['account_owner_invalid']).text());
 			$("#payment-error-elv-3").css('display', 'block');
 			elvErrorFlag = false;
 		}

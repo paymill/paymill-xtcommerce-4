@@ -9,31 +9,31 @@
     var currency = "{$xt_paymill.currency}";
     var lang = new Array();
     // Paymill cc js lang
-    lang['card_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_NUMBER}';
-    lang['verfication_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_CVC}';
-    lang['expiration_date_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_DATE}';
-    lang['card_holder_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_HOLDER}';
-    lang['PAYMILL_internal_server_error'] = '{$smarty.const.PAYMILL_INTERNAL_SERVER_ERROR}';
-    lang['PAYMILL_invalid_public_key'] = '{$smarty.const.PAYMILL_INVALID_PUBLIC_KEY}';
-    lang['PAYMILL_invalid_payment_data'] = '{$smarty.const.PAYMILL_INVALID_PAYMENT_DATA}';
-    lang['PAYMILL_unknown_error'] = '{$smarty.const.PAYMILL_UNKNOWN_ERROR}';
-    lang['PAYMILL_3ds_cancelled'] = '{$smarty.const.PAYMILL_3DS_CANCELLED}';
-    lang['PAYMILL_field_invalid_card_number'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_NUMBER}';
-    lang['PAYMILL_field_invalid_card_exp_year'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_EXP_YEAR}';
-    lang['PAYMILL_field_invalid_card_exp_month'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_EXP_MONTH}';
-    lang['PAYMILL_field_invalid_card_exp'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_EXP}';
-    lang['PAYMILL_field_invalid_card_cvc'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_CVC}';
-    lang['PAYMILL_field_invalid_card_holder'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_HOLDER}';
-    lang['PAYMILL_field_invalid_amount_int'] = '{$smarty.const.PAYMILL_FIELD_INVALID_AMOUNT_INT}';
-    lang['PAYMILL_field_field_invalid_amount'] = '{$smarty.const.PAYMILL_FIELD_FIELD_INVALID_AMOUNT}';
-    lang['PAYMILL_field_field_field_invalid_currency'] = '{$smarty.const.PAYMILL_FIELD_FIELD_FIELD_INVALID_CURRENCY}';
-    lang['PAYMILL_field_invalid_account_number'] = '{$smarty.const.PAYMILL_FIELD_INVALID_ACCOUNT_NUMBER}';
-    lang['PAYMILL_field_invalid_account_holder'] = '{$smarty.const.PAYMILL_FIELD_INVALID_ACCOUNT_HOLDER}';
-    lang['PAYMILL_field_invalid_bank_code'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BANK_CODE}';
-    lang['PAYMILL_field_invalid_iban'] = '{$smarty.const.PAYMILL_FIELD_INVALID_IBAN}';
-    lang['PAYMILL_field_invalid_bic'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BIC}';
-    lang['PAYMILL_field_invalid_country'] = '{$smarty.const.PAYMILL_FIELD_INVALID_COUNTRY}';
-    lang['PAYMILL_field_invalid_bank_data'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BANK_DATA}';
+    lang['card_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_NUMBER|stripslashes}';
+    lang['verfication_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_CVC|stripslashes}';
+    lang['expiration_date_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_DATE|stripslashes}';
+    lang['card_holder_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_HOLDER|stripslashes}';
+    lang['PAYMILL_internal_server_error'] = '{$smarty.const.PAYMILL_INTERNAL_SERVER_ERROR|stripslashes}';
+    lang['PAYMILL_invalid_public_key'] = '{$smarty.const.PAYMILL_INVALID_PUBLIC_KEY|stripslashes}';
+    lang['PAYMILL_invalid_payment_data'] = '{$smarty.const.PAYMILL_INVALID_PAYMENT_DATA|stripslashes}';
+    lang['PAYMILL_unknown_error'] = '{$smarty.const.PAYMILL_UNKNOWN_ERROR|stripslashes}';
+    lang['PAYMILL_3ds_cancelled'] = '{$smarty.const.PAYMILL_3DS_CANCELLED|stripslashes}';
+    lang['PAYMILL_field_invalid_card_number'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_NUMBER|stripslashes}';
+    lang['PAYMILL_field_invalid_card_exp_year'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_EXP_YEAR|stripslashes}';
+    lang['PAYMILL_field_invalid_card_exp_month'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_EXP_MONTH|stripslashes}';
+    lang['PAYMILL_field_invalid_card_exp'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_EXP|stripslashes}';
+    lang['PAYMILL_field_invalid_card_cvc'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_CVC|stripslashes}';
+    lang['PAYMILL_field_invalid_card_holder'] = '{$smarty.const.PAYMILL_FIELD_INVALID_CARD_HOLDER|stripslashes}';
+    lang['PAYMILL_field_invalid_amount_int'] = '{$smarty.const.PAYMILL_FIELD_INVALID_AMOUNT_INT|stripslashes}';
+    lang['PAYMILL_field_field_invalid_amount'] = '{$smarty.const.PAYMILL_FIELD_FIELD_INVALID_AMOUNT|stripslashes}';
+    lang['PAYMILL_field_field_field_invalid_currency'] = '{$smarty.const.PAYMILL_FIELD_FIELD_FIELD_INVALID_CURRENCY|stripslashes}';
+    lang['PAYMILL_field_invalid_account_number'] = '{$smarty.const.PAYMILL_FIELD_INVALID_ACCOUNT_NUMBER|stripslashes}';
+    lang['PAYMILL_field_invalid_account_holder'] = '{$smarty.const.PAYMILL_FIELD_INVALID_ACCOUNT_HOLDER|stripslashes}';
+    lang['PAYMILL_field_invalid_bank_code'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BANK_CODE|stripslashes}';
+    lang['PAYMILL_field_invalid_iban'] = '{$smarty.const.PAYMILL_FIELD_INVALID_IBAN|stripslashes}';
+    lang['PAYMILL_field_invalid_bic'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BIC|stripslashes}';
+    lang['PAYMILL_field_invalid_country'] = '{$smarty.const.PAYMILL_FIELD_INVALID_COUNTRY|stripslashes}';
+    lang['PAYMILL_field_invalid_bank_data'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BANK_DATA|stripslashes}';
 </script>
 <link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -51,31 +51,31 @@
     </span>
     <div id="payment-error-cc-1" class="payment-error"></div>
     <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_CC_CVC}</label><span class="tooltip" title="{$smarty.const.TEXT_PAYMILL_CC_TOOLTIP}">?</span>
+        <label>{$smarty.const.TEXT_PAYMILL_CC_CVC|stripslashes}</label><span class="tooltip" title="{$smarty.const.TEXT_PAYMILL_CC_TOOLTIP|stripslashes}">?</span>
     </div>
     <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value="{$xt_paymill.cvc}"/>
     <div id="payment-error-cc-2" class="payment-error"></div>
     <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER}</label>
+        <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER|stripslashes}</label>
     </div>
     <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value="{$xt_paymill.card_holder}"/>
     <div id="payment-error-cc-3" class="payment-error"></div>
     <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_CC_DATE}</label>
+        <label>{$smarty.const.TEXT_PAYMILL_CC_DATE|stripslashes}</label>
     </div>
     <select id="Paymill_Month">
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_JANUARY}" value="01">{$smarty.const.TEXT_PAYMILL_CC_JANUARY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}" value="02">{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_MARCH}" value="03">{$smarty.const.TEXT_PAYMILL_CC_MARCH}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_APRIL}" value="04">{$smarty.const.TEXT_PAYMILL_CC_APRIL}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_MAY}" value="05">{$smarty.const.TEXT_PAYMILL_CC_MAY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_JUNE}" value="06">{$smarty.const.TEXT_PAYMILL_CC_JUNE}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_JULY}" value="07">{$smarty.const.TEXT_PAYMILL_CC_JULY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_AUGUST}" value="08">{$smarty.const.TEXT_PAYMILL_CC_AUGUST}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER}" value="09">{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_OCTOBER}" value="10">{$smarty.const.TEXT_PAYMILL_CC_OCTOBER}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER}" value="11">{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_DECEMBER}" value="12">{$smarty.const.TEXT_PAYMILL_CC_DECEMBER}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_JANUARY|stripslashes}" value="01">{$smarty.const.TEXT_PAYMILL_CC_JANUARY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY|stripslashes}" value="02">{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_MARCH|stripslashes}" value="03">{$smarty.const.TEXT_PAYMILL_CC_MARCH}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_APRIL|stripslashes}" value="04">{$smarty.const.TEXT_PAYMILL_CC_APRIL}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_MAY|stripslashes}" value="05">{$smarty.const.TEXT_PAYMILL_CC_MAY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_JUNE|stripslashes}" value="06">{$smarty.const.TEXT_PAYMILL_CC_JUNE}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_JULY|stripslashes}" value="07">{$smarty.const.TEXT_PAYMILL_CC_JULY}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_AUGUST|stripslashes}" value="08">{$smarty.const.TEXT_PAYMILL_CC_AUGUST}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER|stripslashes}" value="09">{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_OCTOBER|stripslashes}" value="10">{$smarty.const.TEXT_PAYMILL_CC_OCTOBER}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER|stripslashes}" value="11">{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER}</option>
+        <option label="{$smarty.const.TEXT_PAYMILL_CC_DECEMBER|stripslashes}" value="12">{$smarty.const.TEXT_PAYMILL_CC_DECEMBER}</option>
     </select>
     /
     <select id="Paymill_Year">
