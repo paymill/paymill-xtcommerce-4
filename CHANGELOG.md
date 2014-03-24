@@ -1,3 +1,6 @@
+## v2.6.1
+ * add preventDefault true init
+
 ## v2.6.0
  * add IBAN validation
  * multi lang support

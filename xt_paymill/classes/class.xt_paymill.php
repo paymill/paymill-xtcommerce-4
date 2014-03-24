@@ -15,7 +15,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
      * Version
      * @var string
      */
-    public $version = '2.6.0';
+    public $version = '2.6.1';
 
     /**
      * @var boolean

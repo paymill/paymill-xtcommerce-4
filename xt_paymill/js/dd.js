@@ -1,6 +1,7 @@
-
 $(document).ready(function()
 {	
+	preventDefault = true;
+	
 	function paymillElvResponseHandler(error, result)
 	{
 		paymillDebug('Paymill: Start response handler');

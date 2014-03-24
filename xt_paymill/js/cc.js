@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+	preventDefault = true;
+
 	$('#paymill-card-number').keyup(function() 
 	{
 		paymillShowCardIcon();
