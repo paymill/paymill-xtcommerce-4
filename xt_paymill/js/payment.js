@@ -9,6 +9,6 @@ function paymillDebug(message)
 function hideErrorBoxes(payment, limit)
 {
 	for (i = 0; i <= limit; i++) {
-		$("#payment-error-" + payment + "-" + i).css('display', 'none');
+		pmQuery("#payment-error-" + payment + "-" + i).css('display', 'none');
 	}
 }

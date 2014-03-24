@@ -1,5 +1,6 @@
 ## v2.6.1
  * add preventDefault true init
+ * add pmQuery for jQuery calls to prevent conflicts
 
 ## v2.6.0
  * add IBAN validation
