@@ -1,3 +1,6 @@
+## v2.6.2
+ * add possibility so select which card logos will shown in the checkout
+
 ## v2.6.1
  * add preventDefault true init
  * add pmQuery for jQuery calls to prevent conflicts

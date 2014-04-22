@@ -2,34 +2,38 @@ pmQuery(document).ready(function()
 {
 	preventDefault = true;
 
-	pmQuery('#paymill-card-number').keyup(function() 
+	pmQuery('#paymill-card-number').keyup(function()
 	{
 		paymillShowCardIcon();
 	});
-	
-	/**
-	* Event Handler for the display of the card icons
-	*/
-   function paymillShowCardIcon()
-   {
-	    var creditCard = new BrandDetection();
-	    var brand = detectCreditcardBranding(pmQuery('#paymill-card-number').val());
-	    brand = brand.toLowerCase();
-	    pmQuery('#paymill-card-number')[0].className =  pmQuery('#paymill-card-number')[0].className.replace(/paymill-card-number-.*/g, '');
-		if (brand !== 'unknown') {
-		    if (brand === 'american express') {
-				brand = 'amex';
-		    }
 
-			pmQuery('#paymill-card-number').addClass("paymill-card-number-" + brand);
-			pmQuery('#paymill-card-number').addClass("greyscale");
+	/**
+	 * Event Handler for the display of the card icons
+	 */
+	function paymillShowCardIcon()
+	{
+		var creditCard = new BrandDetection();
+		var brand = detectCreditcardBranding(pmQuery('#paymill-card-number').val());
+		brand = brand.toLowerCase();
+		pmQuery('#paymill-card-number')[0].className = pmQuery('#paymill-card-number')[0].className.replace(/paymill-card-number-.*/g, '');
+		if (brand !== 'unknown') {
+			if (brand === 'american express') {
+				brand = 'amex';
+			}
+			
+			if (logos[brand]) {
+				pmQuery('#paymill-card-number').addClass("paymill-card-number-" + brand);
+				pmQuery('#paymill-card-number').addClass("greyscale");
+			}
 		}
 		
-		if (creditCard.validate(pmQuery('#paymill-card-number').val())) {
-			pmQuery('#paymill-card-number').removeClass('greyscale');
+		if (logos[brand]) {
+			if (creditCard.validate(pmQuery('#paymill-card-number').val())) {
+				pmQuery('#paymill-card-number').removeClass('greyscale');
+			}
 		}
-    }
-	function detectCreditcardBranding(creditcardNumber) 
+	}
+	function detectCreditcardBranding(creditcardNumber)
 	{
 		var creditCard = new BrandDetection();
 		return creditCard.detect(creditcardNumber)

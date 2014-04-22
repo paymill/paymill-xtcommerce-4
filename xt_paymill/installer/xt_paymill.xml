@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xtcommerceplugin>
     <title>PAYMILL</title>
-    <version>2.6.1</version>
+    <version>2.6.2</version>
     <code>xt_paymill</code>
     <url>http://www.paymill.de</url>
     <description>Paymill Payment Plugin</description>
@@ -297,6 +297,260 @@
                 <title>Mostrar formulário SEPA</title>
             </pt>
         </config>
+        
+        <config>
+            <key>LOGO_AMEX</key>
+            <type>status</type>
+            <de>
+                <title>American Express</title>
+            </de>
+            <en>
+                <title>American Express</title>
+            </en>
+            <es>
+                <title>American Express</title>
+            </es>
+            <fr>
+                <title>American Express</title>
+            </fr>
+            <it>
+                <title>American Express</title>
+            </it>
+            <pt>
+                <title>American Express</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_CARTASI</key>
+            <type>status</type>
+            <de>
+                <title>Carta Si</title>
+            </de>
+            <en>
+                <title>Carta Si</title>
+            </en>
+            <es>
+                <title>Carta Si</title>
+            </es>
+            <fr>
+                <title>Carta Si</title>
+            </fr>
+            <it>
+                <title>Carta Si</title>
+            </it>
+            <pt>
+                <title>Carta Si</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_CARTECLEUE</key>
+            <type>status</type>
+            <de>
+                <title>Carte Bleue</title>
+            </de>
+            <en>
+                <title>Carte Bleue</title>
+            </en>
+            <es>
+                <title>Carte Bleue</title>
+            </es>
+            <fr>
+                <title>Carte Bleue</title>
+            </fr>
+            <it>
+                <title>Carte Bleue</title>
+            </it>
+            <pt>
+                <title>Carte Bleue</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_DANKORT</key>
+            <type>status</type>
+            <de>
+                <title>Dankort</title>
+            </de>
+            <en>
+                <title>Dankort</title>
+            </en>
+            <es>
+                <title>Dankort</title>
+            </es>
+            <fr>
+                <title>Dankort</title>
+            </fr>
+            <it>
+                <title>Dankort</title>
+            </it>
+            <pt>
+                <title>Dankort</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_DINERSCLUB</key>
+            <type>status</type>
+            <de>
+                <title>Diners Club</title>
+            </de>
+            <en>
+                <title>Diners Club</title>
+            </en>
+            <es>
+                <title>Diners Club</title>
+            </es>
+            <fr>
+                <title>Diners Club</title>
+            </fr>
+            <it>
+                <title>Diners Club</title>
+            </it>
+            <pt>
+                <title>Diners Club</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_DISCOVER</key>
+            <type>status</type>
+            <de>
+                <title>Discover</title>
+            </de>
+            <en>
+                <title>Discover</title>
+            </en>
+            <es>
+                <title>Discover</title>
+            </es>
+            <fr>
+                <title>Discover</title>
+            </fr>
+            <it>
+                <title>Discover</title>
+            </it>
+            <pt>
+                <title>Discover</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_JCB</key>
+            <type>status</type>
+            <de>
+                <title>Jcb</title>
+            </de>
+            <en>
+                <title>Jcb</title>
+            </en>
+            <es>
+                <title>Jcb</title>
+            </es>
+            <fr>
+                <title>Jcb</title>
+            </fr>
+            <it>
+                <title>Jcb</title>
+            </it>
+            <pt>
+                <title>Jcb</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_MAESTRO</key>
+            <type>status</type>
+            <de>
+                <title>Maestro</title>
+            </de>
+            <en>
+                <title>Maestro</title>
+            </en>
+            <es>
+                <title>Maestro</title>
+            </es>
+            <fr>
+                <title>Maestro</title>
+            </fr>
+            <it>
+                <title>Maestro</title>
+            </it>
+            <pt>
+                <title>Maestro</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_MASTERCARD</key>
+            <type>status</type>
+            <de>
+                <title>Mastercard</title>
+            </de>
+            <en>
+                <title>Mastercard</title>
+            </en>
+            <es>
+                <title>Mastercard</title>
+            </es>
+            <fr>
+                <title>Mastercard</title>
+            </fr>
+            <it>
+                <title>Mastercard</title>
+            </it>
+            <pt>
+                <title>Mastercard</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_UNIONPAY</key>
+            <type>status</type>
+            <de>
+                <title>Unionpay</title>
+            </de>
+            <en>
+                <title>Unionpay</title>
+            </en>
+            <es>
+                <title>Unionpay</title>
+            </es>
+            <fr>
+                <title>Unionpay</title>
+            </fr>
+            <it>
+                <title>Unionpay</title>
+            </it>
+            <pt>
+                <title>Unionpay</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>LOGO_VISA</key>
+            <type>status</type>
+            <de>
+                <title>Visa</title>
+            </de>
+            <en>
+                <title>Visa</title>
+            </en>
+            <es>
+                <title>Visa</title>
+            </es>
+            <fr>
+                <title>Visa</title>
+            </fr>
+            <it>
+                <title>Visa</title>
+            </it>
+            <pt>
+                <title>Visa</title>
+            </pt>
+        </config>
+        
     </configuration_payment>
     <language_content>
         <phrase>

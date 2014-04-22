@@ -34,6 +34,20 @@
     lang['PAYMILL_field_invalid_bic'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BIC|stripslashes}';
     lang['PAYMILL_field_invalid_country'] = '{$smarty.const.PAYMILL_FIELD_INVALID_COUNTRY|stripslashes}';
     lang['PAYMILL_field_invalid_bank_data'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BANK_DATA|stripslashes}';
+    
+    var logos =  new Array();
+    logos['amex'] = {$smarty.const.XT_PAYMILL_LOGO_AMEX|string_format:"%d"};
+    logos['carta-si'] = {$smarty.const.XT_PAYMILL_LOGO_CARTASI|string_format:"%d"};
+    logos['dankort'] = {$smarty.const.XT_PAYMILL_LOGO_DANKORT|string_format:"%d"};
+    logos['carte-bleue'] = {$smarty.const.XT_PAYMILL_LOGO_CARTECLEUE|string_format:"%d"};
+    logos['discover'] = {$smarty.const.XT_PAYMILL_LOGO_DISCOVER|string_format:"%d"};
+    logos['diners-club'] = {$smarty.const.XT_PAYMILL_LOGO_DINERSCLUB|string_format:"%d"};
+    logos['unionpay'] = {$smarty.const.XT_PAYMILL_LOGO_UNIONPAY|string_format:"%d"};
+    logos['maestro'] = {$smarty.const.XT_PAYMILL_LOGO_MAESTRO|string_format:"%d"};
+    logos['jcb'] = {$smarty.const.XT_PAYMILL_LOGO_JCB|string_format:"%d"};
+    logos['mastercard'] = {$smarty.const.XT_PAYMILL_LOGO_MASTERCARD|string_format:"%d"};
+    logos['visa'] = {$smarty.const.XT_PAYMILL_LOGO_VISA|string_format:"%d"};
+    
 </script>
 <link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
