@@ -8,6 +8,7 @@ require_once(dirname(__FILE__) . '/lib/Services/Paymill/Clients.php');
 require_once(dirname(__FILE__) . '/lib/Services/Paymill/Payments.php');
 require_once(dirname(__FILE__) . '/lib/Services/Paymill/Transactions.php');
 require_once(dirname(__FILE__) . '/helpers/FastCheckout.php');
+require_once(dirname(__FILE__) . '/helpers/Util.php');
 
 class xt_paymill implements Services_Paymill_LoggingInterface
 {
@@ -58,11 +59,13 @@ class xt_paymill implements Services_Paymill_LoggingInterface
      * Api endpoint
      * @var string
      */
-    private $_apiUrl = 'https://api.paymill.com/v2/';
+    private $_apiUrl;
 
     public function __construct()
     {
         global $page;
+        
+        $this->_apiUrl = Util::$apiUrl;
 
         $this->_fastCheckout = new FastCheckout();
 
