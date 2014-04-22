@@ -1,4 +1,5 @@
 ## v2.6.2
+ * authenticate web hooks
  * add possibility so select which card logos will shown in the checkout
 
 ## v2.6.1
