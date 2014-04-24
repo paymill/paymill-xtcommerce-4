@@ -198,6 +198,7 @@ class xt_paymill implements Services_Paymill_LoggingInterface
     {
         global $xtLink;
         $code = 'xt_paymill_' . $_SESSION['selected_payment_sub'];
+        $_SESSION['paymill_sepa'] = $code;
         $token = $_POST['paymillToken'];
         if (!$this->_isTokenAvailable($token)) {
             $_SESSION[$code . '_error'] = TEXT_PAYMILL_ERR_TOKEN;

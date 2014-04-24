@@ -129,6 +129,23 @@
             <order>3</order>
             <active>1</active>
         </code>
+        <code>
+            <hook>class.orders.php:_sendOrderMail_bottom</hook>
+            <phpcode>
+                <![CDATA[
+                    if (isset($_SESSION['paymill_sepa']) && $_SESSION['paymill_sepa'] === 'xt_paymill_dd') {
+                        $dayCount = 7 * 24 * 60 * 60; 
+                        $date = time() + $dayCount;
+                        $paymillDescText = $db->Execute("SELECT `language_value` from " . TABLE_LANGUAGE_CONTENT . " WHERE `language_key` = 'TEXT_PAYMILL_SEPA_COLLECT_TEXT' AND `language_code` = '" . $this->order_data['language_code'] . "'");
+                        if ($paymillDescText->RecordCount() == 1) {
+                            $ordermail->_assign('payment_info_html', $paymillDescText->fields['language_value'] . date("d.m.y", $date));
+                        }
+                    }
+                ]]>
+            </phpcode>
+            <order>4</order>
+            <active>1</active>
+        </code>
     </plugin_code>
     <configuration_payment>
         <config>
@@ -2751,6 +2768,28 @@
             </it>
             <pt>
                 <value>Dezembro</value>
+            </pt>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_SEPA_COLLECT_TEXT</key>            
+            <class>store</class>
+            <en>
+                <value>The direct debit is drawn to the following date: </value>
+            </en>
+            <de>
+                <value>Die Lastschrift wird zu dem folgenden Termin eingezogen: </value>
+            </de>
+            <es>
+                <value>The direct debit is drawn to the following date: </value>
+            </es>
+            <fr>
+                <value>The direct debit is drawn to the following date: </value>
+            </fr>
+            <it>
+                <value>The direct debit is drawn to the following date: </value>
+            </it>
+            <pt>
+                <value>The direct debit is drawn to the following date: </value>
             </pt>
         </phrase>
     </language_content>
