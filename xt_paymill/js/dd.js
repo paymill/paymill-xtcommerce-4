@@ -1,3 +1,5 @@
+var sepaCallback;
+
 pmQuery(document).ready(function()
 {	
 	preventDefault = true;
@@ -87,14 +89,26 @@ pmQuery(document).ready(function()
 		if (!elvErrorFlag) {
 			return elvErrorFlag;
 		}
+		
+		var sepa = new Sepa('abc123');
+		sepa.popUp('sepaCallback')
 
-		paymill.createToken({
-			iban: pmQuery('#paymill-account-number').val(),
-			bic: pmQuery('#paymill-bank-code').val(),
-			accountholder: pmQuery('#paymill-bank-owner').val()
-		}, paymillElvResponseHandler);
 
 		return false;
+	}
+	
+	sepaCallback = function sepaCallback(success) 
+	{
+		if (success) {
+			paymill.createToken({
+				iban: pmQuery('#paymill-account-number').val(),
+				bic: pmQuery('#paymill-bank-code').val(),
+				accountholder: pmQuery('#paymill-bank-owner').val()
+			}, paymillElvResponseHandler);
+		} else {
+			pmQuery("#payment-errors-elv").text('mandate_reference_cancelled');
+			pmQuery("#payment-errors-elv").css('display', 'block');
+		}
 	}
 	
 	function isSepa() 
