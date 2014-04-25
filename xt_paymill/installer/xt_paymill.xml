@@ -291,31 +291,6 @@
             </pt>
         </config>
         <config>
-            <key>SEPA</key>
-            <type>dropdown</type>
-            <value>true</value>
-            <url>conf_truefalse</url>
-            <de>
-                <title>SEPA Formular anzeigen</title>
-            </de>
-            <en>
-                <title>Show SEPA form</title>
-            </en>
-            <es>
-                <title>Mostrar solicitud SEPA</title>
-            </es>
-            <fr>
-                <title>Montrer le formulaire SEPA</title>
-            </fr>
-            <it>
-                <title>Mostra SEPA da</title>
-            </it>
-            <pt>
-                <title>Mostrar formulário SEPA</title>
-            </pt>
-        </config>
-        
-        <config>
             <key>LOGO_AMEX</key>
             <type>status</type>
             <de>

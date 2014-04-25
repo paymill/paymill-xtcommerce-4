@@ -1,6 +1,5 @@
 <script type="text/javascript">
     var preventDefault = true;
-    var sepa = "{$smarty.const.XT_PAYMILL_SEPA}";
     var fastCheckoutCc = '{$xt_paymill.fast_checkout_cc}';
     var fastCheckoutElv = '{$xt_paymill.fast_checkout_elv}';
     var PAYMILL_PUBLIC_KEY = '{$smarty.const.XT_PAYMILL_PUBLIC_API_KEY|trim}';
@@ -48,29 +47,16 @@
 <script type="text/javascript" src="plugins/xt_paymill/js/dd.js"></script>
 <div style="position: relative; left: 55%;">
     <div id="payment-errors-elv" class="payment-error"></div>
-    {if $smarty.const.XT_PAYMILL_SEPA eq 'false'}
     <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER|stripslashes}</label>
+        <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER|stripslashes} / {$smarty.const.TEXT_PAYMILL_ELV_IBAN|stripslashes}</label>
     </div>
     <input id="paymill-account-number" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_number}"/>
     <div id="payment-error-elv-1" class="payment-error"></div>
     <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE|stripslashes}</label>
+        <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE|stripslashes} / {$smarty.const.TEXT_PAYMILL_ELV_BIC|stripslashes}</label>
     </div>
     <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value="{$xt_paymill.bank_code}"/>
     <div id="payment-error-elv-2" class="payment-error"></div>
-    {else}
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_ELV_IBAN|stripslashes}</label>
-    </div>
-    <input id="paymill-iban" class="paymill-input" type="text" size="20" value="{$xt_paymill.iban}"/>
-    <div id="payment-error-elv-1" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_ELV_BIC|stripslashes}</label>
-    </div>
-    <input id="paymill-bic" class="paymill-input" type="text" size="20" value="{$xt_paymill.bic}"/>
-    <div id="payment-error-elv-2" class="payment-error"></div>
-    {/if}
     <div class="paymill-input-label">
         <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER|stripslashes}</label>
     </div>

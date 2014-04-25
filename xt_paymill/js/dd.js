@@ -66,13 +66,13 @@ pmQuery(document).ready(function()
 
 		var elvErrorFlag = true;
 		iban = new Iban();
-		if (!iban.validate(pmQuery('#paymill-iban').val())) {
+		if (!iban.validate(pmQuery('#paymill-account-number').val())) {
 			pmQuery("#payment-error-elv-1").text(pmQuery('<div/>').html(lang['iban_invalid']).text());
 			pmQuery("#payment-error-elv-1").css('display', 'block');
 			elvErrorFlag = false;
 		}
 
-		if (pmQuery('#paymill-bic').val() === "") {
+		if (pmQuery('#paymill-bank-code').val() === "") {
 			pmQuery("#payment-error-elv-2").text(pmQuery('<div/>').html(lang['bic_invalid']).text());
 			pmQuery("#payment-error-elv-2").css('display', 'block');
 			elvErrorFlag = false;
@@ -89,16 +89,22 @@ pmQuery(document).ready(function()
 		}
 
 		paymill.createToken({
-			iban: pmQuery('#paymill-iban').val(),
-			bic: pmQuery('#paymill-bic').val(),
+			iban: pmQuery('#paymill-account-number').val(),
+			bic: pmQuery('#paymill-bank-code').val(),
 			accountholder: pmQuery('#paymill-bank-owner').val()
 		}, paymillElvResponseHandler);
 
 		return false;
 	}
+	
+	function isSepa() 
+	{
+		var reg = new RegExp(/^\D{2}/);
+		return reg.test($('#paymill-account-number').val());
+	}
 
 	pmQuery('#paymill-account-number').focus(function() {
-		fastCheckoutElv = 'false';
+		fastCheckoutElv = 'false';                                    
 	});
 
 	pmQuery('#paymill-bank-code').focus(function() {
@@ -122,9 +128,9 @@ pmQuery(document).ready(function()
 			event.preventDefault();
 			if (fastCheckoutElv === 'false') {
 				paymillDebug('Paymill ELV: Payment method triggered');
-				if (sepa === 'false') {
+				if (!isSepa()) {
 					return paymillElv();
-				} else if(sepa === "true") {
+				} else {
 					return paymillSepa();
 				}
 				
