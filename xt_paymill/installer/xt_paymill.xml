@@ -337,7 +337,7 @@
         </config>
         
         <config>
-            <key>LOGO_CARTECLEUE</key>
+            <key>LOGO_CARTEBLEUE</key>
             <type>status</type>
             <de>
                 <title>Carte Bleue</title>
