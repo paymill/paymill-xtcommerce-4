@@ -21,18 +21,19 @@ pmQuery(document).ready(function()
 				brand = 'amex';
 			}
 			
-			if (logos[brand]) {
+			if (logos[brand] || allBrandsDisabled) {
 				pmQuery('#paymill-card-number').addClass("paymill-card-number-" + brand);
 				pmQuery('#paymill-card-number').addClass("greyscale");
 			}
 		}
 		
-		if (logos[brand]) {
+		if (logos[brand] || allBrandsDisabled) {
 			if (creditCard.validate(pmQuery('#paymill-card-number').val())) {
 				pmQuery('#paymill-card-number').removeClass('greyscale');
 			}
 		}
 	}
+	
 	function detectCreditcardBranding(creditcardNumber)
 	{
 		var creditCard = new BrandDetection();
