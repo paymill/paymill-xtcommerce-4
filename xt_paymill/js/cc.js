@@ -2,6 +2,8 @@ pmQuery(document).ready(function()
 {
 	preventDefault = true;
 
+	var oldFieldData = getFormData(true);
+
 	pmQuery('#paymill-card-number').keyup(function()
 	{
 		paymillShowCardIcon();
@@ -111,37 +113,35 @@ pmQuery(document).ready(function()
 
 		return false;
 	}
+	
+	function getFormData(ignoreEmptyValues) 
+	{
+		var array = new Array();
+		pmQuery('#paymill-cc-inputs :input').not('[type=hidden]').each(function() 
+		{
+			
+			if ($(this).val() === "" && ignoreEmptyValues) {
+				return;
+			}
+			
+			array.push($(this).val());
+		});
+		
+		return array;
+	}
 
-	pmQuery('#paymill-card-number').focus(function() {
-		fastCheckoutCc = 'false';
-	});
-
-	pmQuery('#Paymill_Month').focus(function() {
-		fastCheckoutCc = 'false';
-	});
-
-	pmQuery('#Paymill_Year').focus(function() {
-		fastCheckoutCc = 'false';
-	});
-
-	pmQuery('#paymill-card-cvc').focus(function() {
-		fastCheckoutCc = 'false';
-	});
-
-	pmQuery('#paymill-card-holdername').focus(function() {
-		fastCheckoutCc = 'false';
-	});
-
-	pmQuery('form[name^="process"]').submit(function(event) {
+	pmQuery('form[name^="process"]').submit(function(event) 
+	{
 		if (preventDefault) {
 			event.preventDefault();
-			if (fastCheckoutCc === 'false') {
-				paymillDebug('Paymill Creditcard: Payment method triggered');
-				return paymillCc();
-			} else {
+			var newFieldData = getFormData();
+			if (oldFieldData.toString() === newFieldData.toString()) {
 				preventDefault = false;
 				pmQuery('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
 				pmQuery('form[name^="process"]').submit();
+			} else {
+				paymillDebug('Paymill Creditcard: Payment method triggered');
+				return paymillCc();
 			}
 		}
 	});
