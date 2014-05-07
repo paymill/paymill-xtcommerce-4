@@ -1,8 +1,8 @@
-var sepaCallback;
-
 pmQuery(document).ready(function()
 {	
 	preventDefault = true;
+	
+	var oldFieldData = getFormData(true);
 	
 	function paymillElvResponseHandler(error, result)
 	{
@@ -90,25 +90,30 @@ pmQuery(document).ready(function()
 			return elvErrorFlag;
 		}
 		
-		var sepa = new Sepa('abc123');
-		sepa.popUp('sepaCallback')
+		paymill.createToken({
+			iban: pmQuery('#paymill-account-number').val(),
+			bic: pmQuery('#paymill-bank-code').val(),
+			accountholder: pmQuery('#paymill-bank-owner').val()
+		}, paymillElvResponseHandler);
 
 
 		return false;
 	}
 	
-	sepaCallback = function sepaCallback(success) 
+	function getFormData(ignoreEmptyValues) 
 	{
-		if (success) {
-			paymill.createToken({
-				iban: pmQuery('#paymill-account-number').val(),
-				bic: pmQuery('#paymill-bank-code').val(),
-				accountholder: pmQuery('#paymill-bank-owner').val()
-			}, paymillElvResponseHandler);
-		} else {
-			pmQuery("#payment-errors-elv").text('mandate_reference_cancelled');
-			pmQuery("#payment-errors-elv").css('display', 'block');
-		}
+		var array = new Array();
+		pmQuery('#paymill-cc-inputs :input').not('[type=hidden]').each(function() 
+		{
+			
+			if ($(this).val() === "" && ignoreEmptyValues) {
+				return;
+			}
+			
+			array.push($(this).val());
+		});
+		
+		return array;
 	}
 	
 	function isSepa() 
@@ -117,41 +122,22 @@ pmQuery(document).ready(function()
 		return reg.test($('#paymill-account-number').val());
 	}
 
-	pmQuery('#paymill-account-number').focus(function() {
-		fastCheckoutElv = 'false';                                    
-	});
-
-	pmQuery('#paymill-bank-code').focus(function() {
-		fastCheckoutElv = 'false';
-	});
-
-	pmQuery('#paymill-bank-owner').focus(function() {
-		fastCheckoutElv = 'false';
-	});
-	
-	pmQuery('#paymill-iban').focus(function() {
-		fastCheckoutElv = 'false';
-	});
-	
-	pmQuery('#paymill-bic').focus(function() {
-		fastCheckoutElv = 'false';
-	});
-	
 	pmQuery('form[name^="process"]').submit(function(event) {
 		if (preventDefault) {
 			event.preventDefault();
-			if (fastCheckoutElv === 'false') {
+			var newFieldData = getFormData();
+			if (oldFieldData.toString() === newFieldData.toString()) {
+				preventDefault = false;
+				pmQuery('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
+				pmQuery('form[name^="process"]').submit();
+			} else {
 				paymillDebug('Paymill ELV: Payment method triggered');
 				if (!isSepa()) {
 					return paymillElv();
 				} else {
 					return paymillSepa();
 				}
-				
-			} else {
-				preventDefault = false;
-				pmQuery('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
-				pmQuery('form[name^="process"]').submit();
+
 			}
 		}
 	});
