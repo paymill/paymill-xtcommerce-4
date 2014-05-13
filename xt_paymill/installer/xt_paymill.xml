@@ -129,6 +129,23 @@
             <order>3</order>
             <active>1</active>
         </code>
+        <code>
+            <hook>class.orders.php:_sendOrderMail_bottom</hook>
+            <phpcode>
+                <![CDATA[
+                    if (isset($_SESSION['paymill_sepa']) && $_SESSION['paymill_sepa'] === 'xt_paymill_dd') {
+                        $days = 7;
+                        if (is_numeric(XT_PAYMILL_PRENOTIFICATION_DAYS)) {
+                            $days = XT_PAYMILL_PRENOTIFICATION_DAYS;
+                        }
+                        $purchaseDay = $db->Execute("SELECT `date_purchased` FROM " . TABLE_ORDERS . " WHERE `orders_id` = '" . $this->oID . "'");
+                        $ordermail->_assign('payment_info_html', TEXT_PAYMILL_SEPA_COLLECT_TEXT . date('Y-m-d', strtotime($purchaseDay->fields['date_purchased']) . "+$days day"));
+                    }
+                ]]>
+            </phpcode>
+            <order>4</order>
+            <active>1</active>
+        </code>
     </plugin_code>
     <configuration_payment>
         <config>
@@ -223,6 +240,28 @@
             </it>
             <pt>
                 <title>Chave pública</title>
+            </pt>
+        </config>
+        <config>
+            <key>PRENOTIFICATION_DAYS</key>
+            <type>textfield</type>
+            <de>
+                <title>Tage bis zum Einzug</title>
+            </de>
+            <en>
+                <title>Days until the debit</title>
+            </en>
+            <es>
+                <title>Days until the debit</title>
+            </es>
+            <fr>
+                <title>Days until the debit</title>
+            </fr>
+            <it>
+                <title>Days until the debit</title>
+            </it>
+            <pt>
+                <title>Days until the debit</title>
             </pt>
         </config>
         <config>
