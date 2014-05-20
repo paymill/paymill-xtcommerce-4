@@ -1,3 +1,8 @@
+## v2.7.0
+* add payment logos
+* merge elv / sepa form
+* add pre notification to email and invoice
+
 ## v2.6.2
  * authenticate web hooks
  * add possibility so select which card logos will shown in the checkout
