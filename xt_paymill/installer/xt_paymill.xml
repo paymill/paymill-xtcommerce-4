@@ -57,7 +57,14 @@
                 $paymillRefundedId = $db->Insert_ID(TABLE_SYSTEM_STATUS, 'status_id');
                 $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS_DESCRIPTION." (`status_id`, `language_code`, `status_name`) VALUES ($paymillRefundedId, 'en', 'Refund / Chargeback (PAYMILL)');");
                 $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS_DESCRIPTION." (`status_id`, `language_code`, `status_name`) VALUES ($paymillRefundedId, 'de', 'Retoure / Chargeback (PAYMILL)');");
-            }
+            }            
+            
+            $db->Execute("CREATE TABLE IF NOT EXISTS `pi_paymill_transaction` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `order_id` text NOT NULL,
+                `transaction_id` text NOT NULL,
+                PRIMARY KEY (`id`)
+            ) AUTO_INCREMENT=1;");
             
             $db->Execute("CREATE TABLE IF NOT EXISTS `pi_paymill_hooks` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -91,6 +98,32 @@
         ]]>
     </db_uninstall>
     <plugin_code>
+        <code>
+            <hook>class.order.php:_updateOrderStatus_top</hook>
+            <phpcode>
+                <![CDATA[
+                    $order = new order($_POST['edit_id'], -1);
+                    if ($order->order_data['payment_code’] === 'xt_paymill' && $order->order_data['subpayment_code’]  === 'cc') {
+                        global $db;
+                        $paymillRefunded = $db->GetOne("SELECT status_id FROM " . TABLE_SYSTEM_STATUS_DESCRIPTION . " WHERE status_name = 'Refund / Chargeback (PAYMILL)'");
+                        if ($_POST['edit_id'] == $paymillRefunded) {
+                            require _SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/classes/Services/Paymill/Refunds.php';
+                            $refunds = new Services_Paymill_Refunds();
+                            try {
+                                $refund = $refunds->create(array(
+                                    'transactionId' => $transaction->paymill_transaction__transaction_id->rawValue,
+                                    'params' => array('amount' => (int) ($this->_getRefundAmount() * 100))
+                                ));
+                            } catch (Exception $ex) {
+
+                            }
+                        }
+                    }
+                ]]>
+            </phpcode>
+            <order>1</order>
+            <active>1</active>
+        </code>
         <code>
             <hook>module_checkout.php:checkout_process_data</hook>
             <phpcode>
