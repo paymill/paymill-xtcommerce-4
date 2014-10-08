@@ -168,7 +168,8 @@ class xt_paymill implements Services_Paymill_LoggingInterface
         if ($this->data['xt_paymill']['fast_checkout_cc'] === 'true') {
             $payment = $this->_payments->getOne($data->paymentID_CC);
             $this->data['xt_paymill']['cc_number'] = '************' . $payment['last4'];
-            $this->data['xt_paymill']['expire_date'] = $payment['expire_year'] . '-' . $payment['expire_month'] . '-01';
+            $this->data['xt_paymill']['expire_year'] = $payment['expire_year'];
+            $this->data['xt_paymill']['expire_month'] = $payment['expire_month'];
             $this->data['xt_paymill']['cvc'] = '***';
             $this->data['xt_paymill']['card_holder'] = $payment['card_holder'];
             $this->data['xt_paymill']['card_brand'] = $payment['card_type'];

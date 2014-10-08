@@ -2,6 +2,14 @@ $(document).ready(function()
 {
 	preventDefault = true;
 
+	if (expYear != '') {
+		$("#Paymill_Year").val(expYear);
+	}
+
+	if (expMonth != '') {
+		$("#Paymill_Month").val('0' + expMonth);
+	}
+
 	var oldFieldData = getFormData(true);
 
 	$('#paymill-card-number').keyup(paymillShowCardIcon);

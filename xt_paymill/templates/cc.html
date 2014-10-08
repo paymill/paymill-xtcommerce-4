@@ -7,6 +7,8 @@
     var paymentCode = '{$payment_code}';
     var amount = "{$xt_paymill.amount}";
     var currency = "{$xt_paymill.currency}";
+    var expYear = '{$xt_paymill.expire_year}';
+    var expMonth = '{$xt_paymill.expire_month}';
     var lang = new Array();
     // Paymill cc js lang
     lang['card_number_invalid'] = '{$smarty.const.TEXT_PAYMILL_CC_ERR_NUMBER|stripslashes}';
@@ -134,6 +136,7 @@
     <div class="paymill-input-label">
         <label>{$smarty.const.TEXT_PAYMILL_CC_DATE|stripslashes}</label>
     </div>
+
     <select id="Paymill_Month">
         <option label="{$smarty.const.TEXT_PAYMILL_CC_JANUARY|stripslashes}" value="01">{$smarty.const.TEXT_PAYMILL_CC_JANUARY}</option>
         <option label="{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY|stripslashes}" value="02">{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}</option>
