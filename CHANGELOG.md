@@ -1,3 +1,8 @@
+## v2.8.0
+* add refund per status change
+* add preauth/capture capture order during status change
+* remove external jQuery import
+
 ## v2.7.0
 * add payment logos
 * merge elv / sepa form
