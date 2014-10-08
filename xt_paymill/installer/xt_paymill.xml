@@ -171,11 +171,10 @@
                                 if (!$result) {
                                     die(json_encode(array('success' => false)));
                                 }
+                                
+                                $transactionId = $paymentProcessor->getTransactionId();
 
-                                $sql = 'UPDATE `pi_paymill_transaction` WHERE '
-                                        . '`order_id` =  ' . (int) $_POST['edit_id'] . ' '
-                                        . 'SET '
-                                        . '`transaction_id` = "' . $paymentProcessor->getTransactionId() . '"';
+                                $sql = "UPDATE pi_paymill_transaction SET transaction_id = '$transactionId' WHERE order_id = " . (int) $_POST['edit_id'];
 
                                 $db->Execute($sql);
                             } else {
