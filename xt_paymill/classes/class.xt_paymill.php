@@ -219,7 +219,13 @@ class xt_paymill implements Services_Paymill_LoggingInterface
             $this->_paymentProcessor->setToken($token);
             unset($_SESSION['token']);
             
-            $result = $this->_paymentProcessor->processPayment();
+            if ($this->_getPaymentConfig('ACTIVATE_CC_PREAUTH') === 'true' && $code !== 'xt_paymill_dd') {
+                $preauth = true;
+                $result = $this->_paymentProcessor->processPayment(false);
+            } else {
+                $preauth = false;
+                $result = $this->_paymentProcessor->processPayment();
+            }
             
             if (!$result) {
                 $_SESSION[$code . '_error'] = $this->_getErrorMessage($this->_paymentProcessor->getErrorCode());
@@ -230,7 +236,11 @@ class xt_paymill implements Services_Paymill_LoggingInterface
                 $this->_savePayment($code);
             }
 
-            $_SESSION['paymillTransactionId'] = $this->_paymentProcessor->getTransactionId();
+            if ($preauth) {
+                $_SESSION['paymillPreauthId'] = $this->_paymentProcessor->getPreauthId();
+            } else {
+                $_SESSION['paymillTransactionId'] = $this->_paymentProcessor->getTransactionId();
+            }
         }
     }
 
@@ -333,13 +343,37 @@ class xt_paymill implements Services_Paymill_LoggingInterface
 
     private function _success()
     {
-        $this->_transactions->update(
-            array(
-                'id' => $_SESSION['paymillTransactionId'],
-                'description' => ' OrderID: ' . $_SESSION['success_order_id'] . ' ' . _STORE_NAME
-            )
-        );
+        global $db;
+        $preauthId = null;
+        $transactionId = null;
+        
+        if (array_key_exists('paymillTransactionId', $_SESSION)) {
+            $transactionId = $_SESSION['paymillTransactionId'];
+            unset($_SESSION['paymillTransactionId']);
+        } elseif (array_key_exists('paymillPreauthId', $_SESSION)) {
+            $preauthId = $_SESSION['paymillPreauthId'];
+            unset($_SESSION['paymillPreauthId']);
+        }
+        
+        if (!is_null($transactionId)) {
+            $this->_transactions->update(
+                array(
+                    'id' => $_SESSION['paymillTransactionId'],
+                    'description' => ' OrderID: ' . $_SESSION['success_order_id'] . ' ' . _STORE_NAME
+                )
+            );
+        }
+        
+        if (!is_null($transactionId) || !is_null($preauthId)) {
 
-        unset($_SESSION['paymillTransactionId']);
+            $db->Execute('INSERT INTO `pi_paymill_transaction` '
+                    . '(`order_id`, `transaction_id`, `preauth_id`) '
+                    . 'VALUES('
+                        . '"' . $_SESSION['success_order_id'] . '", '
+                        . '"' . $transactionId . '", '
+                        . '"' . $preauthId . '"'
+                    . ')'
+            );
+        }
     }
 }

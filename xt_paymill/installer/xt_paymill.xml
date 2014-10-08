@@ -59,10 +59,20 @@
                 $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS_DESCRIPTION." (`status_id`, `language_code`, `status_name`) VALUES ($paymillRefundedId, 'de', 'Retoure / Chargeback (PAYMILL)');");
             }            
             
+            
+            $paymillCapture = $db->GetOne("SELECT status_id FROM " . TABLE_SYSTEM_STATUS_DESCRIPTION . " WHERE status_name = 'Capture (PAYMILL)'");
+            if (!$paymillCapture) {
+                $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS." (`status_class`, `status_values`) VALUES ('order_status', '".'a:1:{s:4:"data";a:5:{s:15:"enable_download";i:0;s:7:"visible";s:1:"1";s:13:"visible_admin";i:1;s:19:"calculate_statistic";i:0;s:12:"reduce_stock";i:1;}}'."');");
+                $paymillCaptureId = $db->Insert_ID(TABLE_SYSTEM_STATUS, 'status_id');
+                $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS_DESCRIPTION." (`status_id`, `language_code`, `status_name`) VALUES ($paymillCaptureId, 'en', 'Capture (PAYMILL)');");
+                $db->Execute("INSERT INTO ".TABLE_SYSTEM_STATUS_DESCRIPTION." (`status_id`, `language_code`, `status_name`) VALUES ($paymillCaptureId, 'de', 'Capture (PAYMILL)');");
+            }            
+            
             $db->Execute("CREATE TABLE IF NOT EXISTS `pi_paymill_transaction` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `order_id` text NOT NULL,
                 `transaction_id` text NOT NULL,
+                `preauth_id` text NOT NULL,
                 PRIMARY KEY (`id`)
             ) AUTO_INCREMENT=1;");
             
@@ -103,19 +113,73 @@
             <phpcode>
                 <![CDATA[
                     $order = new order($_POST['edit_id'], -1);
-                    if ($order->order_data['payment_code’] === 'xt_paymill' && $order->order_data['subpayment_code’]  === 'cc') {
+                    if ($order->order_data['payment_code'] === 'xt_paymill') {
                         global $db;
-                        $paymillRefunded = $db->GetOne("SELECT status_id FROM " . TABLE_SYSTEM_STATUS_DESCRIPTION . " WHERE status_name = 'Refund / Chargeback (PAYMILL)'");
-                        if ($_POST['edit_id'] == $paymillRefunded) {
-                            require _SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/classes/Services/Paymill/Refunds.php';
-                            $refunds = new Services_Paymill_Refunds();
+                        
+                        require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/classes/helpers/Util.php');
+                        
+                        $transactionData = $db->Execute("SELECT * FROM `pi_paymill_transaction` WHERE `order_id` = '" . $_POST['edit_id'] . "'")->FetchObj();
+                        
+                        $paymillRefund = $db->GetOne("SELECT status_id FROM " . TABLE_SYSTEM_STATUS_DESCRIPTION . " WHERE status_name = 'Refund / Chargeback (PAYMILL)'");
+                        if ($_POST['order_status'] == $paymillRefund) {
+                            require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/classes/lib/Services/Paymill/Refunds.php');
+                            $refunds = new Services_Paymill_Refunds(
+                                XT_PAYMILL_PRIVATE_API_KEY,
+                                Util::$apiUrl
+                            );
+                            
                             try {
                                 $refund = $refunds->create(array(
-                                    'transactionId' => $transaction->paymill_transaction__transaction_id->rawValue,
-                                    'params' => array('amount' => (int) ($this->_getRefundAmount() * 100))
+                                    'transactionId' => $transactionData->transaction_id,
+                                    'params' => array('amount' => (int) ($order->order_total['total']['plain'] * 100))
                                 ));
                             } catch (Exception $ex) {
+                                die(json_encode(array('success' => false)));
+                            }
+                            
+                            if (isset($refund['data']['response_code']) && $refund['data']['response_code'] !== 20000) {
+                                die(json_encode(array('success' => false)));
+                            }
+                            
+                        }
+                        
+                        $paymillCapture = $db->GetOne("SELECT status_id FROM " . TABLE_SYSTEM_STATUS_DESCRIPTION . " WHERE status_name = 'Capture (PAYMILL)'");
+                        if ($_POST['order_status'] == $paymillCapture) {
+                            if (!is_null($transactionData->preauth_id)) {
+                                require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/classes/lib/Services/Paymill/PaymentProcessor.php');
+                                require_once(_SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/classes/class.xt_paymill.php');
+                                $params = array();
+                                $params['amount'] = (int) ($order->order_total['total']['plain'] * 100);
+                                $params['currency'] = $order->order_data['currency_code'];
 
+                                $paymentProcessor = new Services_Paymill_PaymentProcessor(
+                                    XT_PAYMILL_PRIVATE_API_KEY,
+                                    Util::$apiUrl,
+                                    null, 
+                                    $params, 
+                                    new xt_paymill()
+                                );
+
+                                $paymentProcessor->setPreauthId($transactionData->preauth_id);
+
+                                try {
+                                    $result = $paymentProcessor->capture();
+                                } catch (Exception $ex) {
+                                    die(json_encode(array('success' => false)));
+                                }
+
+                                if (!$result) {
+                                    die(json_encode(array('success' => false)));
+                                }
+
+                                $sql = 'UPDATE `pi_paymill_transaction` WHERE '
+                                        . '`order_id` =  ' . (int) $_POST['edit_id'] . ' '
+                                        . 'SET '
+                                        . '`transaction_id` = "' . $paymentProcessor->getTransactionId() . '"';
+
+                                $db->Execute($sql);
+                            } else {
+                                die(json_encode(array('success' => false)));
                             }
                         }
                     }
@@ -186,7 +250,7 @@
             <type>dropdown</type>
             <value>true</value>
             <url>conf_truefalse</url>
-            <sort_order>5</sort_order>
+            <sort_order>1</sort_order>
             <de>
                 <title>Kreditkartenzahlung aktivieren</title>
             </de>
@@ -206,12 +270,13 @@
                 <title>Activar cartão de crédito</title>
             </pt>
         </config>
+        
         <config>
             <key>ACTIVATE_PAYMILLELV</key>
             <type>dropdown</type>
             <value>true</value>
             <url>conf_truefalse</url>
-            <sort_order>5</sort_order>
+            <sort_order>2</sort_order>
             <de>
                 <title>ELV aktivieren</title>
             </de>
@@ -232,8 +297,35 @@
             </pt>
         </config>
         <config>
+            <key>ACTIVATE_CC_PREAUTH</key>
+            <type>dropdown</type>
+            <value>true</value>
+            <url>conf_truefalse</url>
+            <sort_order>3</sort_order>
+            <de>
+                <title>Kreditkarte Preauth/Capture</title>
+            </de>
+            <en>
+                <title>Creditcard preauth/capture</title>
+            </en>
+            <es>
+                <title>Creditcard preauth/capture</title>
+            </es>
+            <fr>
+                <title>Creditcard preauth/capture</title>
+            </fr>
+            <it>
+                <title>Creditcard preauth/capture</title>
+            </it>
+            <pt>
+                <title>Creditcard preauth/capture</title>
+            </pt>
+        </config>
+        
+        <config>
             <key>PRIVATE_API_KEY</key>
             <type>textfield</type>
+            <sort_order>3</sort_order>
             <de>
                 <title>Private Key</title>
             </de>
@@ -253,9 +345,11 @@
                 <title>Chave privada</title>
             </pt>
         </config>
+        
         <config>
             <key>PUBLIC_API_KEY</key>
             <type>textfield</type>
+            <sort_order>4</sort_order>
             <de>
                 <title>Public Key</title>
             </de>
@@ -275,9 +369,11 @@
                 <title>Chave pública</title>
             </pt>
         </config>
+        
         <config>
             <key>PRENOTIFICATION_DAYS</key>
             <type>textfield</type>
+            <sort_order>5</sort_order>
             <de>
                 <title>Tage bis zum Einzug</title>
             </de>
@@ -297,11 +393,13 @@
                 <title>Days until the debit</title>
             </pt>
         </config>
+        
         <config>
             <key>DEBUG_MODE</key>
             <type>dropdown</type>
             <value>false</value>
             <url>conf_truefalse</url>
+            <sort_order>6</sort_order>
             <de>
                 <title>Debugging aktivieren</title>
             </de>
@@ -321,11 +419,13 @@
                 <title>Ativar a depuração</title>
             </pt>
         </config>
+        
         <config>
             <key>FAST_CHECKOUT</key>
             <type>dropdown</type>
             <value>true</value>
             <url>conf_truefalse</url>
+            <sort_order>7</sort_order>
             <de>
                 <title>Fast Checkout erlauben</title>
             </de>
@@ -345,9 +445,11 @@
                 <title>Ativar o checkout rápido</title>
             </pt>
         </config>
+        
         <config>
             <key>LOGO_AMEX</key>
             <type>status</type>
+            <sort_order>8</sort_order>
             <de>
                 <title>American Express</title>
             </de>
@@ -371,6 +473,7 @@
         <config>
             <key>LOGO_CARTASI</key>
             <type>status</type>
+            <sort_order>9</sort_order>
             <de>
                 <title>Carta Si</title>
             </de>
@@ -394,6 +497,7 @@
         <config>
             <key>LOGO_CARTEBLEUE</key>
             <type>status</type>
+            <sort_order>10</sort_order>
             <de>
                 <title>Carte Bleue</title>
             </de>
@@ -417,6 +521,7 @@
         <config>
             <key>LOGO_DANKORT</key>
             <type>status</type>
+            <sort_order>11</sort_order>
             <de>
                 <title>Dankort</title>
             </de>
@@ -440,6 +545,7 @@
         <config>
             <key>LOGO_DINERSCLUB</key>
             <type>status</type>
+            <sort_order>12</sort_order>
             <de>
                 <title>Diners Club</title>
             </de>
@@ -463,6 +569,7 @@
         <config>
             <key>LOGO_DISCOVER</key>
             <type>status</type>
+            <sort_order>13</sort_order>
             <de>
                 <title>Discover</title>
             </de>
@@ -486,6 +593,7 @@
         <config>
             <key>LOGO_JCB</key>
             <type>status</type>
+            <sort_order>14</sort_order>
             <de>
                 <title>Jcb</title>
             </de>
@@ -509,6 +617,7 @@
         <config>
             <key>LOGO_MAESTRO</key>
             <type>status</type>
+            <sort_order>15</sort_order>
             <de>
                 <title>Maestro</title>
             </de>
@@ -532,6 +641,7 @@
         <config>
             <key>LOGO_MASTERCARD</key>
             <type>status</type>
+            <sort_order>16</sort_order>
             <de>
                 <title>Mastercard</title>
             </de>
@@ -555,6 +665,7 @@
         <config>
             <key>LOGO_UNIONPAY</key>
             <type>status</type>
+            <sort_order>17</sort_order>
             <de>
                 <title>Unionpay</title>
             </de>
@@ -578,6 +689,7 @@
         <config>
             <key>LOGO_VISA</key>
             <type>status</type>
+            <sort_order>18</sort_order>
             <de>
                 <title>Visa</title>
             </de>
