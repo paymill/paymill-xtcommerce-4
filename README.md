@@ -24,6 +24,11 @@ Afterwards perform the following steps in your store backend:
 * Configure the PAYMILL payment method by inserting your public and private test or live keys
 * Activate the PAYMILL payment method
 
+# Refund
+To refund the order you simply have to change the order status to "Refund / Chargeback (PAYMILL)" and a online refund will be processed.
+
+# Preauth / Capture
+If you select the Preauth / Capture feature, you simply have to change the status to "Capture (PAYMILL)" and a online capture will be processed.
 
 # In case of errors
 
