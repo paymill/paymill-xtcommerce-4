@@ -200,6 +200,16 @@
             <active>1</active>
         </code>
         <code>
+            <hook>admin_dropdown.php:dropdown</hook>
+            <phpcode>
+                <![CDATA[
+                    include _SRV_WEBROOT . _SRV_WEB_PLUGINS . 'xt_paymill/hooks/dropdown.php';
+                ]]>
+            </phpcode>
+            <order>1</order>
+            <active>1</active>
+        </code>
+        <code>
             <hook>module_checkout.php:checkout_pre_data</hook>
             <phpcode>
                 <![CDATA[
@@ -390,6 +400,32 @@
             </it>
             <pt>
                 <title>Days until the debit</title>
+            </pt>
+        </config>
+        
+        <config>
+            <key>PCI_MODE</key>
+            <type>dropdown</type>
+            <value>-- Please Select --</value>
+            <url>plg_xt_paymill_pci</url>
+            <sort_order>5</sort_order>
+            <de>
+                <title>Zahlungsformular</title>
+            </de>
+            <en>
+                <title>Payment form</title>
+            </en>
+            <es>
+                <title>Payment form</title>
+            </es>
+            <fr>
+                <title>Formulaire de paiement</title>
+            </fr>
+            <it>
+                <title>Payment form</title>
+            </it>
+            <pt>
+                <title>Payment form</title>
             </pt>
         </config>
         
@@ -2931,6 +2967,50 @@
             </it>
             <pt>
                 <value>The direct debit is drawn to the following date: </value>
+            </pt>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_PCI_SAQ_A</key>            
+            <class>admin</class>
+            <en>
+                <value>embedded PayFrame (requires PCI SAQ A)</value>
+            </en>
+            <de>
+                <value>eingebettetes PayFrame (erfordert PCI SAQ A)</value>
+            </de>
+            <es>
+                <value>embedded PayFrame (requires PCI SAQ A)</value>
+            </es>
+            <fr>
+                <value>PayFrame intégré (nécessite PCI SAQ A)</value>
+            </fr>
+            <it>
+                <value>embedded PayFrame (requires PCI SAQ A)</value>
+            </it>
+            <pt>
+                <value>embedded PayFrame (requires PCI SAQ A)</value>
+            </pt>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_PCI_SAQ_A_EP</key>            
+            <class>admin</class>
+            <en>
+                <value>direct integration (requires PCI SAQ A-EP)</value>
+            </en>
+            <de>
+                <value>direkte Integration (erfordert PCI SAQ A-EP)</value>
+            </de>
+            <es>
+                <value>direct integration (requires PCI SAQ A-EP)</value>
+            </es>
+            <fr>
+                <value>integration direct (nécessite PCI SAQ A-EP)</value>
+            </fr>
+            <it>
+                <value>direct integration (requires PCI SAQ A-EP)</value>
+            </it>
+            <pt>
+                <value>direct integration (requires PCI SAQ A-EP)</value>
             </pt>
         </phrase>
     </language_content>
