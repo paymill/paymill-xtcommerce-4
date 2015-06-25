@@ -36,6 +36,7 @@
     lang['PAYMILL_field_invalid_bic'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BIC|stripslashes}';
     lang['PAYMILL_field_invalid_country'] = '{$smarty.const.PAYMILL_FIELD_INVALID_COUNTRY|stripslashes}';
     lang['PAYMILL_field_invalid_bank_data'] = '{$smarty.const.PAYMILL_FIELD_INVALID_BANK_DATA|stripslashes}';
+    lang['iframe_lang'] = '{$smarty.const.TEXT_PAYMILL_CC_IFRAME_LANG|stripslashes}';
     
     var logos =  new Array();
     logos['amex'] = {$smarty.const.XT_PAYMILL_LOGO_AMEX|string_format:"%d"};
@@ -61,13 +62,17 @@
                             !{$smarty.const.XT_PAYMILL_LOGO_JCB|string_format:"%d"} && 
                             !{$smarty.const.XT_PAYMILL_LOGO_MASTERCARD|string_format:"%d"} && 
                             !{$smarty.const.XT_PAYMILL_LOGO_VISA|string_format:"%d"};
-                            
+    var fastcheckoutChange = false;                        
 </script>
 <link rel="stylesheet" type="text/css" href="plugins/xt_paymill/css/paymill.css"/>
-<script type="text/javascript" src="https://bridge.paymill.com/"></script>
+<script type="text/javascript" src="https://bridge.paymill.com/dss3"></script>
 <script type="text/javascript" src="plugins/xt_paymill/js/BrandDetection.js"></script>
 <script type="text/javascript" src="plugins/xt_paymill/js/payment.js"></script>
-<script type="text/javascript" src="plugins/xt_paymill/js/cc.js"></script>
+{if $smarty.const.XT_PAYMILL_PCI_MODE|string_format:"%d" == '1'}
+    <script type="text/javascript" src="plugins/xt_paymill/js/cc_saq_a_ep.js"></script>
+{else}
+    <script type="text/javascript" src="plugins/xt_paymill/js/cc_saq_a.js"></script>
+{/if}
 <div class="paymill-form-container" id="paymill-cc-inputs">
     {if !$smarty.const.XT_PAYMILL_LOGO_AMEX|string_format:"%d" && 
         !$smarty.const.XT_PAYMILL_LOGO_CARTASI|string_format:"%d" &&
@@ -115,47 +120,79 @@
         <img src="plugins/xt_paymill/images/32x20_visa.png" alt="Visa"/>
         {/if}
     {/if}
-    <div id="payment-errors-cc" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
-    </div>
-    <span class="card-icon-parent">
-        <span><input id="paymill-card-number" class="paymill-input{if $xt_paymill.card_brand} paymill-card-number-{$xt_paymill.card_brand|lower}{/if}" type="text" size="20" value="{$xt_paymill.cc_number}"/></span>
-    </span>
-    <div id="payment-error-cc-1" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_CC_CVC|stripslashes}</label><span class="tooltip" title="{$smarty.const.TEXT_PAYMILL_CC_TOOLTIP|stripslashes}">?</span>
-    </div>
-    <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value="{$xt_paymill.cvc}"/>
-    <div id="payment-error-cc-2" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER|stripslashes}</label>
-    </div>
-    <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value="{$xt_paymill.card_holder}"/>
-    <div id="payment-error-cc-3" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_CC_DATE|stripslashes}</label>
-    </div>
+    {if $smarty.const.XT_PAYMILL_PCI_MODE|string_format:"%d" == '1'}
+        <div id="payment-errors-cc" class="payment-error"></div>
+        <div class="paymill-input-label">
+            <label>{$smarty.const.TEXT_PAYMILL_CC_CCNR}</label>
+        </div>
+        <span class="card-icon-parent">
+            <span><input id="paymill-card-number" class="paymill-input{if $xt_paymill.card_brand} paymill-card-number-{$xt_paymill.card_brand|lower}{/if}" type="text" size="20" value="{$xt_paymill.cc_number}"/></span>
+        </span>
+        <div id="payment-error-cc-1" class="payment-error"></div>
+        <div class="paymill-input-label">
+            <label>{$smarty.const.TEXT_PAYMILL_CC_CVC|stripslashes}</label><span class="tooltip" title="{$smarty.const.TEXT_PAYMILL_CC_TOOLTIP|stripslashes}">?</span>
+        </div>
+        <input id="paymill-card-cvc" class="paymill-input" type="text" size="20" value="{$xt_paymill.cvc}"/>
+        <div id="payment-error-cc-2" class="payment-error"></div>
+        <div class="paymill-input-label">
+            <label>{$smarty.const.TEXT_PAYMILL_CC_HOLDER|stripslashes}</label>
+        </div>
+        <input id="paymill-card-holdername" class="paymill-input" type="text" size="20" value="{$xt_paymill.card_holder}"/>
+        <div id="payment-error-cc-3" class="payment-error"></div>
+        <div class="paymill-input-label">
+            <label>{$smarty.const.TEXT_PAYMILL_CC_DATE|stripslashes}</label>
+        </div>
 
-    <select id="Paymill_Month">
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_JANUARY|stripslashes}" value="01">{$smarty.const.TEXT_PAYMILL_CC_JANUARY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY|stripslashes}" value="02">{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_MARCH|stripslashes}" value="03">{$smarty.const.TEXT_PAYMILL_CC_MARCH}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_APRIL|stripslashes}" value="04">{$smarty.const.TEXT_PAYMILL_CC_APRIL}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_MAY|stripslashes}" value="05">{$smarty.const.TEXT_PAYMILL_CC_MAY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_JUNE|stripslashes}" value="06">{$smarty.const.TEXT_PAYMILL_CC_JUNE}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_JULY|stripslashes}" value="07">{$smarty.const.TEXT_PAYMILL_CC_JULY}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_AUGUST|stripslashes}" value="08">{$smarty.const.TEXT_PAYMILL_CC_AUGUST}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER|stripslashes}" value="09">{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_OCTOBER|stripslashes}" value="10">{$smarty.const.TEXT_PAYMILL_CC_OCTOBER}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER|stripslashes}" value="11">{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER}</option>
-        <option label="{$smarty.const.TEXT_PAYMILL_CC_DECEMBER|stripslashes}" value="12">{$smarty.const.TEXT_PAYMILL_CC_DECEMBER}</option>
-    </select>
-    /
-    <select id="Paymill_Year">
-        {php} for($year=date("Y");$year<=date("Y")+15;$year++): {/php}
-        {php} echo '<option label="' . $year . '" value="' . $year . '">' . $year . '</option>'; {/php}
-        {php} endfor; {/php}
-    </select>
-    <div id="payment-error-cc-4" class="payment-error"></div>
+        <select id="Paymill_Month">
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_JANUARY|stripslashes}" value="01">{$smarty.const.TEXT_PAYMILL_CC_JANUARY}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY|stripslashes}" value="02">{$smarty.const.TEXT_PAYMILL_CC_FEBRUARY}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_MARCH|stripslashes}" value="03">{$smarty.const.TEXT_PAYMILL_CC_MARCH}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_APRIL|stripslashes}" value="04">{$smarty.const.TEXT_PAYMILL_CC_APRIL}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_MAY|stripslashes}" value="05">{$smarty.const.TEXT_PAYMILL_CC_MAY}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_JUNE|stripslashes}" value="06">{$smarty.const.TEXT_PAYMILL_CC_JUNE}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_JULY|stripslashes}" value="07">{$smarty.const.TEXT_PAYMILL_CC_JULY}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_AUGUST|stripslashes}" value="08">{$smarty.const.TEXT_PAYMILL_CC_AUGUST}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER|stripslashes}" value="09">{$smarty.const.TEXT_PAYMILL_CC_SEPTEMBER}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_OCTOBER|stripslashes}" value="10">{$smarty.const.TEXT_PAYMILL_CC_OCTOBER}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER|stripslashes}" value="11">{$smarty.const.TEXT_PAYMILL_CC_NOVEMBER}</option>
+            <option label="{$smarty.const.TEXT_PAYMILL_CC_DECEMBER|stripslashes}" value="12">{$smarty.const.TEXT_PAYMILL_CC_DECEMBER}</option>
+        </select>
+        /
+        <select id="Paymill_Year">
+            {php} for($year=date("Y");$year<=date("Y")+15;$year++): {/php}
+            {php} echo '<option label="' . $year . '" value="' . $year . '">' . $year . '</option>'; {/php}
+            {php} endfor; {/php}
+        </select>
+        <div id="payment-error-cc-4" class="payment-error"></div>
+    {else}
+        {if $xt_paymill.fast_checkout_cc === 'true'}
+            <table id="paymill_fast_checkout_table">
+                <tr>
+                    <td>{$smarty.const.TEXT_PAYMILL_CC_CCNR}: </td>
+                    <td>
+                        {$xt_paymill.cc_number}
+                        <img src="plugins/xt_paymill/images/32x20_{$xt_paymill.card_brand|lower}.png" alt="{$xt_paymill.card_brand|lower}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>{$smarty.const.TEXT_PAYMILL_CC_CVC|stripslashes}: </td>
+                    <td>{$xt_paymill.cvc}</td>
+                </tr>
+                <tr>
+                    <td>{$smarty.const.TEXT_PAYMILL_CC_HOLDER|stripslashes}: </td>
+                    <td>{$xt_paymill.card_holder}</td>
+                </tr>
+                <tr>
+                    <td>{$smarty.const.TEXT_PAYMILL_CC_DATE|stripslashes}: </td>
+                    <td>{$xt_paymill.expire_month}/{$xt_paymill.expire_year}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button id="paymill_fast_checkout_iframe_change" class="button" type="button">{$smarty.const.TEXT_PAYMILL_CC_CHANGE|stripslashes}</button>
+                    </td>
+                </tr>
+            </table>
+        {/if}
+    {/if}
 </div>

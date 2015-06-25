@@ -3013,5 +3013,49 @@
                 <value>direct integration (requires PCI SAQ A-EP)</value>
             </pt>
         </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_CHANGE</key>            
+            <class>store</class>
+            <en>
+                <value>change</value>
+            </en>
+            <de>
+                <value>ändern</value>
+            </de>
+            <es>
+                <value>change</value>
+            </es>
+            <fr>
+                <value>change</value>
+            </fr>
+            <it>
+                <value>change</value>
+            </it>
+            <pt>
+                <value>change</value>
+            </pt>
+        </phrase>
+        <phrase>
+            <key>TEXT_PAYMILL_CC_IFRAME_LANG</key>            
+            <class>store</class>
+            <en>
+                <value>en</value>
+            </en>
+            <de>
+                <value>de</value>
+            </de>
+            <es>
+                <value>es</value>
+            </es>
+            <fr>
+                <value>fr</value>
+            </fr>
+            <it>
+                <value>it</value>
+            </it>
+            <pt>
+                <value>pt</value>
+            </pt>
+        </phrase>
     </language_content>
 </xtcommerceplugin>
