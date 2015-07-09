@@ -1,34 +1,34 @@
-$(document).ready(function()
+$(document).ready(function ()
 {
-	preventDefault = true;
-        if(fastCheckoutCc === 'false'){
-            paymillEmbedFrame();
-        }
+    preventDefault = true;
+    if (fastCheckoutCc === 'false') {
+        paymillEmbedFrame();
+    }
 
-	$('form[name^="process"]').submit(function(event) 
-	{
-		if (preventDefault) {
-			event.preventDefault();
-                        console.log(fastcheckoutChange);
-                        if (!fastcheckoutChange) {
-				preventDefault = false;
-				$('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
-				$('form[name^="process"]').submit();
-			} else {
-				paymillDebug('Paymill Creditcard: Payment method triggered');
-				paymill.createTokenViaFrame({
-                                    amount_int: amount,
-                                    currency:   currency
-                                }, paymillCcResponseHandler);
-                                return false;
-			}
-		}
-	});
-        
-        $('#paymill_fast_checkout_iframe_change').click(function (event) {
-            $( "#paymill_fast_checkout_table" ).remove();
-            paymillEmbedFrame();
-        });
+    $('form[name^="process"]').submit(function (event)
+    {
+        if (preventDefault) {
+            event.preventDefault();
+            console.log(fastcheckoutChange);
+            if (!fastcheckoutChange) {
+                preventDefault = false;
+                $('form[name^="process"]').append("<input type='hidden' name='paymillToken' value='dummyToken'/>");
+                $('form[name^="process"]').submit();
+            } else {
+                paymillDebug('Paymill Creditcard: Payment method triggered');
+                paymill.createTokenViaFrame({
+                    amount_int: amount,
+                    currency: currency
+                }, paymillCcResponseHandler);
+                return false;
+            }
+        }
+    });
+
+    $('#paymill_fast_checkout_iframe_change').click(function (event) {
+        $("#paymill_fast_checkout_box").remove();
+        paymillEmbedFrame();
+    });
 });
 
 function PaymillFrameResponseHandler(error, result)
@@ -39,13 +39,13 @@ function PaymillFrameResponseHandler(error, result)
         paymillDebug("iFrame successfully loaded");
     }
 }
-        
+
 function paymillEmbedFrame()
 {
     fastcheckoutChange = true;
-    paymill.embedFrame('paymill-cc-inputs', lang['iframe_lang'],  PaymillFrameResponseHandler);
+    paymill.embedFrame('paymill-cc-inputs', {lang: lang['iframe_lang']}, PaymillFrameResponseHandler);
 }
-        
+
 function paymillCcResponseHandler(error, result)
 {
     paymillDebug('Paymill: Start response handler');

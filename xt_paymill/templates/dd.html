@@ -42,21 +42,23 @@
 <script type="text/javascript" src="plugins/xt_paymill/js/Sepa.js"></script>
 <script type="text/javascript" src="plugins/xt_paymill/js/payment.js"></script>
 <script type="text/javascript" src="plugins/xt_paymill/js/dd.js"></script>
-<div class="paymill-form-container" id="paymill-cc-inputs">
-    <div id="payment-errors-elv" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER|stripslashes} / {$smarty.const.TEXT_PAYMILL_ELV_IBAN|stripslashes}</label>
+<div class="box">
+    <div class="paymill-form-container" id="paymill-cc-inputs">
+        <div id="payment-errors-elv" class="payment-error"></div>
+        <div class="paymill-input-label">
+            <label>{$smarty.const.TEXT_PAYMILL_ELV_ACCOUNT_NUMBER|stripslashes} / {$smarty.const.TEXT_PAYMILL_ELV_IBAN|stripslashes}</label>
+        </div>
+        <input id="paymill-account-number" class="paymill-input" type="text" size="20" value="{if $xt_paymill.iban eq ''}{$xt_paymill.account_number}{else}{$xt_paymill.iban}{/if}"/>
+        <div id="payment-error-elv-1" class="payment-error"></div>
+        <div class="paymill-input-label">
+            <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE|stripslashes} / {$smarty.const.TEXT_PAYMILL_ELV_BIC|stripslashes}</label>
+        </div>
+        <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value="{if $xt_paymill.bic eq ''}{$xt_paymill.bank_code}{else}{$xt_paymill.bic}{/if}"/>
+        <div id="payment-error-elv-2" class="payment-error"></div>
+        <div class="paymill-input-label">
+            <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER|stripslashes}</label>
+        </div>
+        <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_holder}"/>
+        <div id="payment-error-elv-3" class="payment-error"></div>
     </div>
-    <input id="paymill-account-number" class="paymill-input" type="text" size="20" value="{if $xt_paymill.iban eq ''}{$xt_paymill.account_number}{else}{$xt_paymill.iban}{/if}"/>
-    <div id="payment-error-elv-1" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_ELV_BANK_CODE|stripslashes} / {$smarty.const.TEXT_PAYMILL_ELV_BIC|stripslashes}</label>
-    </div>
-    <input id="paymill-bank-code" class="paymill-input" type="text" size="20" value="{if $xt_paymill.bic eq ''}{$xt_paymill.bank_code}{else}{$xt_paymill.bic}{/if}"/>
-    <div id="payment-error-elv-2" class="payment-error"></div>
-    <div class="paymill-input-label">
-        <label>{$smarty.const.TEXT_PAYMILL_ELV_OWNER|stripslashes}</label>
-    </div>
-    <input id="paymill-bank-owner" class="paymill-input" type="text" size="20" value="{$xt_paymill.account_holder}"/>
-    <div id="payment-error-elv-3" class="payment-error"></div>
 </div>
