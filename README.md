@@ -11,6 +11,16 @@ xtCommerce (Version 4 / Veyton) Plugin for PAYMILL credit card and elv payments
 * Supported Languages: German, English, Spanish, French, Italian, Portuguese
 * Backend Log with custom View accessible from your shop backend
 
+# PayFrame 
+ 
+We’ve introduced a “payment form” option for easier compliance with PCI 
+requirements. 
+In addition to having a payment form directly integrated in your checkout page, you 
+can use our embedded PayFrame solution to ensure that payment data never 
+touches your website. 
+ 
+To learn more about the benefits of PayFrame, please visit our [FAQ](https://www.paymill.com/en/faq/how-does-paymills-payframe-solution-work "FAQ").
+
 # Installation
 
     Download the Zip here: https://github.com/Paymill/Paymill-xtCommerce-4/archive/master.zip

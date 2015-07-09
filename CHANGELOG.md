@@ -1,3 +1,6 @@
+## v2.9.0
+* Integration of PayFrame to enable use of SAQ A for easier PCI DSS 3.0 compliance
+
 ## v2.8.0
 * add refund per status change
 * add preauth/capture capture order during status change
