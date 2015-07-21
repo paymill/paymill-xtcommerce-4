@@ -1,4 +1,4 @@
-Iban = function() {
+Iban = function () {
 };
 Iban.prototype.countries = {
     'AL': 28,
@@ -114,7 +114,7 @@ Iban.prototype.alphabet = {
 
 Iban.prototype.iban = '';
 
-Iban.prototype.validate = function(iban) {
+Iban.prototype.validate = function (iban) {
     if (iban === undefined || iban === "") {
         return false;
     }
@@ -138,7 +138,7 @@ Iban.prototype.validate = function(iban) {
     ibanWithoutCheckDigits = this.iban.substr(0, this.iban.length - 2);
     ibanWithZeroCheckDigits = ibanWithoutCheckDigits + "00";
     ibanCheckDigits = this.iban.substr(this.iban.length - 2, 2);
-    
+
     calcCheckDigits = (98 - this.calculate(ibanWithZeroCheckDigits)).toString();
 
     if (calcCheckDigits.length === 1) {
@@ -157,19 +157,19 @@ Iban.prototype.validate = function(iban) {
 };
 
 //checking if the given IBAN is alphanumeric, the first two positions are letters and the next two positions numbers
-Iban.prototype.checkString = function() {
+Iban.prototype.checkString = function () {
     return this.iban.match(/^[a-z]{2}[0-9]{2}[a-z0-9]+$/i) !== null;
 };
 
 
 //checking if the given IBAN has the right length based on the first two letters which have to be a country code
-Iban.prototype.checkLength = function() {
+Iban.prototype.checkLength = function () {
     countryCode = this.iban.substr(0, 2);
     return this.countries[countryCode] === this.iban.length;
 };
 
 //Replace Letters with Numbers A = 10,....,Z = 35
-Iban.prototype.replaceLettersWithNumbers = function() {
+Iban.prototype.replaceLettersWithNumbers = function () {
     for (character in this.alphabet) {
         regex = new RegExp(character, 'g');
         this.iban = this.iban.replace(regex, this.alphabet[character]);
@@ -177,14 +177,14 @@ Iban.prototype.replaceLettersWithNumbers = function() {
 };
 
 //Puts the first 4 Characters to the End
-Iban.prototype.changeCharacterPosition = function() {
+Iban.prototype.changeCharacterPosition = function () {
     firstFourCharacters = this.iban.substr(0, 4);
     leftOverString = this.iban.substr(4);
     this.iban = leftOverString + firstFourCharacters;
 };
 
 //calculate the IBAN Hash with piece-wise manner modulo operations, since javascript cant handle 128 bit integer
-Iban.prototype.calculate = function(iban) {
+Iban.prototype.calculate = function (iban) {
     start = 0;
     length = 9;
     loop = true;
