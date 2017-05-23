@@ -1,3 +1,8 @@
+## v2.9.1
+* Remove CURLOPT_CAINFO - path to Certificate Authority (CA) bundle
+* Remove paymill.crt
+* Change user agent info to "Paymill-xtCommerce-4/2.9.1"
+
 ## v2.9.0
 * Integration of PayFrame to enable use of SAQ A for easier PCI DSS 3.0 compliance
 
